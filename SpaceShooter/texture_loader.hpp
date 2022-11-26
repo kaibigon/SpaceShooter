@@ -4,7 +4,7 @@
 //
 //  Created by Kai Wang on 2022/11/26.
 //
-
+#pragma once
 #ifndef texture_loader_hpp
 #define texture_loader_hpp
 
@@ -12,6 +12,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include "consts.h"
 
 #endif /* texture_loader_hpp */
 
@@ -28,6 +29,10 @@ public:
     void free();
     
     SDL_Texture* getTexture();
+    
+    void setAlpha(Uint8 alpha);
+    
+    void render(SDL_Renderer *renderer);
     
     int getWidth();
     

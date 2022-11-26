@@ -32,6 +32,7 @@
 		2AFA3A90293245480074B1A9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		2AFA3A97293250C10074B1A9 /* texture_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_loader.cpp; sourceTree = "<group>"; };
 		2AFA3A98293250C10074B1A9 /* texture_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_loader.hpp; sourceTree = "<group>"; };
+		2AFA3A9A293271FF0074B1A9 /* consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = consts.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 				2AFA3A84293245370074B1A9 /* main.cpp */,
 				2AFA3A97293250C10074B1A9 /* texture_loader.cpp */,
 				2AFA3A98293250C10074B1A9 /* texture_loader.hpp */,
+				2AFA3A9A293271FF0074B1A9 /* consts.h */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";

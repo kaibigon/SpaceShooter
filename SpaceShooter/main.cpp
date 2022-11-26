@@ -2,23 +2,20 @@
 #include <SDL2_image/SDL_image.h>
 #include <stdio.h>
 #include "texture_loader.hpp"
-
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+#include "consts.h"
 
 int main( int argc, char* args[] )
 {
     // init
     SDL_Window* window = NULL;
     
-    SDL_Surface* screenSurface = NULL;
+    SDL_Surface* windowSurface = NULL;
 
     SDL_Renderer* renderer = NULL;
     
     SDL_Event e;
     
-    LTexture testTexture;
+    LTexture testLoadTexture;
     
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -34,6 +31,7 @@ int main( int argc, char* args[] )
         else
         {
             renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            windowSurface = SDL_GetWindowSurface(window);
            
             if(renderer == NULL) {
                 printf("Renderer could not be initialized! SDL_Error: %s\n", SDL_GetError());
@@ -46,10 +44,12 @@ int main( int argc, char* args[] )
     }
    
     // load texture
-    testTexture.loadFromFile(renderer, "./SpaceShooter/Assets/foo.png");
+    testLoadTexture.loadFromFile(renderer, "./SpaceShooter/Assets/bg.png");
     
     // game loop
     bool quit = false;
+    
+    testLoadTexture.setAlpha(50);
     
     while(!quit) {
         
@@ -61,9 +61,9 @@ int main( int argc, char* args[] )
         
         SDL_RenderClear(renderer);
         
-        SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0xFF, 0xFF);
+        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        SDL_RenderCopy(renderer, testTexture.getTexture(), NULL, NULL);
+        testLoadTexture.render(renderer);
         
         SDL_RenderPresent(renderer);
     }

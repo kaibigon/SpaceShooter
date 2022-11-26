@@ -27,8 +27,23 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
     width = newSurface->w;
     height = newSurface->h;
     
-    SDL_FreeSurface(newSurface);
     texture = newTexture;
+    
+    SDL_FreeSurface(newSurface);
+}
+
+void LTexture::setAlpha(Uint8 alpha){
+    SDL_SetTextureAlphaMod( texture, alpha );
+}
+
+void LTexture::render(SDL_Renderer *renderer){
+    SDL_Rect dst;
+    dst.x = 0;
+    dst.y = 0;
+    dst.w = SCREEN_WIDTH;
+    dst.h = SCREEN_HEIGHT;
+    
+    SDL_RenderCopy(renderer, texture, NULL, &dst);
 }
 
 void LTexture::free(){
