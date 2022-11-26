@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include <SDL2_mixer/SDL_mixer.h>
 #include <stdio.h>
+
 #include "texture_loader.hpp"
 #include "consts.h"
 
@@ -15,9 +17,10 @@ int main( int argc, char* args[] )
     
     SDL_Event e;
     
-    LTexture testLoadTexture;
+    LTexture bgTexture;
+    Mix_Music *bgMusic = NULL;
     
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+    if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
     {
         printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
     }
@@ -39,17 +42,23 @@ int main( int argc, char* args[] )
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0xFF);
                 
                 int image_flag = IMG_INIT_PNG;
+               
+                if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                {
+                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+                }
             }
         }
     }
    
     // load texture
-    testLoadTexture.loadFromFile(renderer, "./SpaceShooter/Assets/bg.png");
+    bgTexture.loadFromFile(renderer, "./SpaceShooter/Assets/bg.png");
+    bgMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
     
     // game loop
     bool quit = false;
     
-    testLoadTexture.setAlpha(50);
+    bgTexture.setAlpha(50);
     
     while(!quit) {
         
@@ -58,12 +67,17 @@ int main( int argc, char* args[] )
                 quit = true;
             }
         }
+        if( Mix_PlayingMusic() == 0 )
+        {
+            //Play the music
+            Mix_PlayMusic( bgMusic, -1 );
+        }
         
         SDL_RenderClear(renderer);
         
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        testLoadTexture.render(renderer);
+        bgTexture.render(renderer);
         
         SDL_RenderPresent(renderer);
     }
