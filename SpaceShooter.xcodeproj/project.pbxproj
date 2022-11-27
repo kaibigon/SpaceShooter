@@ -14,6 +14,7 @@
 		2AFA3A9C2932AC3B0074B1A9 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */; };
 		2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AA8293390800074B1A9 /* timer.cpp */; };
 		2AFA3AAC293391C70074B1A9 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */; };
+		2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AAF2933C5BC0074B1A9 /* player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		2AFA3AA8293390800074B1A9 /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		2AFA3AA9293390800074B1A9 /* timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = timer.hpp; sourceTree = "<group>"; };
 		2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		2AFA3AAF2933C5BC0074B1A9 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		2AFA3AB02933C5BC0074B1A9 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 				2AFA3A9A293271FF0074B1A9 /* consts.h */,
 				2AFA3AA8293390800074B1A9 /* timer.cpp */,
 				2AFA3AA9293390800074B1A9 /* timer.hpp */,
+				2AFA3AAF2933C5BC0074B1A9 /* player.cpp */,
+				2AFA3AB02933C5BC0074B1A9 /* player.hpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */,
 				2AFA3A99293250C10074B1A9 /* texture_loader.cpp in Sources */,
 				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
 				2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */,
