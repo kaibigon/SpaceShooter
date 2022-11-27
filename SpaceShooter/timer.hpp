@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <sstream>
 
-#include "texture_loader.hpp"
+#include "textureLoader.hpp"
 
 #endif /* timer_hpp */
 

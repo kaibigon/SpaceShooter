@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include "consts.h"
-#include "texture_loader.hpp"
+#include "textureLoader.hpp"
 
 #endif /* player_hpp */
 

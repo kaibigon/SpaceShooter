@@ -4,7 +4,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <stdio.h>
 
-#include "texture_loader.hpp"
+#include "textureLoader.hpp"
 #include "timer.hpp"
 #include "consts.h"
 #include "player.hpp"
@@ -22,8 +22,10 @@ void updateTimer(KTimer *timer, KTimer *fpsTimer, TTF_Font *font, SDL_Renderer *
     fpsTimer->updateFpsText();
     fpsTimer->updateFrames();
     
-    timer->render(font, renderer, tColor, 0, 100, 1000, 200);
-    fpsTimer->render(font, renderer, tColor, 0, 300, 1000, 200);
+    timer->render(font, renderer, tColor, 8.9 * SCREEN_WIDTH / 10, 0,
+                    1 * SCREEN_WIDTH / 10, 1 * SCREEN_HEIGHT / 20);
+    fpsTimer->render(font, renderer, tColor, 8.9 * SCREEN_WIDTH / 10, 1 * SCREEN_HEIGHT / 20,
+                     1 * SCREEN_WIDTH / 10, 1 * SCREEN_HEIGHT / 20);
 }
 
 void updateMusic(Mix_Music *music)
