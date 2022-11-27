@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "texture_loader.hpp"
+#include "timer.hpp"
 #include "consts.h"
 
 int main( int argc, char* args[] )
@@ -23,6 +24,8 @@ int main( int argc, char* args[] )
     Mix_Music *bgMusic = NULL;
     TTF_Font* gFont = NULL;
 
+    KTimer timer;
+    std::stringstream timerText;
     
     if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
     {
@@ -63,25 +66,52 @@ int main( int argc, char* args[] )
     // load texture
     bgTexture.loadFromFile(renderer, "./SpaceShooter/Assets/bg.png");
     bgMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
-    gFont = TTF_OpenFont( "./SpaceShooter/Assets/lazy.ttf", 28 );
+    gFont = TTF_OpenFont( "./SpaceShooter/Assets/lazy.ttf", 20 );
     SDL_Color tColor = {0, 0, 0};
-    tTexture.loadFromRendereredText(gFont, renderer, "nmsl?", tColor);
     
     // game loop
     bool quit = false;
     
     bgTexture.setAlpha(50);
     
-    while(!quit) {
-        
-        while(SDL_PollEvent(&e) != 0){
-            if(e.type == SDL_QUIT){
+    while(!quit)
+    {
+        while(SDL_PollEvent(&e) != 0)
+        {
+            if(e.type == SDL_QUIT)
+            {
                 quit = true;
             }
+            else if (e.type == SDL_KEYDOWN)
+            {
+                if(e.key.keysym.sym == SDLK_s)
+                {
+                    if( timer.isStarted())
+                    {
+                        timer.stop();
+                    }
+                    else
+                    {
+                        timer.start();
+                    }
+                }
+                else if (e.key.keysym.sym == SDLK_p)
+                {
+                    if(timer.isPaused())
+                    {
+                        timer.resume();
+                    }
+                    else
+                    {
+                        timer.pause();
+                    }
+                }
+            }
         }
+        
+        // play music
         if( Mix_PlayingMusic() == 0 )
         {
-            //Play the music
             Mix_PlayMusic( bgMusic, -1 );
         }
         
@@ -89,7 +119,12 @@ int main( int argc, char* args[] )
         
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        tTexture.render(renderer, 100, 100, 70, 70);
+        timerText.str( "" );
+        timerText << "Seconds since start time " << ( timer.getTicks() / 1000.f ) ;
+
+        tTexture.loadFromRendereredText(gFont, renderer, timerText.str().c_str(), tColor);
+        
+        tTexture.render(renderer, 0, 100, 1000, 200);
         
         bgTexture.render(renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         

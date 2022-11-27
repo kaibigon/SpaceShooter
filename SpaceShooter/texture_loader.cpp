@@ -8,9 +8,9 @@
 #include "texture_loader.hpp"
 
 LTexture::LTexture(){
-    texture = NULL;
-    width = 0;
-    height = 0;
+    mTexture = NULL;
+    mWidth = 0;
+    mHeight = 0;
 }
 
 LTexture::~LTexture(){
@@ -24,10 +24,10 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
     SDL_Surface *newSurface = IMG_Load(path.c_str());
     
     newTexture = SDL_CreateTextureFromSurface(renender, newSurface);
-    width = newSurface->w;
-    height = newSurface->h;
+    mWidth = newSurface->w;
+    mHeight = newSurface->h;
     
-    texture = newTexture;
+    mTexture = newTexture;
     
     SDL_FreeSurface(newSurface);
 }
@@ -38,16 +38,16 @@ void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, st
     if(textSurface == NULL){
         printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
     }else{
-        texture = SDL_CreateTextureFromSurface(renender, textSurface);
-        width = textSurface->w;
-        height = textSurface->h;
+        mTexture = SDL_CreateTextureFromSurface(renender, textSurface);
+        mWidth = textSurface->w;
+        mHeight = textSurface->h;
         SDL_FreeSurface(textSurface);
     }
 
 }
 
 void LTexture::setAlpha(Uint8 alpha){
-    SDL_SetTextureAlphaMod( texture, alpha );
+    SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
 void LTexture::render(SDL_Renderer *renderer, int x, int y, int width, int height){
@@ -57,25 +57,25 @@ void LTexture::render(SDL_Renderer *renderer, int x, int y, int width, int heigh
     dst.w = width;
     dst.h = height;
     
-    SDL_RenderCopy(renderer, texture, NULL, &dst);
+    SDL_RenderCopy(renderer, mTexture, NULL, &dst);
 }
 
 void LTexture::free(){
-    if(texture != NULL) {
-        texture = NULL;
-        width = 0;
-        height = 0;
+    if(mTexture != NULL) {
+        mTexture = NULL;
+        mWidth = 0;
+        mHeight = 0;
     }
 }
 
 SDL_Texture* LTexture::getTexture(){
-    return texture;
+    return mTexture;
 }
 
 int LTexture::getWidth(){
-    return width;
+    return mWidth;
 }
 
 int LTexture::getHeight(){
-    return height;
+    return mHeight;
 }
