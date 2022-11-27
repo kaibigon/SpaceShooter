@@ -16,26 +16,31 @@ Player::Player()
     mVelY = 0;
 }
 
+Player::~Player()
+{
+    mTexture.free();
+}
+
 void Player::handleEvent(SDL_Event &e)
 {
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP:    mVelY -= VEL; break;
-            case SDLK_DOWN:  mVelY += VEL; break;
-            case SDLK_LEFT:  mVelX -= VEL; break;
-            case SDLK_RIGHT: mVelX += VEL; break;
+            case SDLK_w: mVelY -= VEL; break;
+            case SDLK_s: mVelY += VEL; break;
+            case SDLK_a: mVelX -= VEL; break;
+            case SDLK_d: mVelX += VEL; break;
         }
     }
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP:    mVelY += VEL; break;
-            case SDLK_DOWN:  mVelY -= VEL; break;
-            case SDLK_LEFT:  mVelX += VEL; break;
-            case SDLK_RIGHT: mVelX -= VEL; break;
+            case SDLK_w: mVelY += VEL; break;
+            case SDLK_s: mVelY -= VEL; break;
+            case SDLK_a: mVelX += VEL; break;
+            case SDLK_d: mVelX -= VEL; break;
         }
     }
 }
@@ -59,10 +64,16 @@ void Player::move()
 
 void Player::render(SDL_Renderer *renderer)
 {
-    playerTexture.render(renderer, mPosX, mPosY, playerTexture.getWidth(), playerTexture.getHeight());
+    printf("player;s width: %d, height: %d\n", mTexture.getWidth(), mTexture.getHeight());
+    mTexture.render(renderer, mPosX, mPosY, mTexture.getWidth(), mTexture.getHeight());
 }
 
 void Player::setTexture(LTexture texture)
 {
-    playerTexture = texture;
+    mTexture = texture;
+}
+
+LTexture* Player::getTexture()
+{
+    return &mTexture;
 }

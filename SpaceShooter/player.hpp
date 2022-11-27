@@ -22,17 +22,19 @@ public:
     static const int WIDTH = 20;
     static const int HEIGHT = 20;
     
-    static const int VEL = 20;
+    static const int VEL = 5;
     
     Player();
+    ~Player();
     
     void handleEvent(SDL_Event &e);
     void move();
     void render(SDL_Renderer *renderer);
+    LTexture* getTexture();
     void setTexture(LTexture texture);
     
 private:
-    LTexture playerTexture;
+    LTexture mTexture;
     int mPosX;
     int mPosY;
     int mVelX;

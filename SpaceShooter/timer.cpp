@@ -15,6 +15,13 @@ KTimer::KTimer()
 
     mPaused = false;
     mStarted = false;
+    mText.str("");
+    mFrames = 0;
+}
+
+KTimer::~KTimer()
+{
+    mTexture.free();
 }
 
 void KTimer::start()
@@ -79,4 +86,62 @@ bool KTimer::isStarted()
 bool KTimer::isPaused()
 {
     return mPaused && mStarted;
+}
+
+void KTimer::handleEvent(SDL_Event &e)
+{
+    if( e.type == SDL_KEYDOWN )
+    {
+        if(e.key.keysym.sym == SDLK_n)
+        {
+            if(isStarted())
+            {
+                stop();
+            }
+            else
+            {
+                start();
+            }
+        }
+        else if (e.key.keysym.sym == SDLK_m)
+        {
+            if(isPaused())
+            {
+                resume();
+            }
+            else
+            {
+                pause();
+            }
+        }
+    }
+}
+
+void KTimer::setTexture(LTexture texture)
+{
+    mTexture = texture;
+}
+
+void KTimer::updateTimeText()
+{
+    mText.str("");
+    mText << "Time: " << round(getTicks() / 1000.f);
+}
+
+void KTimer::updateFpsText()
+{
+    mText.str("");
+    mText << "FPS: " << round(mFrames / (getTicks() / 1000.f ));
+}
+
+void KTimer::updateFrames()
+{
+    mFrames++;
+}
+
+void KTimer::render(TTF_Font *font, SDL_Renderer *renderer, SDL_Color textColor,
+                    int x, int y, int width, int height)
+{
+    mTexture.loadFromRendereredText(font, renderer, mText.str().c_str(), textColor);
+    mTexture.render(renderer, x, y, width, height);
 }
