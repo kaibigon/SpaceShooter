@@ -32,16 +32,30 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
     SDL_FreeSurface(newSurface);
 }
 
+void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
+    free();
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
+    if(textSurface == NULL){
+        printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+    }else{
+        texture = SDL_CreateTextureFromSurface(renender, textSurface);
+        width = textSurface->w;
+        height = textSurface->h;
+        SDL_FreeSurface(textSurface);
+    }
+
+}
+
 void LTexture::setAlpha(Uint8 alpha){
     SDL_SetTextureAlphaMod( texture, alpha );
 }
 
-void LTexture::render(SDL_Renderer *renderer){
+void LTexture::render(SDL_Renderer *renderer, int x, int y, int width, int height){
     SDL_Rect dst;
-    dst.x = 0;
-    dst.y = 0;
-    dst.w = SCREEN_WIDTH;
-    dst.h = SCREEN_HEIGHT;
+    dst.x = x;
+    dst.y = y;
+    dst.w = width;
+    dst.h = height;
     
     SDL_RenderCopy(renderer, texture, NULL, &dst);
 }

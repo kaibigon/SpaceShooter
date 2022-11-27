@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_mixer/SDL_mixer.h>
+#include <SDL2_ttf/SDL_ttf.h>
 #include <stdio.h>
 
 #include "texture_loader.hpp"
@@ -18,7 +19,10 @@ int main( int argc, char* args[] )
     SDL_Event e;
     
     LTexture bgTexture;
+    LTexture tTexture;
     Mix_Music *bgMusic = NULL;
+    TTF_Font* gFont = NULL;
+
     
     if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
     {
@@ -47,6 +51,11 @@ int main( int argc, char* args[] )
                 {
                     printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                 }
+                
+                if( TTF_Init() == -1 )
+                {
+                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+                }
             }
         }
     }
@@ -54,6 +63,9 @@ int main( int argc, char* args[] )
     // load texture
     bgTexture.loadFromFile(renderer, "./SpaceShooter/Assets/bg.png");
     bgMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
+    gFont = TTF_OpenFont( "./SpaceShooter/Assets/lazy.ttf", 28 );
+    SDL_Color tColor = {0, 0, 0};
+    tTexture.loadFromRendereredText(gFont, renderer, "nmsl?", tColor);
     
     // game loop
     bool quit = false;
@@ -77,7 +89,9 @@ int main( int argc, char* args[] )
         
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        bgTexture.render(renderer);
+        tTexture.render(renderer, 100, 100, 70, 70);
+        
+        bgTexture.render(renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         
         SDL_RenderPresent(renderer);
     }
@@ -85,10 +99,13 @@ int main( int argc, char* args[] )
     // free operations
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    
+    tTexture.free();
+    TTF_CloseFont(gFont);
+    gFont = NULL;
     window = NULL;
     renderer = NULL;
     
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 
