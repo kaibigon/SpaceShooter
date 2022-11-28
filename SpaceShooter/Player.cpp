@@ -67,12 +67,12 @@ void Player::render(SDL_Renderer *renderer)
     mTexture.Render(renderer, mPosX, mPosY, mTexture.GetWidth(), mTexture.GetHeight());
 }
 
-void Player::setTexture(LTexture texture)
+void Player::setTexture(TextureComponent texture)
 {
     mTexture = texture;
 }
 
-LTexture* Player::getTexture()
+TextureComponent* Player::getTexture()
 {
     return &mTexture;
 }

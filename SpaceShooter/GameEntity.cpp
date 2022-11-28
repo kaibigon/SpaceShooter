@@ -9,12 +9,11 @@
 
 GameEntity::GameEntity(){
     mTexture = nullptr;
+    mTransform = nullptr;
 }
 
 GameEntity::GameEntity(SDL_Renderer *renderer)
 {
-    mPosX = 0;
-    mPosY = 0;
     mRenderer = renderer;
 }
 
@@ -32,26 +31,50 @@ void update()
 
 void GameEntity::Render()
 {
-    if ( mTexture != nullptr)
+    if ( mTexture != nullptr && mTransform != nullptr)
     {
-        mTexture->Render(mRenderer, mPosX, mPosY, mTexture->GetWidth(), mTexture->GetHeight());
+        mTexture->Render(mRenderer,
+                         mTransform->GetPosX(),
+                         mTransform->GetPosY(),
+                         mTexture->GetWidth(),
+                         mTexture->GetHeight());
     }
 }
 
 void GameEntity::AddTextureComponent()
 {
-    mTexture = new LTexture();
+    mTexture = new TextureComponent();
 }
 
 void GameEntity::AddTextureComponent(std::string filepath)
 {
-    mTexture = new LTexture();
+    mTexture = new TextureComponent();
     mTexture->LoadFromFile(mRenderer, filepath);
 }
 
-LTexture& GameEntity::GetTextureComponent()
+TextureComponent& GameEntity::GetTextureComponent()
 {
     return *mTexture;
+}
+
+void GameEntity::AddTransformComponent()
+{
+    mTransform = new TransformComponent();
+}
+
+TransformComponent& GameEntity::GetTransformComponent()
+{
+    return *mTransform;
+}
+
+void GameEntity::AddMovementComponent()
+{
+    mMovement = new MovementComponent();
+}
+
+MovementComponent& GameEntity::GetMovementComponent()
+{
+    return *mMovement;
 }
 
 SDL_Renderer* GameEntity::GetRenderer()
@@ -59,22 +82,3 @@ SDL_Renderer* GameEntity::GetRenderer()
     return mRenderer;
 }
 
-void GameEntity::SetPosX(int posX)
-{
-    mPosX = posX;
-}
-
-void GameEntity::SetPosY(int posY)
-{
-    mPosY = posY;
-}
-
-int GameEntity::GetPosX()
-{
-    return mPosX;
-}
-
-int GameEntity::GetPosY()
-{
-    return mPosY;
-}

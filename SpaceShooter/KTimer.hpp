@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <sstream>
 
-#include "TextureLoader.hpp"
+#include "TextureComponent.hpp"
 
 #endif /* timer_hpp */
 
@@ -34,14 +34,14 @@ public:
     bool isStarted();
     bool isPaused();
     void handleEvent(SDL_Event &e);
-    void setTexture(LTexture texture);
+    void setTexture(TextureComponent texture);
     void updateTimeText();
     void updateFpsText();
     void updateFrames();
     void render(TTF_Font *font, SDL_Renderer *renender, SDL_Color textColor, int x, int y, int width, int height);
     
 private:
-    LTexture mTexture;
+    TextureComponent mTexture;
     std::stringstream mText;
     
     uint32_t mStartTicks;

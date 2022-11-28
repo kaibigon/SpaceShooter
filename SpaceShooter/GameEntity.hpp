@@ -10,7 +10,9 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "TextureLoader.hpp"
+#include "TextureComponent.hpp"
+#include "TransformComponent.hpp"
+#include "MovementComponent.hpp"
 
 class GameEntity
 {
@@ -23,33 +25,30 @@ public:
     ~GameEntity(); // TODO: should find a way to proper loop through components to free them
     
     void Update();
-    
     void Render();
-    
-    void SetPosX(int posX);
-    void SetPosY(int posY);
     
     void AddTextureComponent();
     void AddTextureComponent(std::string filepath);
-    LTexture& GetTextureComponent();
+    TextureComponent& GetTextureComponent();
+    
+    void AddTransformComponent();
+    TransformComponent& GetTransformComponent();
+    
+    void AddMovementComponent();
+    MovementComponent& GetMovementComponent();
     
     SDL_Renderer* GetRenderer();
-    
-    int GetPosX();
-    int GetPosY();
     
 private:
     
     int mEntityId; // TODO:
     
-    // actually by ecs design, these attributes should be component attached to this entity?
-    // forget it, make they are just what they are now -.-
-    LTexture* mTexture;
+    // by ecs design, all of these attributes should actually be components attached to this entity
+    // but forget it, they are just what they are now -.-
     SDL_Renderer* mRenderer;
     
-    // TODO: could be a vec2 but Im lazy
-    int mPosX;
-    int mPosY;
-    
+    TextureComponent* mTexture;
+    TransformComponent* mTransform;
+    MovementComponent* mMovement;
 };
 #endif /* gameEntity_hpp */

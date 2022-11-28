@@ -117,7 +117,7 @@ void KTimer::handleEvent(SDL_Event &e)
     }
 }
 
-void KTimer::setTexture(LTexture texture)
+void KTimer::setTexture(TextureComponent texture)
 {
     mTexture = texture;
 }

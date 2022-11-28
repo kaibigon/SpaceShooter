@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include "consts.h"
-#include "TextureLoader.hpp"
+#include "TextureComponent.hpp"
 
 #endif /* player_hpp */
 
@@ -30,11 +30,11 @@ public:
     void handleEvent(SDL_Event &e);
     void move();
     void render(SDL_Renderer *renderer);
-    LTexture* getTexture();
-    void setTexture(LTexture texture);
+    TextureComponent* getTexture();
+    void setTexture(TextureComponent texture);
     
 private:
-    LTexture mTexture;
+    TextureComponent mTexture;
     int mPosX;
     int mPosY;
     int mVelX;

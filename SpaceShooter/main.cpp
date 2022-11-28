@@ -4,7 +4,7 @@
 //#include <SDL2_ttf/SDL_ttf.h>
 //#include <stdio.h>
 //
-//#include "textureLoader.hpp"
+//#include "TextureComponent.hpp"
 //#include "KTimer.hpp"
 //#include "consts.h"
 //#include "Player.hpp"

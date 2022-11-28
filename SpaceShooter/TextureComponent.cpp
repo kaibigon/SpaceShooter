@@ -5,19 +5,22 @@
 //  Created by Kai Wang on 2022/11/26.
 //
 
-#include "TextureLoader.hpp"
+#include "TextureComponent.hpp"
 
-LTexture::LTexture(){
+TextureComponent::TextureComponent()
+{
     mTexture = NULL;
     mWidth = 0;
     mHeight = 0;
 }
 
-LTexture::~LTexture(){
+TextureComponent::~TextureComponent()
+{
     Free();
 }
 
-void LTexture::LoadFromFile(SDL_Renderer *renender, std::string path){
+void TextureComponent::LoadFromFile(SDL_Renderer *renender, std::string path)
+{
 //    free();
     
     SDL_Texture *newTexture = NULL;
@@ -34,7 +37,8 @@ void LTexture::LoadFromFile(SDL_Renderer *renender, std::string path){
 //    SDL_FreeSurface(newSurface);
 }
 
-void LTexture::LoadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
+void TextureComponent::LoadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor)
+{
 //    free();
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
     
@@ -49,11 +53,13 @@ void LTexture::LoadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, st
 
 }
 
-void LTexture::SetAlpha(Uint8 alpha){
+void TextureComponent::SetAlpha(Uint8 alpha)
+{
     SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
-void LTexture::Render(SDL_Renderer *renderer, int x, int y, int width, int height){
+void TextureComponent::Render(SDL_Renderer *renderer, int x, int y, int width, int height)
+{
     SDL_Rect dst;
     dst.x = x;
     dst.y = y;
@@ -63,7 +69,8 @@ void LTexture::Render(SDL_Renderer *renderer, int x, int y, int width, int heigh
     SDL_RenderCopy(renderer, mTexture, NULL, &dst);
 }
 
-void LTexture::Free(){
+void TextureComponent::Free()
+{
     if(mTexture != NULL) {
         mTexture = NULL;
         mWidth = 0;
@@ -71,24 +78,27 @@ void LTexture::Free(){
     }
 }
 
-SDL_Texture* LTexture::GetTexture(){
+SDL_Texture* TextureComponent::GetTexture()
+{
     return mTexture;
 }
 
-int LTexture::GetWidth(){
+int TextureComponent::GetWidth()
+{
     return mWidth;
 }
 
-int LTexture::GetHeight(){
+int TextureComponent::GetHeight()
+{
     return mHeight;
 }
 
-void LTexture::SetWidth(int width)
+void TextureComponent::SetWidth(int width)
 {
     mWidth = width;
 }
 
-void LTexture::SetHeight(int height)
+void TextureComponent::SetHeight(int height)
 {
     mHeight = height;
 }

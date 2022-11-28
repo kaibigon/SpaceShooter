@@ -51,18 +51,18 @@ void SDLApp::RunLoop(){
         // (2) Then handle our rendering
         // (3) Clear and Draw the Screen
         // Gives us a clear "canvas"
-        SDL_SetRenderDrawColor(renderer,0,0,0,SDL_ALPHA_OPAQUE);
+//        SDL_SetRenderDrawColor(renderer,255,255,255,SDL_ALPHA_OPAQUE);
         SDL_RenderClear(renderer);
 
         // Do our drawing
-        SDL_SetRenderDrawColor(renderer,255,255,255,SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer,0,0,0,SDL_ALPHA_OPAQUE);
         // What the user specifies to happen during the rendering
         // stage in this callback function
         mRenderCallback();
         // Finally show what we've drawn
         SDL_RenderPresent(renderer);
         // TODO: Eventually set a frame cap
-        SDL_Delay(100);
+//        SDL_Delay(100);
     }
 }
 

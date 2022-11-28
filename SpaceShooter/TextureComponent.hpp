@@ -19,13 +19,13 @@
 
 #endif /* texture_loader_hpp */
 
-class LTexture {
+class TextureComponent {
     
 public:
     
-    LTexture();
+    TextureComponent();
     
-    ~LTexture();
+    ~TextureComponent();
     
     void LoadFromFile(SDL_Renderer *renderer, std::string path);
     

@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE13293511F200B0E813 /* TransformComponent.cpp */; };
+		2A70FE182935183300B0E813 /* MovementComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE162935183300B0E813 /* MovementComponent.cpp */; };
 		2AFA3A85293245370074B1A9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A84293245370074B1A9 /* main.cpp */; };
 		2AFA3A8D293245470074B1A9 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A8C293245470074B1A9 /* SDL2.framework */; };
 		2AFA3A94293247990074B1A9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A90293245480074B1A9 /* SDL2_image.framework */; };
-		2AFA3A99293250C10074B1A9 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A97293250C10074B1A9 /* TextureLoader.cpp */; };
+		2AFA3A99293250C10074B1A9 /* TextureComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A97293250C10074B1A9 /* TextureComponent.cpp */; };
 		2AFA3A9C2932AC3B0074B1A9 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */; };
 		2AFA3AAA293390800074B1A9 /* KTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AA8293390800074B1A9 /* KTimer.cpp */; };
 		2AFA3AAC293391C70074B1A9 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */; };
@@ -34,12 +36,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A70FE13293511F200B0E813 /* TransformComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TransformComponent.cpp; sourceTree = "<group>"; };
+		2A70FE14293511F200B0E813 /* TransformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
+		2A70FE162935183300B0E813 /* MovementComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovementComponent.cpp; sourceTree = "<group>"; };
+		2A70FE172935183300B0E813 /* MovementComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MovementComponent.hpp; sourceTree = "<group>"; };
 		2AFA3A81293245370074B1A9 /* SpaceShooter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpaceShooter; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFA3A84293245370074B1A9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2AFA3A8C293245470074B1A9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		2AFA3A90293245480074B1A9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
-		2AFA3A97293250C10074B1A9 /* TextureLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureLoader.cpp; sourceTree = "<group>"; };
-		2AFA3A98293250C10074B1A9 /* TextureLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureLoader.hpp; sourceTree = "<group>"; };
+		2AFA3A97293250C10074B1A9 /* TextureComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureComponent.cpp; sourceTree = "<group>"; };
+		2AFA3A98293250C10074B1A9 /* TextureComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureComponent.hpp; sourceTree = "<group>"; };
 		2AFA3A9A293271FF0074B1A9 /* consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = consts.h; sourceTree = "<group>"; };
 		2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		2AFA3AA8293390800074B1A9 /* KTimer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KTimer.cpp; sourceTree = "<group>"; };
@@ -95,8 +101,8 @@
 				2AFA3AB2293438900074B1A9 /* src */,
 				2AFA3A93293247170074B1A9 /* Assets */,
 				2AFA3A84293245370074B1A9 /* main.cpp */,
-				2AFA3A97293250C10074B1A9 /* TextureLoader.cpp */,
-				2AFA3A98293250C10074B1A9 /* TextureLoader.hpp */,
+				2AFA3A97293250C10074B1A9 /* TextureComponent.cpp */,
+				2AFA3A98293250C10074B1A9 /* TextureComponent.hpp */,
 				2AFA3A9A293271FF0074B1A9 /* consts.h */,
 				2AFA3AA8293390800074B1A9 /* KTimer.cpp */,
 				2AFA3AA9293390800074B1A9 /* KTimer.hpp */,
@@ -109,6 +115,10 @@
 				2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */,
 				2AFA3ABD2934F2EF0074B1A9 /* GameEntity.cpp */,
 				2AFA3ABE2934F2EF0074B1A9 /* GameEntity.hpp */,
+				2A70FE13293511F200B0E813 /* TransformComponent.cpp */,
+				2A70FE14293511F200B0E813 /* TransformComponent.hpp */,
+				2A70FE162935183300B0E813 /* MovementComponent.cpp */,
+				2A70FE172935183300B0E813 /* MovementComponent.hpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -206,8 +216,10 @@
 				2AFA3AB12933C5BC0074B1A9 /* Player.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
-				2AFA3A99293250C10074B1A9 /* TextureLoader.cpp in Sources */,
+				2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */,
+				2AFA3A99293250C10074B1A9 /* TextureComponent.cpp in Sources */,
 				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
+				2A70FE182935183300B0E813 /* MovementComponent.cpp in Sources */,
 				2AFA3ABF2934F2EF0074B1A9 /* GameEntity.cpp in Sources */,
 				2AFA3AAA293390800074B1A9 /* KTimer.cpp in Sources */,
 			);

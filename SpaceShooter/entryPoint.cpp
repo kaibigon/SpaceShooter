@@ -11,7 +11,9 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <stdio.h>
 
-#include "TextureLoader.hpp"
+#include "TextureComponent.hpp"
+#include "MovementComponent.hpp"
+#include "TransformComponent.hpp"
 #include "KTimer.hpp"
 #include "consts.h"
 #include "Player.hpp"
@@ -20,54 +22,58 @@
 
 SDLApp* app;
 
-// okey how Im gonna deal with you -.-
+// maybe a spawner instead of global -.-
 GameEntity* bgEntity;
+GameEntity* playerEntity;
 
 void HandleEvents(){
     SDL_Event event;
 
-    // (1) Handle Input
-    // Start our event loop
     while(SDL_PollEvent(&event)){
-        // Handle each specific event
+        
         if(event.type == SDL_QUIT){
             app->StopAppLoop();
         }
-        // Detect collision from our two shapes if mouse
-        // button is pressed
-        if(event.button.button == SDL_BUTTON_LEFT){
-
-        }
+        
+        playerEntity->GetMovementComponent().HandleEvent(event);
     }
 }
 
 void HandleRendering(){
-    // Set draw positions and size
+    playerEntity->GetMovementComponent().Update(&playerEntity->GetTransformComponent());
     bgEntity->Render();
+    playerEntity->Render();
 }
 
 int main( int argc, char* args[] )
 {
-    // Setup the SDLApp
-    const char* title = "New SDL2 Abstraction";
+    const char* title = "Boden Hao Leng";
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // testing rendering
+    // testing
     bgEntity = new GameEntity(app->GetRenderer());
+    bgEntity->AddTransformComponent();
     bgEntity->AddTextureComponent("./SpaceShooter/Assets/bg.png");
     bgEntity->GetTextureComponent().SetAlpha(50);
     bgEntity->GetTextureComponent().SetWidth(SCREEN_WIDTH);
     bgEntity->GetTextureComponent().SetHeight(SCREEN_HEIGHT);
-    bgEntity->SetPosX(0);
-    bgEntity->SetPosY(0);
     
-    // Set callback functions
+    playerEntity = new GameEntity(app->GetRenderer());
+    playerEntity->AddTransformComponent();
+    playerEntity->GetTransformComponent().SetPosX(SCREEN_WIDTH/2);
+    playerEntity->GetTransformComponent().SetPosY(SCREEN_HEIGHT/2);
+    playerEntity->AddTextureComponent();
+    playerEntity->AddTextureComponent("./SpaceShooter/Assets/dot.bmp");
+    playerEntity->GetTextureComponent().SetWidth(20);
+    playerEntity->GetTextureComponent().SetHeight(20);
+    playerEntity->AddMovementComponent();
+    
     app->SetEventCallback(HandleEvents);
     app->SetRenderCallback(HandleRendering);
-    // Run our application until terminated
     app->RunLoop();
 
     delete bgEntity;
+    delete playerEntity;
     delete app;
 
     return 0;
