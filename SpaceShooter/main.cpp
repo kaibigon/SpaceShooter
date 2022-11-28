@@ -128,7 +128,7 @@ int main( int argc, char* args[] )
     window = NULL;
     renderer = NULL;
     
-    AssetManager::GetInstance().free();
+    AssetManager::GetInstance().Free();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

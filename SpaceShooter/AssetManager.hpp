@@ -23,7 +23,7 @@ public:
     
     SDL_Surface* GetSurface(std::string filepath);
     
-    void free();
+    void Free();
     
 private:
     AssetManager();

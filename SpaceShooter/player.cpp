@@ -64,7 +64,6 @@ void Player::move()
 
 void Player::render(SDL_Renderer *renderer)
 {
-    printf("player;s width: %d, height: %d\n", mTexture.getWidth(), mTexture.getHeight());
     mTexture.render(renderer, mPosX, mPosY, mTexture.getWidth(), mTexture.getHeight());
 }
 

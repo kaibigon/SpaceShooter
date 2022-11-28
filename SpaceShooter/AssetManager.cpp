@@ -15,7 +15,6 @@ AssetManager::AssetManager(AssetManager const&){
 
 }
 
-// Is instantiate, exactly 1 instance of our class
 AssetManager& AssetManager::GetInstance(){
     static AssetManager* s_instance = new AssetManager;
     return *s_instance;
@@ -34,7 +33,7 @@ SDL_Surface* AssetManager::GetSurface(std::string filepath){
     return nullptr;
 }
 
-void AssetManager::free()
+void AssetManager::Free()
 {
     for (std::pair<std::string, SDL_Surface*> e : m_surfaces)
     {
