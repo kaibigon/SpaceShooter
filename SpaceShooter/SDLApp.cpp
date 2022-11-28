@@ -25,6 +25,7 @@ SDLApp::~SDLApp(){
     // Destroy our m_window
     SDL_DestroyWindow(window);
     // Quit our SDL application
+    IMG_Quit();
     SDL_Quit();
 }
 

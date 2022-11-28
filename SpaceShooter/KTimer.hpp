@@ -6,8 +6,8 @@
 //
 #pragma once
 
-#ifndef timer_hpp
-#define timer_hpp
+#ifndef KTimer_hpp
+#define KTimer_hpp
 
 #include <SDL2/SDL.h>
 #include <SDL2_ttf/SDL_ttf.h>
@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <sstream>
 
-#include "textureLoader.hpp"
+#include "TextureLoader.hpp"
 
 #endif /* timer_hpp */
 

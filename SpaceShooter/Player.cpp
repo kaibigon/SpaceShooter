@@ -5,7 +5,7 @@
 //  Created by Kai Wang on 2022/11/27.
 //
 
-#include "player.hpp"
+#include "Player.hpp"
 
 Player::Player()
 {

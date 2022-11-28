@@ -11,10 +11,10 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <stdio.h>
 
-#include "textureLoader.hpp"
-#include "timer.hpp"
+#include "TextureLoader.hpp"
+#include "KTimer.hpp"
 #include "consts.h"
-#include "player.hpp"
+#include "Player.hpp"
 #include "SDLApp.hpp"
 
 SDLApp* app;
@@ -60,6 +60,7 @@ int main( int argc, char* args[] )
     // Run our application until terminated
     app->runLoop();
 
+    bgTexture.free();
     // Clean up our application
     delete app;
 

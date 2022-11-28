@@ -5,8 +5,8 @@
 //  Created by Kai Wang on 2022/11/26.
 //
 #pragma once
-#ifndef texture_loader_hpp
-#define texture_loader_hpp
+#ifndef TextureLoader_hpp
+#define TextureLoader_hpp
 
 #include <stdio.h>
 #include <string>
@@ -15,7 +15,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 
 #include "consts.h"
-#include "assetManager.hpp"
+#include "AssetManager.hpp"
 
 #endif /* texture_loader_hpp */
 

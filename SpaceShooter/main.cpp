@@ -5,9 +5,9 @@
 //#include <stdio.h>
 //
 //#include "textureLoader.hpp"
-//#include "timer.hpp"
+//#include "KTimer.hpp"
 //#include "consts.h"
-//#include "player.hpp"
+//#include "Player.hpp"
 //
 //void updatePlayer(Player *player, SDL_Renderer *renderer)
 //{

@@ -5,7 +5,7 @@
 //  Created by Kai Wang on 2022/11/26.
 //
 
-#include "textureLoader.hpp"
+#include "TextureLoader.hpp"
 
 LTexture::LTexture(){
     mTexture = NULL;

@@ -5,14 +5,14 @@
 //  Created by Kai Wang on 2022/11/27.
 //
 
-#ifndef player_hpp
-#define player_hpp
+#ifndef Player_hpp
+#define Player_hpp
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
 #include "consts.h"
-#include "textureLoader.hpp"
+#include "TextureLoader.hpp"
 
 #endif /* player_hpp */
 
