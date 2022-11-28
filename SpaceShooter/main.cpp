@@ -36,6 +36,8 @@ void updateMusic(Mix_Music *music)
     }
 }
 
+
+// TODO: might be a more optimized way to display ui (timer
 int main( int argc, char* args[] )
 {
     // init SDL
@@ -126,6 +128,7 @@ int main( int argc, char* args[] )
     window = NULL;
     renderer = NULL;
     
+    AssetManager::GetInstance().free();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

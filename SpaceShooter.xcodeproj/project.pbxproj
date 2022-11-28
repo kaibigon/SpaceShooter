@@ -15,6 +15,7 @@
 		2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AA8293390800074B1A9 /* timer.cpp */; };
 		2AFA3AAC293391C70074B1A9 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */; };
 		2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AAF2933C5BC0074B1A9 /* player.cpp */; };
+		2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		2AFA3AAF2933C5BC0074B1A9 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		2AFA3AB02933C5BC0074B1A9 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
+		2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		2AFA3AB5293438C20074B1A9 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 		2AFA3A83293245370074B1A9 /* SpaceShooter */ = {
 			isa = PBXGroup;
 			children = (
+				2AFA3AB3293438970074B1A9 /* include */,
+				2AFA3AB2293438900074B1A9 /* src */,
 				2AFA3A93293247170074B1A9 /* Assets */,
 				2AFA3A84293245370074B1A9 /* main.cpp */,
 				2AFA3A97293250C10074B1A9 /* textureLoader.cpp */,
@@ -89,6 +94,8 @@
 				2AFA3AA9293390800074B1A9 /* timer.hpp */,
 				2AFA3AAF2933C5BC0074B1A9 /* player.cpp */,
 				2AFA3AB02933C5BC0074B1A9 /* player.hpp */,
+				2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */,
+				2AFA3AB5293438C20074B1A9 /* AssetManager.hpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -109,6 +116,20 @@
 			children = (
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		2AFA3AB2293438900074B1A9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2AFA3AB3293438970074B1A9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */,
+				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
 				2AFA3A99293250C10074B1A9 /* textureLoader.cpp in Sources */,
 				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
 				2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */,

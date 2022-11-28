@@ -21,7 +21,9 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
     free();
     
     SDL_Texture *newTexture = NULL;
-    SDL_Surface *newSurface = IMG_Load(path.c_str());
+    // SDL_Surface *newSurface = IMG_Load(path.c_str());
+    
+    SDL_Surface *newSurface = AssetManager::GetInstance().GetSurface(path.c_str());
     
     newTexture = SDL_CreateTextureFromSurface(renender, newSurface);
     mWidth = newSurface->w;
@@ -29,12 +31,13 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
     
     mTexture = newTexture;
     
-    SDL_FreeSurface(newSurface);
+//    SDL_FreeSurface(newSurface);
 }
 
 void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
     free();
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
+    
     if(textSurface == NULL){
         printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
     }else{
