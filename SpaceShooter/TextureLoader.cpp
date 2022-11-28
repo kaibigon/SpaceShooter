@@ -18,7 +18,7 @@ LTexture::~LTexture(){
 }
 
 void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
-    free();
+//    free();
     
     SDL_Texture *newTexture = NULL;
     // SDL_Surface *newSurface = IMG_Load(path.c_str());
@@ -35,7 +35,7 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
 }
 
 void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
-    free();
+//    free();
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
     
     if(textSurface == NULL){
@@ -81,4 +81,14 @@ int LTexture::getWidth(){
 
 int LTexture::getHeight(){
     return mHeight;
+}
+
+void LTexture::setWidth(int width)
+{
+    mWidth = width;
+}
+
+void LTexture::setHeight(int height)
+{
+    mHeight = height;
 }

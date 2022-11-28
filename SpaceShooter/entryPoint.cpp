@@ -16,11 +16,11 @@
 #include "consts.h"
 #include "Player.hpp"
 #include "SDLApp.hpp"
+#include "GameEntity.hpp"
 
 SDLApp* app;
 
-LTexture bgTexture;
-LTexture bgTexture2;
+GameEntity* bgEntity;
 
 void HandleEvents(){
     SDL_Event event;
@@ -42,7 +42,7 @@ void HandleEvents(){
 
 void HandleRendering(){
     // Set draw positions and size
-    bgTexture.render(app->getRenderer(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    bgEntity->render();
 }
 
 int main( int argc, char* args[] )
@@ -51,8 +51,14 @@ int main( int argc, char* args[] )
     const char* title = "New SDL2 Abstraction";
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    bgTexture.loadFromFile(app->getRenderer(), "./SpaceShooter/Assets/bg.png");
-    bgTexture.setAlpha(50);
+    // testing rendering
+    bgEntity = new GameEntity(app->getRenderer());
+    bgEntity->getTexture().loadFromFile(bgEntity->getRenderer(), "./SpaceShooter/Assets/bg.png");
+    bgEntity->getTexture().setAlpha(50);
+    bgEntity->getTexture().setWidth(SCREEN_WIDTH);
+    bgEntity->getTexture().setHeight(SCREEN_HEIGHT);
+    bgEntity->setPosX(0);
+    bgEntity->setPosY(0);
     
     // Set callback functions
     app->setEventCallback(HandleEvents);
@@ -60,7 +66,7 @@ int main( int argc, char* args[] )
     // Run our application until terminated
     app->runLoop();
 
-    bgTexture.free();
+    bgEntity->getTexture().free();
     // Clean up our application
     delete app;
 

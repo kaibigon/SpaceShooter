@@ -6,3 +6,23 @@
 //
 
 #include "GameEntity.hpp"
+
+void GameEntity::setPosX(int posX)
+{
+    mPosX = posX;
+}
+
+void GameEntity::setPosY(int posY)
+{
+    mPosY = posY;
+}
+
+int GameEntity::getPosX()
+{
+    return mPosX;
+}
+
+int GameEntity::getPosY()
+{
+    return mPosY;
+}
