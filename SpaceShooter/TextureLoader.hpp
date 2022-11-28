@@ -27,25 +27,25 @@ public:
     
     ~LTexture();
     
-    void loadFromFile(SDL_Renderer *renderer, std::string path);
+    void LoadFromFile(SDL_Renderer *renderer, std::string path);
     
-    void loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor);
+    void LoadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor);
     
-    void free();
+    void Free();
     
-    SDL_Texture* getTexture();
+    SDL_Texture* GetTexture();
     
-    void setAlpha(Uint8 alpha);
+    void SetAlpha(Uint8 alpha);
     
-    void render(SDL_Renderer *renderer, int x, int y, int width, int height);
+    void Render(SDL_Renderer *renderer, int x, int y, int width, int height);
     
-    int getWidth();
+    int GetWidth();
     
-    int getHeight();
+    int GetHeight();
     
-    void setWidth(int width);
+    void SetWidth(int width);
     
-    void setHeight(int height);
+    void SetHeight(int height);
     
 private:
     SDL_Texture *mTexture;

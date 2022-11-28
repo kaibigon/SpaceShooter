@@ -7,22 +7,74 @@
 
 #include "GameEntity.hpp"
 
-void GameEntity::setPosX(int posX)
+GameEntity::GameEntity(){
+    mTexture = nullptr;
+}
+
+GameEntity::GameEntity(SDL_Renderer *renderer)
+{
+    mPosX = 0;
+    mPosY = 0;
+    mRenderer = renderer;
+}
+
+GameEntity::~GameEntity()
+{
+    if (mTexture != nullptr) {
+        delete mTexture;
+    }
+}
+
+void update()
+{
+    
+}
+
+void GameEntity::Render()
+{
+    if ( mTexture != nullptr)
+    {
+        mTexture->Render(mRenderer, mPosX, mPosY, mTexture->GetWidth(), mTexture->GetHeight());
+    }
+}
+
+void GameEntity::AddTextureComponent()
+{
+    mTexture = new LTexture();
+}
+
+void GameEntity::AddTextureComponent(std::string filepath)
+{
+    mTexture = new LTexture();
+    mTexture->LoadFromFile(mRenderer, filepath);
+}
+
+LTexture& GameEntity::GetTextureComponent()
+{
+    return *mTexture;
+}
+
+SDL_Renderer* GameEntity::GetRenderer()
+{
+    return mRenderer;
+}
+
+void GameEntity::SetPosX(int posX)
 {
     mPosX = posX;
 }
 
-void GameEntity::setPosY(int posY)
+void GameEntity::SetPosY(int posY)
 {
     mPosY = posY;
 }
 
-int GameEntity::getPosX()
+int GameEntity::GetPosX()
 {
     return mPosX;
 }
 
-int GameEntity::getPosY()
+int GameEntity::GetPosY()
 {
     return mPosY;
 }

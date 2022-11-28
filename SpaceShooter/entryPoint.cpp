@@ -20,6 +20,7 @@
 
 SDLApp* app;
 
+// okey how Im gonna deal with you -.-
 GameEntity* bgEntity;
 
 void HandleEvents(){
@@ -30,7 +31,7 @@ void HandleEvents(){
     while(SDL_PollEvent(&event)){
         // Handle each specific event
         if(event.type == SDL_QUIT){
-            app->stopAppLoop();
+            app->StopAppLoop();
         }
         // Detect collision from our two shapes if mouse
         // button is pressed
@@ -42,7 +43,7 @@ void HandleEvents(){
 
 void HandleRendering(){
     // Set draw positions and size
-    bgEntity->render();
+    bgEntity->Render();
 }
 
 int main( int argc, char* args[] )
@@ -52,22 +53,21 @@ int main( int argc, char* args[] )
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // testing rendering
-    bgEntity = new GameEntity(app->getRenderer());
-    bgEntity->getTexture().loadFromFile(bgEntity->getRenderer(), "./SpaceShooter/Assets/bg.png");
-    bgEntity->getTexture().setAlpha(50);
-    bgEntity->getTexture().setWidth(SCREEN_WIDTH);
-    bgEntity->getTexture().setHeight(SCREEN_HEIGHT);
-    bgEntity->setPosX(0);
-    bgEntity->setPosY(0);
+    bgEntity = new GameEntity(app->GetRenderer());
+    bgEntity->AddTextureComponent("./SpaceShooter/Assets/bg.png");
+    bgEntity->GetTextureComponent().SetAlpha(50);
+    bgEntity->GetTextureComponent().SetWidth(SCREEN_WIDTH);
+    bgEntity->GetTextureComponent().SetHeight(SCREEN_HEIGHT);
+    bgEntity->SetPosX(0);
+    bgEntity->SetPosY(0);
     
     // Set callback functions
-    app->setEventCallback(HandleEvents);
-    app->setRenderCallback(HandleRendering);
+    app->SetEventCallback(HandleEvents);
+    app->SetRenderCallback(HandleRendering);
     // Run our application until terminated
-    app->runLoop();
+    app->RunLoop();
 
-    bgEntity->getTexture().free();
-    // Clean up our application
+    delete bgEntity;
     delete app;
 
     return 0;

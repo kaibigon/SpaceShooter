@@ -16,54 +16,40 @@ class GameEntity
 {
 public:
     
-    GameEntity(){
-        mTexture = nullptr;
-    }
+    GameEntity();
     
-    GameEntity(SDL_Renderer *renderer)
-    {
-        mPosX = 0;
-        mPosY = 0;
-        mRenderer = renderer;
-        mTexture = new LTexture();
-    }
+    GameEntity(SDL_Renderer *renderer);
     
-    ~GameEntity();
+    ~GameEntity(); // TODO: should find a way to proper loop through components to free them
     
-    void update()
-    {
-        
-    }
+    void Update();
     
-    void render()
-    {
-        if ( mTexture != nullptr)
-        {
-            mTexture->render(mRenderer, mPosX, mPosY, mTexture->getWidth(), mTexture->getHeight());
-        }
-    }
+    void Render();
     
-    LTexture& getTexture()
-    {
-        return *mTexture;
-    }
+    void SetPosX(int posX);
+    void SetPosY(int posY);
     
-    SDL_Renderer* getRenderer()
-    {
-        return mRenderer;
-    }
+    void AddTextureComponent();
+    void AddTextureComponent(std::string filepath);
+    LTexture& GetTextureComponent();
     
-    void setPosX(int posX);
-    void setPosY(int posY);
+    SDL_Renderer* GetRenderer();
     
-    int getPosX();
-    int getPosY();
+    int GetPosX();
+    int GetPosY();
     
 private:
     
+    int mEntityId; // TODO:
+    
+    // actually by ecs design, these attributes should be component attached to this entity?
+    // forget it, make they are just what they are now -.-
     LTexture* mTexture;
     SDL_Renderer* mRenderer;
+    
+    // TODO: could be a vec2 but Im lazy
     int mPosX;
     int mPosY;
+    
 };
 #endif /* gameEntity_hpp */

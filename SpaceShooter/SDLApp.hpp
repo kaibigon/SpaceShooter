@@ -20,13 +20,13 @@ public:
     SDLApp(const char* title,int x, int y, int w, int h);
     ~SDLApp();
     
-    void setEventCallback(std::function<void(void)> func);
-    void setRenderCallback(std::function<void(void)> func);
-    void runLoop();
-    SDL_Renderer* getRenderer() const;
-    int getMouseX();
-    int getMouseY();
-    void stopAppLoop();
+    void SetEventCallback(std::function<void(void)> func);
+    void SetRenderCallback(std::function<void(void)> func);
+    void RunLoop();
+    SDL_Renderer* GetRenderer() const;
+    int GetMouseX();
+    int GetMouseY();
+    void StopAppLoop();
     
 private:
     SDL_Window *window = nullptr;

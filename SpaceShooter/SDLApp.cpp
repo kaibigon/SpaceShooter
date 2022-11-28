@@ -30,17 +30,17 @@ SDLApp::~SDLApp(){
 }
 
 // Handle Events
-void SDLApp::setEventCallback(std::function<void(void)> func){
+void SDLApp::SetEventCallback(std::function<void(void)> func){
     mEventCallback = func;
 }
 
 // Handle Render
-void SDLApp::setRenderCallback(std::function<void(void)> func){
+void SDLApp::SetRenderCallback(std::function<void(void)> func){
     mRenderCallback = func;
     
 }
 
-void SDLApp::runLoop(){
+void SDLApp::RunLoop(){
     while(mGameIsRunning){
         Uint32 buttons;
         buttons = SDL_GetMouseState(&mMouseX,&mMouseY);
@@ -66,17 +66,17 @@ void SDLApp::runLoop(){
     }
 }
 
-SDL_Renderer* SDLApp::getRenderer() const{
+SDL_Renderer* SDLApp::GetRenderer() const{
     return renderer;
 }
 
-int SDLApp::getMouseX(){
+int SDLApp::GetMouseX(){
     return mMouseX;
 }
-int SDLApp::getMouseY(){
+int SDLApp::GetMouseY(){
     return mMouseY;
 }
 
-void SDLApp::stopAppLoop(){
+void SDLApp::StopAppLoop(){
     mGameIsRunning = false;
 }

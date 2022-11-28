@@ -18,7 +18,7 @@ Player::Player()
 
 Player::~Player()
 {
-    mTexture.free();
+    mTexture.Free();
 }
 
 void Player::handleEvent(SDL_Event &e)
@@ -64,7 +64,7 @@ void Player::move()
 
 void Player::render(SDL_Renderer *renderer)
 {
-    mTexture.render(renderer, mPosX, mPosY, mTexture.getWidth(), mTexture.getHeight());
+    mTexture.Render(renderer, mPosX, mPosY, mTexture.GetWidth(), mTexture.GetHeight());
 }
 
 void Player::setTexture(LTexture texture)

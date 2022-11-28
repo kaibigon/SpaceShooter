@@ -14,10 +14,10 @@ LTexture::LTexture(){
 }
 
 LTexture::~LTexture(){
-    free();
+    Free();
 }
 
-void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
+void LTexture::LoadFromFile(SDL_Renderer *renender, std::string path){
 //    free();
     
     SDL_Texture *newTexture = NULL;
@@ -34,7 +34,7 @@ void LTexture::loadFromFile(SDL_Renderer *renender, std::string path){
 //    SDL_FreeSurface(newSurface);
 }
 
-void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
+void LTexture::LoadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, std::string textureText, SDL_Color textColor){
 //    free();
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
     
@@ -49,11 +49,11 @@ void LTexture::loadFromRendereredText(TTF_Font *font, SDL_Renderer *renender, st
 
 }
 
-void LTexture::setAlpha(Uint8 alpha){
+void LTexture::SetAlpha(Uint8 alpha){
     SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
-void LTexture::render(SDL_Renderer *renderer, int x, int y, int width, int height){
+void LTexture::Render(SDL_Renderer *renderer, int x, int y, int width, int height){
     SDL_Rect dst;
     dst.x = x;
     dst.y = y;
@@ -63,7 +63,7 @@ void LTexture::render(SDL_Renderer *renderer, int x, int y, int width, int heigh
     SDL_RenderCopy(renderer, mTexture, NULL, &dst);
 }
 
-void LTexture::free(){
+void LTexture::Free(){
     if(mTexture != NULL) {
         mTexture = NULL;
         mWidth = 0;
@@ -71,24 +71,24 @@ void LTexture::free(){
     }
 }
 
-SDL_Texture* LTexture::getTexture(){
+SDL_Texture* LTexture::GetTexture(){
     return mTexture;
 }
 
-int LTexture::getWidth(){
+int LTexture::GetWidth(){
     return mWidth;
 }
 
-int LTexture::getHeight(){
+int LTexture::GetHeight(){
     return mHeight;
 }
 
-void LTexture::setWidth(int width)
+void LTexture::SetWidth(int width)
 {
     mWidth = width;
 }
 
-void LTexture::setHeight(int height)
+void LTexture::SetHeight(int height)
 {
     mHeight = height;
 }

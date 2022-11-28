@@ -21,7 +21,7 @@ KTimer::KTimer()
 
 KTimer::~KTimer()
 {
-    mTexture.free();
+    mTexture.Free();
 }
 
 void KTimer::start()
@@ -142,6 +142,6 @@ void KTimer::updateFrames()
 void KTimer::render(TTF_Font *font, SDL_Renderer *renderer, SDL_Color textColor,
                     int x, int y, int width, int height)
 {
-    mTexture.loadFromRendereredText(font, renderer, mText.str().c_str(), textColor);
-    mTexture.render(renderer, x, y, width, height);
+    mTexture.LoadFromRendereredText(font, renderer, mText.str().c_str(), textColor);
+    mTexture.Render(renderer, x, y, width, height);
 }
