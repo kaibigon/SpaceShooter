@@ -15,7 +15,9 @@
 		2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AA8293390800074B1A9 /* timer.cpp */; };
 		2AFA3AAC293391C70074B1A9 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */; };
 		2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AAF2933C5BC0074B1A9 /* player.cpp */; };
-		2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */; };
+		2AFA3AB6293438C20074B1A9 /* assetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AB4293438C20074B1A9 /* assetManager.cpp */; };
+		2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3AB7293443390074B1A9 /* SDLApp.cpp */; };
+		2AFA3ABB2934EC660074B1A9 /* entryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,8 +46,11 @@
 		2AFA3AAB293391C70074B1A9 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		2AFA3AAF2933C5BC0074B1A9 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		2AFA3AB02933C5BC0074B1A9 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
-		2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
-		2AFA3AB5293438C20074B1A9 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
+		2AFA3AB4293438C20074B1A9 /* assetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = assetManager.cpp; sourceTree = "<group>"; };
+		2AFA3AB5293438C20074B1A9 /* assetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = assetManager.hpp; sourceTree = "<group>"; };
+		2AFA3AB7293443390074B1A9 /* SDLApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLApp.cpp; sourceTree = "<group>"; };
+		2AFA3AB8293443390074B1A9 /* SDLApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLApp.hpp; sourceTree = "<group>"; };
+		2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entryPoint.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +99,11 @@
 				2AFA3AA9293390800074B1A9 /* timer.hpp */,
 				2AFA3AAF2933C5BC0074B1A9 /* player.cpp */,
 				2AFA3AB02933C5BC0074B1A9 /* player.hpp */,
-				2AFA3AB4293438C20074B1A9 /* AssetManager.cpp */,
-				2AFA3AB5293438C20074B1A9 /* AssetManager.hpp */,
+				2AFA3AB4293438C20074B1A9 /* assetManager.cpp */,
+				2AFA3AB5293438C20074B1A9 /* assetManager.hpp */,
+				2AFA3AB7293443390074B1A9 /* SDLApp.cpp */,
+				2AFA3AB8293443390074B1A9 /* SDLApp.hpp */,
+				2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -189,8 +197,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AFA3ABB2934EC660074B1A9 /* entryPoint.cpp in Sources */,
 				2AFA3AB12933C5BC0074B1A9 /* player.cpp in Sources */,
-				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
+				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
+				2AFA3AB6293438C20074B1A9 /* assetManager.cpp in Sources */,
 				2AFA3A99293250C10074B1A9 /* textureLoader.cpp in Sources */,
 				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
 				2AFA3AAA293390800074B1A9 /* timer.cpp in Sources */,

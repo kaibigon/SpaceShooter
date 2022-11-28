@@ -5,7 +5,7 @@
 //  Created by Kai Wang on 2022/11/28.
 //
 
-#include "AssetManager.hpp"
+#include "assetManager.hpp"
 
 AssetManager::AssetManager(){
 

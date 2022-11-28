@@ -15,7 +15,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 
 #include "consts.h"
-#include "AssetManager.hpp"
+#include "assetManager.hpp"
 
 #endif /* texture_loader_hpp */
 
