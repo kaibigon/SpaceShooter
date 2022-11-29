@@ -60,7 +60,6 @@ void TextureComponent::SetAlpha(Uint8 alpha)
 
 void TextureComponent::Render()
 {
-    printf("nmsl, imrendering\n");
     SDL_RenderCopy(mRenderer, mTexture, NULL, &mDst);
 }
 

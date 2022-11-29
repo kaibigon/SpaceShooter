@@ -64,6 +64,10 @@ public:
         return *static_cast<T*>(ptr);
     }
     
+    std::vector<std::unique_ptr<Component>>& GetComponents();
+    ComponentArray& GetComponentArray();
+    ComponentBitset& GetComponentBitset();
+    
 private:
     
     static int mEntityId; // TODO:

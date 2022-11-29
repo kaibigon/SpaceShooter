@@ -83,6 +83,7 @@ int main( int argc, char* args[] )
     
     auto& testEntity = entityManager.AddEntity();
     testEntity.AddComponent<TransformComponent>(20, 20);
+    testEntity.AddComponent<TextureComponent>();
     if(testEntity.HasComponent<TransformComponent>())
     {
         printf("nmysl\n");
@@ -91,12 +92,18 @@ int main( int argc, char* args[] )
     {
         printf("nmxc\n");
     }
+   
+//    std::vector<std::unique_ptr<Component>>* numOfC =  &testEntity.GetComponents();
+//    printf("num of components: %lu\n", numOfC->size());
+//    ComponentArray* test2 = &testEntity.GetComponentArray();
+//    printf("max size is: %lu\n", (test2)->size());
     
     app->SetEventCallback(HandleEvents);
     app->SetUpdateCallback(HandleUpdate);
     app->SetRenderCallback(HandleRendering);
     app->RunLoop();
 
+    entityManager.Refresh();
     delete app;
 
     return 0;

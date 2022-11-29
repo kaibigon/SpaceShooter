@@ -41,3 +41,18 @@ SDL_Renderer* GameEntity::GetRenderer()
 {
     return mRenderer;
 }
+
+std::vector<std::unique_ptr<Component>>& GameEntity::GetComponents()
+{
+    return components;
+}
+
+ComponentArray& GameEntity::GetComponentArray()
+{
+    return componentArray;
+}
+
+ComponentBitset& GameEntity::GetComponentBitset()
+{
+    return componentBitset;
+}
