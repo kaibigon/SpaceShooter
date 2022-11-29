@@ -14,7 +14,9 @@
 #include "consts.h"
 #include "TextureComponent.hpp"
 
-#endif /* player_hpp */
+
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
 
 class Player
 {
@@ -40,3 +42,4 @@ private:
     int mVelX;
     int mVelY;
 };
+#endif /* player_hpp */

@@ -16,6 +16,11 @@ class GameEntity;
 class Component;
 
 using ComponentTypeID = std::size_t;
+constexpr std::size_t MAX_ENTITIES = 5000;
+constexpr std::size_t MAX_COMPONENTS = 32;
+
+using ComponentBitset = std::bitset<MAX_COMPONENTS>;
+using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
 inline ComponentTypeID getUniqueComponentID()
 {
@@ -30,9 +35,4 @@ inline ComponentTypeID getComponentTypeID() noexcept
     return typeID;
 }
 
-constexpr std::size_t MAX_ENTITIES = 5000;
-constexpr std::size_t MAX_COMPONENTS = 32;
-
-using ComponentBitset = std::bitset<MAX_COMPONENTS>;
-using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 #endif /* ECS_h */

@@ -22,6 +22,7 @@ public:
     
     void SetEventCallback(std::function<void(void)> func);
     void SetRenderCallback(std::function<void(void)> func);
+    void SetUpdateCallback(std::function<void(void)> func);
     void RunLoop();
     SDL_Renderer* GetRenderer() const;
     int GetMouseX();
@@ -36,6 +37,7 @@ private:
     int mMouseY;
     std::function<void(void)> mEventCallback;
     std::function<void(void)> mRenderCallback;
+    std::function<void(void)> mUpdateCallback;
 };
 #endif /* SDLApp_hpp */
 

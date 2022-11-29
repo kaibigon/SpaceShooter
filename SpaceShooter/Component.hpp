@@ -12,16 +12,15 @@
 #include "GameEntity.hpp"
 
 class GameEntity;
-
 class Component
 {
 public:
     Component() = default ;
     virtual ~Component() = default;
     
-    virtual void init() {}
-    virtual void update() {}
-    virtual void render() {}
+    virtual void Init() {}
+    virtual void Update() {}
+    virtual void Render() {}
     
     GameEntity* entity;
 };

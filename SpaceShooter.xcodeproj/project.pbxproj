@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2A25D92629358B2000B3015C /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D92429358B2000B3015C /* Component.cpp */; };
-		2A25D92A2935940500B3015C /* testComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D9282935940500B3015C /* testComponent.cpp */; };
-		2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE13293511F200B0E813 /* TransformComponent.cpp */; };
+		2A25D92A2935940500B3015C /* TransformComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D9282935940500B3015C /* TransformComponent.cpp */; };
+		2A25D92F2936A3B200B3015C /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D92D2936A3B200B3015C /* EntityManager.cpp */; };
 		2A70FE182935183300B0E813 /* MovementComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE162935183300B0E813 /* MovementComponent.cpp */; };
 		2ABFBA3429354CE900427F33 /* ComponentManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFBA3229354CE900427F33 /* ComponentManager.cpp */; };
 		2AFA3A85293245370074B1A9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A84293245370074B1A9 /* main.cpp */; };
@@ -42,10 +42,10 @@
 		2A25D92429358B2000B3015C /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		2A25D92529358B2000B3015C /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
 		2A25D92729358F7C00B3015C /* ECS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECS.h; sourceTree = "<group>"; };
-		2A25D9282935940500B3015C /* testComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testComponent.cpp; sourceTree = "<group>"; };
-		2A25D9292935940500B3015C /* testComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = testComponent.hpp; sourceTree = "<group>"; };
-		2A70FE13293511F200B0E813 /* TransformComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TransformComponent.cpp; sourceTree = "<group>"; };
-		2A70FE14293511F200B0E813 /* TransformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
+		2A25D9282935940500B3015C /* TransformComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TransformComponent.cpp; sourceTree = "<group>"; };
+		2A25D9292935940500B3015C /* TransformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
+		2A25D92D2936A3B200B3015C /* EntityManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
+		2A25D92E2936A3B200B3015C /* EntityManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityManager.hpp; sourceTree = "<group>"; };
 		2A70FE162935183300B0E813 /* MovementComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovementComponent.cpp; sourceTree = "<group>"; };
 		2A70FE172935183300B0E813 /* MovementComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MovementComponent.hpp; sourceTree = "<group>"; };
 		2ABFBA3229354CE900427F33 /* ComponentManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentManager.cpp; sourceTree = "<group>"; };
@@ -111,6 +111,7 @@
 				2AFA3AB2293438900074B1A9 /* src */,
 				2AFA3A93293247170074B1A9 /* Assets */,
 				2AFA3A84293245370074B1A9 /* main.cpp */,
+				2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */,
 				2AFA3A97293250C10074B1A9 /* TextureComponent.cpp */,
 				2AFA3A98293250C10074B1A9 /* TextureComponent.hpp */,
 				2AFA3A9A293271FF0074B1A9 /* consts.h */,
@@ -122,11 +123,8 @@
 				2AFA3AB5293438C20074B1A9 /* AssetManager.hpp */,
 				2AFA3AB7293443390074B1A9 /* SDLApp.cpp */,
 				2AFA3AB8293443390074B1A9 /* SDLApp.hpp */,
-				2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */,
 				2AFA3ABD2934F2EF0074B1A9 /* GameEntity.cpp */,
 				2AFA3ABE2934F2EF0074B1A9 /* GameEntity.hpp */,
-				2A70FE13293511F200B0E813 /* TransformComponent.cpp */,
-				2A70FE14293511F200B0E813 /* TransformComponent.hpp */,
 				2A70FE162935183300B0E813 /* MovementComponent.cpp */,
 				2A70FE172935183300B0E813 /* MovementComponent.hpp */,
 				2ABFBA3229354CE900427F33 /* ComponentManager.cpp */,
@@ -134,8 +132,10 @@
 				2A25D92429358B2000B3015C /* Component.cpp */,
 				2A25D92529358B2000B3015C /* Component.hpp */,
 				2A25D92729358F7C00B3015C /* ECS.h */,
-				2A25D9282935940500B3015C /* testComponent.cpp */,
-				2A25D9292935940500B3015C /* testComponent.hpp */,
+				2A25D9282935940500B3015C /* TransformComponent.cpp */,
+				2A25D9292935940500B3015C /* TransformComponent.hpp */,
+				2A25D92D2936A3B200B3015C /* EntityManager.cpp */,
+				2A25D92E2936A3B200B3015C /* EntityManager.hpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -233,14 +233,14 @@
 				2A25D92629358B2000B3015C /* Component.cpp in Sources */,
 				2AFA3AB12933C5BC0074B1A9 /* Player.cpp in Sources */,
 				2ABFBA3429354CE900427F33 /* ComponentManager.cpp in Sources */,
-				2A25D92A2935940500B3015C /* testComponent.cpp in Sources */,
+				2A25D92A2935940500B3015C /* TransformComponent.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
-				2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */,
 				2AFA3A99293250C10074B1A9 /* TextureComponent.cpp in Sources */,
 				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
 				2A70FE182935183300B0E813 /* MovementComponent.cpp in Sources */,
 				2AFA3ABF2934F2EF0074B1A9 /* GameEntity.cpp in Sources */,
+				2A25D92F2936A3B200B3015C /* EntityManager.cpp in Sources */,
 				2AFA3AAA293390800074B1A9 /* KTimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

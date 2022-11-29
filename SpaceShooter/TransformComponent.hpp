@@ -1,35 +1,45 @@
 //
-//  TransformComponent.hpp
+//  testComponent.hpp
 //  SpaceShooter
 //
-//  Created by Kai Wang on 2022/11/28.
+//  Created by Kai Wang on 2022/11/29.
 //
 
-#ifndef TransformComponent_hpp
-#define TransformComponent_hpp
+#ifndef TransformComponentt_hpp
+#define TransformComponentt_hpp
 
-#include <SDL2/SDL.h>
 #include <stdio.h>
+#include "Component.hpp"
 
-class TransformComponent
+class TransformComponent : public Component
 {
 public:
     
-    TransformComponent();
+    TransformComponent() { };
     
-    ~TransformComponent();
+    TransformComponent(int x, int y)
+    {
+        posx = x;
+        posy = y;
+        printf("x: %d, y: %d\n", posx, posy);
+    }
     
-    void SetPosX(int posX);
-    void SetPosY(int posY);
+    virtual ~TransformComponent() {};
+    int x() {return posx;}
+    int y() {return posy;}
     
-    int GetPosX();
-    int GetPosY();
+    void Init() override
+    {
+        posx = 0;
+        posy = 0;
+    }
+    
+    void Update() override
+    {
+    }
     
 private:
-    
-    // TODO: make a pos struct
-    int mPosX;
-    int mPosY;
-    
+    int posx;
+    int posy;
 };
-#endif /* TransformComponent_hpp */
+#endif /* testComponent_hpp */

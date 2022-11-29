@@ -5,13 +5,12 @@
 //  Created by Kai Wang on 2022/11/28.
 //
 
-#ifndef PlayermovementComponent_hpp
-#define PlayermovementComponent_hpp
+#ifndef MovementComponent_hpp
+#define MovementComponent_hpp
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-#include "TransformComponent.hpp"
 class MovementComponent
 {
 public:
@@ -19,7 +18,7 @@ public:
     ~MovementComponent();
     
     void HandleEvent(SDL_Event &e);
-    void Update(TransformComponent* transformComponent);
+//    void Update(TransformComponent* transformComponent);
     
 private:
     int mVelValue;

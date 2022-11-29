@@ -143,5 +143,5 @@ void KTimer::render(TTF_Font *font, SDL_Renderer *renderer, SDL_Color textColor,
                     int x, int y, int width, int height)
 {
     mTexture.LoadFromRendereredText(font, renderer, mText.str().c_str(), textColor);
-    mTexture.Render(renderer, x, y, width, height);
+    mTexture.SetRenderConfig(renderer, x, y, width, height);
 }

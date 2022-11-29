@@ -58,15 +58,20 @@ void TextureComponent::SetAlpha(Uint8 alpha)
     SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
-void TextureComponent::Render(SDL_Renderer *renderer, int x, int y, int width, int height)
+void TextureComponent::Render()
 {
-    SDL_Rect dst;
-    dst.x = x;
-    dst.y = y;
-    dst.w = width;
-    dst.h = height;
-    
-    SDL_RenderCopy(renderer, mTexture, NULL, &dst);
+    printf("nmsl, imrendering\n");
+    SDL_RenderCopy(mRenderer, mTexture, NULL, &mDst);
+}
+
+void TextureComponent::SetRenderConfig(SDL_Renderer *renderer, int x, int y, int width, int height)
+{
+    mDst.x = x;
+    mDst.y = y;
+    mDst.w = width;
+    mDst.h = height;
+    mRenderer = renderer;
+//    SDL_RenderCopy(renderer, mTexture, NULL, &dst);
 }
 
 void TextureComponent::Free()

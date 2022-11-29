@@ -38,8 +38,8 @@ void MovementComponent::HandleEvent(SDL_Event &e)
     }
 }
 
-void MovementComponent::Update(TransformComponent* transformComponent)
-{
-    transformComponent->SetPosX(transformComponent->GetPosX() + mVelX);
-    transformComponent->SetPosY(transformComponent->GetPosY() + mVelY);
-}
+//void MovementComponent::Update(TransformComponent* transformComponent)
+//{
+//    transformComponent->SetPosX(transformComponent->GetPosX() + mVelX);
+//    transformComponent->SetPosY(transformComponent->GetPosY() + mVelY);
+//}

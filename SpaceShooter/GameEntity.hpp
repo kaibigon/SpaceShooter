@@ -16,9 +16,6 @@
 #include <array>
 
 #include "Component.hpp"
-#include "TextureComponent.hpp"
-#include "TransformComponent.hpp"
-#include "MovementComponent.hpp"
 #include "ECS.h"
 
 class GameEntity
@@ -33,44 +30,46 @@ public:
     
     void Update();
     void Render();
-    
-    void AddTextureComponent();
-    void AddTextureComponent(std::string filepath);
-    TextureComponent& GetTextureComponent();
-    
-    void AddTransformComponent();
-    TransformComponent& GetTransformComponent();
-    
-    void AddMovementComponent();
-    MovementComponent& GetMovementComponent();
+    bool IsActive() {return mActive;}
+    void Destory();
     
     SDL_Renderer* GetRenderer();
+
+    // code from : https://www.youtube.com/watch?v=XsvI8Sng6dk&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=9
+    template <typename T>
+    bool HasComponent() const
+    {
+        return componentBitset[getComponentTypeID<T>()];
+    }
     
     template <typename T, typename... TArgs>
     T& AddComponent(TArgs&&... mArgs)
     {
-        T* c(new T(std::forward<TArgs>(mArgs)...));
+        // T* c = new T(std::forward<TArgs>(mArgs)...);
+        T* c = new T(mArgs...);
         c->entity = this;
         std::unique_ptr<Component> uPtr{c};
         components.emplace_back(std::move(uPtr));
         componentArray[getComponentTypeID<T>()] = c;
         componentBitset[getComponentTypeID<T>()] = true;
         
-        c->init();
+        c->Init();
         return *c;
+    }
+    
+    template <typename T>
+    T& GetComponent() const
+    {
+        auto ptr(componentArray[getComponentTypeID<T>()]);
+        return *static_cast<T*>(ptr);
     }
     
 private:
     
-    int mEntityId; // TODO:
+    static int mEntityId; // TODO:
+    bool mActive = true;
     
-    // by ecs design, all of these attributes should actually be components attached to this entity
-    // but forget it, they are just what they are now -.-
     SDL_Renderer* mRenderer;
-    
-    TextureComponent* mTexture;
-    TransformComponent* mTransform;
-    MovementComponent* mMovement;
     
     std::vector<std::unique_ptr<Component>> components;
     ComponentArray componentArray;

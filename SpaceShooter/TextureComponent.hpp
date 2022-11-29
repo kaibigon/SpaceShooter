@@ -5,8 +5,8 @@
 //  Created by Kai Wang on 2022/11/26.
 //
 #pragma once
-#ifndef TextureLoader_hpp
-#define TextureLoader_hpp
+#ifndef TextureComponent_hpp
+#define TextureComponent_hpp
 
 #include <stdio.h>
 #include <string>
@@ -14,12 +14,12 @@
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 
-#include "consts.h"
+//#include "consts.h"
 #include "AssetManager.hpp"
+#include "Component.hpp"
+#include "ECS.h"
 
-#endif /* texture_loader_hpp */
-
-class TextureComponent {
+class TextureComponent : public Component {
     
 public:
     
@@ -37,7 +37,9 @@ public:
     
     void SetAlpha(Uint8 alpha);
     
-    void Render(SDL_Renderer *renderer, int x, int y, int width, int height);
+    void Render();
+    
+    void SetRenderConfig(SDL_Renderer *renderer, int x, int y, int width, int height);
     
     int GetWidth();
     
@@ -49,7 +51,9 @@ public:
     
 private:
     SDL_Texture *mTexture;
-    
+    SDL_Renderer *mRenderer;
     int mWidth;
     int mHeight;
+    SDL_Rect mDst;
 };
+#endif /* texture_loader_hpp */

@@ -13,21 +13,20 @@
 
 #include "TextureComponent.hpp"
 #include "MovementComponent.hpp"
-#include "TransformComponent.hpp"
 #include "KTimer.hpp"
 #include "consts.h"
-#include "Player.hpp"
+//#include "Player.hpp"
 #include "SDLApp.hpp"
 #include "GameEntity.hpp"
-#include "testComponent.hpp"
+#include "TransformComponent.hpp"
+#include "EntityManager.hpp"
 
 SDLApp* app;
 
-// maybe a spawner instead of global -.-
-GameEntity* bgEntity;
-GameEntity* playerEntity;
+EntityManager entityManager;
 
-void HandleEvents(){
+void HandleEvents()
+{
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
@@ -36,14 +35,20 @@ void HandleEvents(){
             app->StopAppLoop();
         }
         
-        playerEntity->GetMovementComponent().HandleEvent(event);
     }
 }
 
-void HandleRendering(){
-    playerEntity->GetMovementComponent().Update(&playerEntity->GetTransformComponent());
-    bgEntity->Render();
-    playerEntity->Render();
+void HandleUpdate()
+{
+    entityManager.Update();
+}
+
+void HandleRendering()
+{
+    entityManager.Render();
+//    playerEntity->GetMovementComponent().Update(&playerEntity->GetTransformComponent());
+//    bgEntity->Render();
+//    playerEntity->Render();
 }
 
 int main( int argc, char* args[] )
@@ -52,33 +57,46 @@ int main( int argc, char* args[] )
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // testing
-    bgEntity = new GameEntity(app->GetRenderer());
-    bgEntity->AddTransformComponent();
-    bgEntity->AddTextureComponent("./SpaceShooter/Assets/bg.png");
-    bgEntity->GetTextureComponent().SetAlpha(50);
-    bgEntity->GetTextureComponent().SetWidth(SCREEN_WIDTH);
-    bgEntity->GetTextureComponent().SetHeight(SCREEN_HEIGHT);
+//    bgEntity = new GameEntity(app->GetRenderer());
+//    bgEntity->AddTransformComponent();
+//    bgEntity->AddTextureComponent("./SpaceShooter/Assets/bg.png");
+//    bgEntity->GetTextureComponent().SetAlpha(50);
+//    bgEntity->GetTextureComponent().SetWidth(SCREEN_WIDTH);
+//    bgEntity->GetTextureComponent().SetHeight(SCREEN_HEIGHT);
+//
+//    playerEntity = new GameEntity(app->GetRenderer());
+//    playerEntity->AddTransformComponent();
+//    playerEntity->GetTransformComponent().SetPosX(SCREEN_WIDTH/2);
+//    playerEntity->GetTransformComponent().SetPosY(SCREEN_HEIGHT/2);
+//    playerEntity->AddTextureComponent();
+//    playerEntity->AddTextureComponent("./SpaceShooter/Assets/dot.bmp");
+//    playerEntity->GetTextureComponent().SetWidth(20);
+//    playerEntity->GetTextureComponent().SetHeight(20);
+//    playerEntity->AddMovementComponent();
+//    playerEntity->AddComponent<testComponent>(100,100);
     
-    playerEntity = new GameEntity(app->GetRenderer());
-    playerEntity->AddTransformComponent();
-    playerEntity->GetTransformComponent().SetPosX(SCREEN_WIDTH/2);
-    playerEntity->GetTransformComponent().SetPosY(SCREEN_HEIGHT/2);
-    playerEntity->AddTextureComponent();
-    playerEntity->AddTextureComponent("./SpaceShooter/Assets/dot.bmp");
-    playerEntity->GetTextureComponent().SetWidth(20);
-    playerEntity->GetTextureComponent().SetHeight(20);
-    playerEntity->AddMovementComponent();
+    auto& bgEntity = entityManager.AddEntity();
+    bgEntity.AddComponent<TextureComponent>();
+    bgEntity.GetComponent<TextureComponent>().LoadFromFile(app->GetRenderer(), "./SpaceShooter/Assets/bg.png");
+    bgEntity.GetComponent<TextureComponent>().SetAlpha(50);
+    bgEntity.GetComponent<TextureComponent>().SetRenderConfig(app->GetRenderer(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
-    playerEntity->AddComponent<testComponent>(100,100);
-    
-    
+    auto& testEntity = entityManager.AddEntity();
+    testEntity.AddComponent<TransformComponent>(20, 20);
+    if(testEntity.HasComponent<TransformComponent>())
+    {
+        printf("nmysl\n");
+    }
+    if(!testEntity.HasComponent<TextureComponent>())
+    {
+        printf("nmxc\n");
+    }
     
     app->SetEventCallback(HandleEvents);
+    app->SetUpdateCallback(HandleUpdate);
     app->SetRenderCallback(HandleRendering);
     app->RunLoop();
 
-    delete bgEntity;
-    delete playerEntity;
     delete app;
 
     return 0;

@@ -17,7 +17,6 @@
 
 #include "TextureComponent.hpp"
 
-#endif /* timer_hpp */
 
 class KTimer {
 public:
@@ -52,3 +51,4 @@ private:
     bool mPaused;
     bool mStarted;
 };
+#endif /* timer_hpp */
