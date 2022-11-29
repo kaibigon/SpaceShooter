@@ -12,7 +12,6 @@
 #include <SDL2/SDL.h>
 
 #include "TransformComponent.hpp"
-
 class MovementComponent
 {
 public:
@@ -26,7 +25,6 @@ private:
     int mVelValue;
     int mVelY;
     int mVelX;
-//    TransformComponent* transformComponent;
 };
 
 #endif /* PlayermovementComponent_hpp */

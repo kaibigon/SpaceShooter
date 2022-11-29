@@ -19,6 +19,7 @@
 #include "Player.hpp"
 #include "SDLApp.hpp"
 #include "GameEntity.hpp"
+#include "testComponent.hpp"
 
 SDLApp* app;
 
@@ -67,6 +68,10 @@ int main( int argc, char* args[] )
     playerEntity->GetTextureComponent().SetWidth(20);
     playerEntity->GetTextureComponent().SetHeight(20);
     playerEntity->AddMovementComponent();
+    
+    playerEntity->AddComponent<testComponent>(100,100);
+    
+    
     
     app->SetEventCallback(HandleEvents);
     app->SetRenderCallback(HandleRendering);

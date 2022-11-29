@@ -5,14 +5,21 @@
 //  Created by Kai Wang on 2022/11/28.
 //
 
+#pragma once
 #ifndef GameEntity_hpp
 #define GameEntity_hpp
 
 #include <stdio.h>
+#include <vector>
 #include <SDL2/SDL.h>
+#include <bitset>
+#include <array>
+
+#include "Component.hpp"
 #include "TextureComponent.hpp"
 #include "TransformComponent.hpp"
 #include "MovementComponent.hpp"
+#include "ECS.h"
 
 class GameEntity
 {
@@ -39,6 +46,20 @@ public:
     
     SDL_Renderer* GetRenderer();
     
+    template <typename T, typename... TArgs>
+    T& AddComponent(TArgs&&... mArgs)
+    {
+        T* c(new T(std::forward<TArgs>(mArgs)...));
+        c->entity = this;
+        std::unique_ptr<Component> uPtr{c};
+        components.emplace_back(std::move(uPtr));
+        componentArray[getComponentTypeID<T>()] = c;
+        componentBitset[getComponentTypeID<T>()] = true;
+        
+        c->init();
+        return *c;
+    }
+    
 private:
     
     int mEntityId; // TODO:
@@ -50,5 +71,10 @@ private:
     TextureComponent* mTexture;
     TransformComponent* mTransform;
     MovementComponent* mMovement;
+    
+    std::vector<std::unique_ptr<Component>> components;
+    ComponentArray componentArray;
+    ComponentBitset componentBitset;
+    
 };
 #endif /* gameEntity_hpp */

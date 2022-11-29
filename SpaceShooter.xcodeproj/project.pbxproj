@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A25D92629358B2000B3015C /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D92429358B2000B3015C /* Component.cpp */; };
+		2A25D92A2935940500B3015C /* testComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D9282935940500B3015C /* testComponent.cpp */; };
 		2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE13293511F200B0E813 /* TransformComponent.cpp */; };
 		2A70FE182935183300B0E813 /* MovementComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FE162935183300B0E813 /* MovementComponent.cpp */; };
+		2ABFBA3429354CE900427F33 /* ComponentManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFBA3229354CE900427F33 /* ComponentManager.cpp */; };
 		2AFA3A85293245370074B1A9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A84293245370074B1A9 /* main.cpp */; };
 		2AFA3A8D293245470074B1A9 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A8C293245470074B1A9 /* SDL2.framework */; };
 		2AFA3A94293247990074B1A9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A90293245480074B1A9 /* SDL2_image.framework */; };
@@ -36,10 +39,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A25D92429358B2000B3015C /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		2A25D92529358B2000B3015C /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
+		2A25D92729358F7C00B3015C /* ECS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECS.h; sourceTree = "<group>"; };
+		2A25D9282935940500B3015C /* testComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testComponent.cpp; sourceTree = "<group>"; };
+		2A25D9292935940500B3015C /* testComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = testComponent.hpp; sourceTree = "<group>"; };
 		2A70FE13293511F200B0E813 /* TransformComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TransformComponent.cpp; sourceTree = "<group>"; };
 		2A70FE14293511F200B0E813 /* TransformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
 		2A70FE162935183300B0E813 /* MovementComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovementComponent.cpp; sourceTree = "<group>"; };
 		2A70FE172935183300B0E813 /* MovementComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MovementComponent.hpp; sourceTree = "<group>"; };
+		2ABFBA3229354CE900427F33 /* ComponentManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentManager.cpp; sourceTree = "<group>"; };
+		2ABFBA3329354CE900427F33 /* ComponentManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentManager.hpp; sourceTree = "<group>"; };
 		2AFA3A81293245370074B1A9 /* SpaceShooter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpaceShooter; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFA3A84293245370074B1A9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2AFA3A8C293245470074B1A9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -119,6 +129,13 @@
 				2A70FE14293511F200B0E813 /* TransformComponent.hpp */,
 				2A70FE162935183300B0E813 /* MovementComponent.cpp */,
 				2A70FE172935183300B0E813 /* MovementComponent.hpp */,
+				2ABFBA3229354CE900427F33 /* ComponentManager.cpp */,
+				2ABFBA3329354CE900427F33 /* ComponentManager.hpp */,
+				2A25D92429358B2000B3015C /* Component.cpp */,
+				2A25D92529358B2000B3015C /* Component.hpp */,
+				2A25D92729358F7C00B3015C /* ECS.h */,
+				2A25D9282935940500B3015C /* testComponent.cpp */,
+				2A25D9292935940500B3015C /* testComponent.hpp */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -213,7 +230,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AFA3ABB2934EC660074B1A9 /* entryPoint.cpp in Sources */,
+				2A25D92629358B2000B3015C /* Component.cpp in Sources */,
 				2AFA3AB12933C5BC0074B1A9 /* Player.cpp in Sources */,
+				2ABFBA3429354CE900427F33 /* ComponentManager.cpp in Sources */,
+				2A25D92A2935940500B3015C /* testComponent.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
 				2A70FE15293511F200B0E813 /* TransformComponent.cpp in Sources */,

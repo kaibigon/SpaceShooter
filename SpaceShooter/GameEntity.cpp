@@ -10,6 +10,8 @@
 GameEntity::GameEntity(){
     mTexture = nullptr;
     mTransform = nullptr;
+    mMovement = nullptr;
+//    mComponents = {};
 }
 
 GameEntity::GameEntity(SDL_Renderer *renderer)
@@ -81,4 +83,3 @@ SDL_Renderer* GameEntity::GetRenderer()
 {
     return mRenderer;
 }
-
