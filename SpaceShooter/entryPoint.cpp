@@ -11,19 +11,12 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <stdio.h>
 
-#include "TextureComponent.hpp"
-#include "MovementComponent.hpp"
-#include "KTimer.hpp"
 #include "consts.h"
 //#include "Player.hpp"
 #include "SDLApp.hpp"
-#include "GameEntity.hpp"
-#include "TransformComponent.hpp"
-#include "EntityManager.hpp"
 
 SDLApp* app;
 
-EntityManager entityManager;
 
 void HandleEvents()
 {
@@ -40,15 +33,10 @@ void HandleEvents()
 
 void HandleUpdate()
 {
-    entityManager.Update();
 }
 
 void HandleRendering()
 {
-    entityManager.Render();
-//    playerEntity->GetMovementComponent().Update(&playerEntity->GetTransformComponent());
-//    bgEntity->Render();
-//    playerEntity->Render();
 }
 
 int main( int argc, char* args[] )
@@ -56,30 +44,12 @@ int main( int argc, char* args[] )
     const char* title = "Boden Hao Leng";
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    auto& bgEntity = entityManager.AddEntity();
-    bgEntity.AddComponent<TextureComponent>();
-    bgEntity.GetComponent<TextureComponent>().LoadFromFile(app->GetRenderer(), "./SpaceShooter/Assets/bg.png");
-    bgEntity.GetComponent<TextureComponent>().SetAlpha(50);
-    bgEntity.GetComponent<TextureComponent>().SetRenderConfig(app->GetRenderer(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    auto& testEntity = entityManager.AddEntity();
-    testEntity.AddComponent<TransformComponent>(20, 20);
-    testEntity.AddComponent<TextureComponent>();
-    if(testEntity.HasComponent<TransformComponent>())
-    {
-        printf("nmysl\n");
-    }
-    if(!testEntity.HasComponent<TextureComponent>())
-    {
-        printf("nmxc\n");
-    }
     
     app->SetEventCallback(HandleEvents);
     app->SetUpdateCallback(HandleUpdate);
     app->SetRenderCallback(HandleRendering);
     app->RunLoop();
 
-    entityManager.Refresh();
     delete app;
 
     return 0;
