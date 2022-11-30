@@ -22,9 +22,7 @@ SDLApp::SDLApp(const char* title,int x, int y, int w, int h)
 }
 
 SDLApp::~SDLApp(){
-    // Destroy our m_window
     SDL_DestroyWindow(window);
-    // Quit our SDL application
     IMG_Quit();
     SDL_Quit();
 }

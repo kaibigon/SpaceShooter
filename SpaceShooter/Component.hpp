@@ -17,7 +17,6 @@ class Component
 public:
     Component() = default ;
     virtual ~Component() = default;
-    
     virtual void Init() {}
     virtual void Update() {}
     virtual void Render() {}
