@@ -70,21 +70,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A25D9392937DE8E00B3015C /* system */ = {
+		2A25D9392937DE8E00B3015C /* Systems */ = {
 			isa = PBXGroup;
 			children = (
 				2A25D93A2937DEB400B3015C /* PhysicsSystem.cpp */,
 				2A25D93B2937DEB400B3015C /* PhysicsSystem.hpp */,
 			);
-			path = system;
+			path = Systems;
 			sourceTree = "<group>";
 		};
-		2A25D93D2937DF1400B3015C /* components */ = {
+		2A25D93D2937DF1400B3015C /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				2A25D93E2937DF3300B3015C /* TransformComponent.h */,
 			);
-			path = components;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2A25D93F2937E67500B3015C /* ECS */ = {
+			isa = PBXGroup;
+			children = (
+				2A25D9312936DDF000B3015C /* Entity.h */,
+				2A25D9322936DFD000B3015C /* EntityManager.h */,
+				2A25D93329379AEF00B3015C /* ComponentArray.h */,
+				2A25D9342937C7E400B3015C /* ComponentManager.h */,
+				2A25D9352937D2C500B3015C /* System.h */,
+				2A25D9362937D31700B3015C /* SystemManager.h */,
+				2A25D9372937D82D00B3015C /* Coordinator.h */,
+			);
+			path = ECS;
 			sourceTree = "<group>";
 		};
 		2AFA3A78293245370074B1A9 = {
@@ -149,15 +163,9 @@
 		2AFA3AB3293438970074B1A9 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				2A25D93D2937DF1400B3015C /* components */,
-				2A25D9392937DE8E00B3015C /* system */,
-				2A25D9312936DDF000B3015C /* Entity.h */,
-				2A25D9322936DFD000B3015C /* EntityManager.h */,
-				2A25D93329379AEF00B3015C /* ComponentArray.h */,
-				2A25D9342937C7E400B3015C /* ComponentManager.h */,
-				2A25D9352937D2C500B3015C /* System.h */,
-				2A25D9362937D31700B3015C /* SystemManager.h */,
-				2A25D9372937D82D00B3015C /* Coordinator.h */,
+				2A25D93F2937E67500B3015C /* ECS */,
+				2A25D93D2937DF1400B3015C /* Components */,
+				2A25D9392937DE8E00B3015C /* Systems */,
 			);
 			path = include;
 			sourceTree = "<group>";

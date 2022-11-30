@@ -9,7 +9,7 @@
 #define PhysicsSystem_hpp
 
 #include <stdio.h>
-#include "../System.h"
+#include "../ECS/System.h"
 
 class PhysicsSystem : public System
 {

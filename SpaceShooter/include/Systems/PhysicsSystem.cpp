@@ -6,8 +6,8 @@
 //
 
 #include "PhysicsSystem.hpp"
-#include "../Coordinator.h"
-#include "../components/TransformComponent.h"
+#include "../ECS/Coordinator.h"
+#include "../Components/TransformComponent.h"
 
 extern Coordinator gCoordinator;
 

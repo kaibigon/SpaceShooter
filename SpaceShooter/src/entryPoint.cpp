@@ -14,9 +14,9 @@
 #include "consts.h"
 #include "SDLApp.hpp"
 
-#include "../include/Coordinator.h"
-#include "../include/components/TransformComponent.h"
-#include "../include/system/PhysicsSystem.hpp"
+#include "../include/ECS/Coordinator.h"
+#include "../include/Components/TransformComponent.h"
+#include "../include/Systems/PhysicsSystem.hpp"
 
 SDLApp* app;
 
