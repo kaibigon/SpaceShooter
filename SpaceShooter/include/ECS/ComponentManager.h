@@ -22,7 +22,7 @@ public:
         
         assert(mComponentTypes.find(typeName) == mComponentTypes.end() && "Registering component type more than once.");
         
-        mComponentTypes.insert({typeName, mNextComponentType}); //shouldnt it be T?
+        mComponentTypes.insert({typeName, mNextComponentType}); // mapping component type name to a number
         mComponentArrays.insert({typeName, std::make_shared<ComponentArray<T>>()});
         
         ++mNextComponentType;

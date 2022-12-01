@@ -13,8 +13,6 @@ extern Coordinator gCoordinator;
 
 void PhysicsSystem::Init()
 {
-    printf("nmsl\n");
-    printf("number: %lu\n", mEntities.size());
 }
 
 void PhysicsSystem::Update()
@@ -23,6 +21,5 @@ void PhysicsSystem::Update()
     {
         auto& transform = gCoordinator.GetComponent<TransformComponent>(entity);
 
-        printf("x: %d, y: %d\n", transform.x, transform.y);
     }
 }
