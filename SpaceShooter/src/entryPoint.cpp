@@ -27,15 +27,7 @@ Coordinator gCoordinator;
 
 void HandleEvents()
 {
-    SDL_Event event;
-
-    while(SDL_PollEvent(&event)){
-        
-        if(event.type == SDL_QUIT){
-            app->StopAppLoop();
-        }
-        
-    }
+    
 }
 
 void HandleUpdate()
@@ -104,9 +96,6 @@ int main( int argc, char* args[] )
 
     physicsSystem->Init();
     
-    
-    
-    // System init 
     renderSystem->LoadTexture(bgEntity, app->GetRenderer(), "./SpaceShooter/Assets/bg.png");
     renderSystem->SetRenderRange(bgEntity, SCREEN_WIDTH, SCREEN_HEIGHT);
     
@@ -114,9 +103,8 @@ int main( int argc, char* args[] )
     renderSystem->SetRenderRange(player, 20, 20);
     
     bool quit = false;
+    SDL_Event event;
     while(!quit){
-
-        SDL_Event event;
 
         while(SDL_PollEvent(&event)){
             
@@ -127,10 +115,10 @@ int main( int argc, char* args[] )
             physicsSystem->HandleInput(event);
         }
         
+        physicsSystem->Update();
         SDL_RenderClear(app->GetRenderer());
         SDL_SetRenderDrawColor(app->GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
-        physicsSystem->Update();
         renderSystem->Render(app->GetRenderer());
         
         SDL_RenderPresent(app->GetRenderer());
@@ -140,6 +128,7 @@ int main( int argc, char* args[] )
 //    app->SetEventCallback(HandleEvents);
 //    app->SetUpdateCallback(HandleUpdate);
 //    app->SetRenderCallback(HandleRendering);
+//    app->RunLoop();
 //    app->RunLoop();
 //
     delete app;

@@ -14,7 +14,7 @@ struct MovementComponent
 {
     int velX = 0;
     int velY = 0;
-    int velValue = 0;
+    int velValue = 5;
     int accer = 0;
 };
 
