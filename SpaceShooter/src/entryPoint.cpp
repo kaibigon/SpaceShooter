@@ -43,6 +43,7 @@ int main( int argc, char* args[] )
     const char* title = "Boden Hao Leng";
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+    Mix_Music *gMusic = NULL;
     // Init Coordinator
     
     gCoordinator.Init();
@@ -104,6 +105,12 @@ int main( int argc, char* args[] )
     
     bool quit = false;
     SDL_Event event;
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+       printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+    gMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
+
     while(!quit){
 
         while(SDL_PollEvent(&event)){
@@ -113,6 +120,11 @@ int main( int argc, char* args[] )
                 quit = true;
             }
             physicsSystem->HandleInput(event);
+        }
+        
+        if( Mix_PlayingMusic() == 0 )
+        {
+            Mix_PlayMusic( gMusic, -1 );
         }
         
         physicsSystem->Update();
@@ -131,6 +143,7 @@ int main( int argc, char* args[] )
 //    app->RunLoop();
 //    app->RunLoop();
 //
+    Mix_FreeMusic( gMusic );
     delete app;
 
     return 0;

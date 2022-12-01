@@ -9,7 +9,7 @@
 
 SDLApp::SDLApp(const char* title,int x, int y, int w, int h)
 {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {
         std::cout << "SDL could not be initialized: " << SDL_GetError();
     }
@@ -19,6 +19,8 @@ SDLApp::SDLApp(const char* title,int x, int y, int w, int h)
     window = SDL_CreateWindow(title,x,y,w,h,SDL_WINDOW_SHOWN);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    
+//    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 );
 }
 
 SDLApp::~SDLApp(){
