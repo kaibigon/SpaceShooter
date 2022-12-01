@@ -60,10 +60,12 @@ public:
 
             if ((entitySignature & systemSignature) == systemSignature)
             {
+                printf("%s accept %ld\n", typeid(type).name(), entity);
                 system->mEntities.insert(entity);
             }
             else
             {
+                printf("refuse %ld\n", entity);
                 system->mEntities.erase(entity);
             }
         }

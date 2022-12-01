@@ -11,6 +11,7 @@
 #include "AssetManager.hpp"
 #include "../ECS/Coordinator.h"
 #include "../Components/TextureComponent.h"
+#include "../Components/TransformComponent.h"
 
 extern Coordinator gCoordinator;
 
@@ -26,11 +27,9 @@ void RenderSystem::LoadTexture(Entity entity, SDL_Renderer *renender, std::strin
     textureComponent.texture = newTexture;
 }
 
-void RenderSystem::SetRenderRange(Entity entity, int x, int y,int width, int height)
+void RenderSystem::SetRenderRange(Entity entity, int width, int height)
 {
     auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
-    textureComponent.dst.x = x;
-    textureComponent.dst.y = y;
     textureComponent.dst.w = width;
     textureComponent.dst.h = height;
 }
@@ -40,6 +39,9 @@ void RenderSystem::Render(SDL_Renderer *renender)
     for (auto const& entity : mEntities)
     {
         auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
+        auto& transformComponent = gCoordinator.GetComponent<TransformComponent>(entity);
+        textureComponent.dst.x = transformComponent.x;
+        textureComponent.dst.y = transformComponent.y;
         SDL_RenderCopy(renender, textureComponent.texture, NULL, &textureComponent.dst);
     }
 }

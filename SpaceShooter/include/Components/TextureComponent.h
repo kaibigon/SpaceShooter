@@ -7,7 +7,7 @@
 
 #ifndef TextureComponent_h
 #define TextureComponent_h
-#include <SDL2/SDL.h>"
+#include <SDL2/SDL.h>
 
 struct TextureComponent
 {

@@ -32,9 +32,6 @@ SDL_Surface* AssetManager::GetSurface(std::string filepath){
           
         }
         m_surfaces.insert(std::make_pair(filepath,surface));
-        printf("%d\n", surface->w);
-        printf("%d\n", surface->h);
-        printf("load successfully");
         return m_surfaces[filepath];
     }
 

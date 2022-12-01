@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2A25D93C2937DEB400B3015C /* PhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D93A2937DEB400B3015C /* PhysicsSystem.cpp */; };
 		2A25D9432938DA8400B3015C /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D9412938DA8400B3015C /* RenderSystem.cpp */; };
-		2AFA3A85293245370074B1A9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA3A84293245370074B1A9 /* main.cpp */; };
 		2AFA3A8D293245470074B1A9 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A8C293245470074B1A9 /* SDL2.framework */; };
 		2AFA3A94293247990074B1A9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A90293245480074B1A9 /* SDL2_image.framework */; };
 		2AFA3A9C2932AC3B0074B1A9 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */; };
@@ -45,8 +44,8 @@
 		2A25D9402938D8D800B3015C /* TextureComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureComponent.h; sourceTree = "<group>"; };
 		2A25D9412938DA8400B3015C /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		2A25D9422938DA8400B3015C /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		2A25D94429390D4200B3015C /* MovementComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovementComponent.h; sourceTree = "<group>"; };
 		2AFA3A81293245370074B1A9 /* SpaceShooter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpaceShooter; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AFA3A84293245370074B1A9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2AFA3A8C293245470074B1A9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		2AFA3A90293245480074B1A9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		2AFA3A9A293271FF0074B1A9 /* consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = consts.h; sourceTree = "<group>"; };
@@ -92,6 +91,7 @@
 			children = (
 				2A25D93E2937DF3300B3015C /* TransformComponent.h */,
 				2A25D9402938D8D800B3015C /* TextureComponent.h */,
+				2A25D94429390D4200B3015C /* MovementComponent.h */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -158,7 +158,6 @@
 		2AFA3AB2293438900074B1A9 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				2AFA3A84293245370074B1A9 /* main.cpp */,
 				2AFA3ABA2934EC660074B1A9 /* entryPoint.cpp */,
 				2AFA3A9A293271FF0074B1A9 /* consts.h */,
 				2AFA3AB7293443390074B1A9 /* SDLApp.cpp */,
@@ -237,7 +236,6 @@
 				2AFA3ABB2934EC660074B1A9 /* entryPoint.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
-				2AFA3A85293245370074B1A9 /* main.cpp in Sources */,
 				2A25D9432938DA8400B3015C /* RenderSystem.cpp in Sources */,
 				2A25D93C2937DEB400B3015C /* PhysicsSystem.cpp in Sources */,
 			);

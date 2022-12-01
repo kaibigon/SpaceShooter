@@ -16,7 +16,7 @@ class RenderSystem : public System
 {
 public:
     void LoadTexture(Entity entity, SDL_Renderer *renender, std::string path);
-    void SetRenderRange(Entity entity, int x, int y,int width, int height);
+    void SetRenderRange(Entity entity, int width, int height);
     void Render(SDL_Renderer *renender);
 private:
     

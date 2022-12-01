@@ -100,9 +100,26 @@ public:
         mSystemManager->EntitySignatureChanged(entity, entitySignature);
     }
     
+    void SetTag(Entity entity, const char* tagName)
+    {
+        Tag.insert({entity, tagName});
+    }
+    
+    std::unordered_map<Entity, const char*>& GetTag()
+    {
+        return Tag;
+    }
+    
+    bool HasTag(Entity entity)
+    {
+        return Tag.find(entity) != Tag.end();
+    }
+    
+    
 private:
     std::unique_ptr<ComponentManager> mComponentManager;
     std::unique_ptr<EntityManager> mEntityManager;
     std::unique_ptr<SystemManager> mSystemManager;
+    std::unordered_map<Entity, const char*> Tag{};
 };
 #endif /* Coordinator_h */
