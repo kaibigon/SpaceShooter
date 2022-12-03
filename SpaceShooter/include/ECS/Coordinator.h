@@ -96,12 +96,9 @@ public:
         mSystemManager->SetSignature<T>(signature);
     }
     
-//     find all entities that have the components system requires.
     template<typename T>
     void SetEntitiesForSystem()
     {
-        const char* systemName = typeid(T).name();
-        
         Signature systemSignature = mSystemManager->GetSystemSignature<T>();
 
         Entity numOfEntities = mEntityManager->GetNumOfEntities();
@@ -112,12 +109,10 @@ public:
             
             if ((entitySignature & systemSignature) == systemSignature)
             {
-//                system->mEntities.insert(i);
                 mSystemManager->AddEntityToSystemRequiredEntities<T>(i);
             }
             else
             {
-//                system->mEntities.erase(i);
             }
         }
     }

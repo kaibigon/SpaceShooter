@@ -51,6 +51,7 @@ public:
         }
     }
 
+    // TODO: add a event system to trigger this function
     void EntitySignatureChanged(Entity entity, Signature entitySignature)
     {
         for (auto const& pair : mSystems)
@@ -89,6 +90,13 @@ public:
         auto const& system = mSystems[systemName];
         
         system->mEntities.insert(entity);
+    }
+    
+    // TODO:
+    template<typename T>
+    void RemoveEntityFromSystemRequiredEntities(Entity entity)
+    {
+        
     }
 
 private:
