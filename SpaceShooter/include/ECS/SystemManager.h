@@ -14,6 +14,7 @@
 
 #include "System.h"
 #include "Entity.h"
+#include "EntityManager.h"
 
 class SystemManager
 {
@@ -60,18 +61,36 @@ public:
 
             if ((entitySignature & systemSignature) == systemSignature)
             {
-                printf("%s accept %ld\n", typeid(type).name(), entity);
                 system->mEntities.insert(entity);
             }
             else
             {
-                printf("refuse %ld\n", entity);
                 system->mEntities.erase(entity);
             }
         }
     }
     
+    std::unordered_map<const char*, Signature>& GetSignatures(){
+        return mSignatures;
+    }
     
+    template<typename T>
+    Signature& GetSystemSignature()
+    {
+        const char* systemName = typeid(T).name();
+        return mSignatures[systemName];
+    }
+    
+    template<typename T>
+    void AddEntityToSystemRequiredEntities(Entity entity)
+    {
+        const char* systemName = typeid(T).name();
+        
+        auto const& system = mSystems[systemName];
+        
+        system->mEntities.insert(entity);
+    }
+
 private:
     std::unordered_map<const char*, Signature> mSignatures{};
     std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};

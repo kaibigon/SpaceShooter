@@ -13,6 +13,7 @@
 #include "SystemManager.h"
 #include "Entity.h"
 #include <memory>
+#include <queue>
 
 class Coordinator
 {
@@ -55,7 +56,7 @@ public:
         signature.set(mComponentManager->GetComponentType<T>(), true);
         mEntityManager->SetSignature(entity, signature);
 
-        mSystemManager->EntitySignatureChanged(entity, signature);
+//        mSystemManager->EntitySignatureChanged(entity, signature);
     }
     
     template<typename T>
@@ -67,7 +68,7 @@ public:
         signature.set(mComponentManager->GetComponentType<T>(), false);
         mEntityManager->SetSignature(entity, signature);
 
-        mSystemManager->EntitySignatureChanged(entity, signature);
+//        mSystemManager->EntitySignatureChanged(entity, signature);
     }
     
     template<typename T>
@@ -93,6 +94,32 @@ public:
     void SetSystemSignature(Signature signature)
     {
         mSystemManager->SetSignature<T>(signature);
+    }
+    
+//     find all entities that have the components system requires.
+    template<typename T>
+    void SetEntitiesForSystem()
+    {
+        const char* systemName = typeid(T).name();
+        
+        Signature systemSignature = mSystemManager->GetSystemSignature<T>();
+
+        Entity numOfEntities = mEntityManager->GetNumOfEntities();
+        
+        for(std::uint32_t i = 0; i < numOfEntities; i++)
+        {
+            Signature entitySignature = mEntityManager->GetSignature(i);
+            
+            if ((entitySignature & systemSignature) == systemSignature)
+            {
+//                system->mEntities.insert(i);
+                mSystemManager->AddEntityToSystemRequiredEntities<T>(i);
+            }
+            else
+            {
+//                system->mEntities.erase(i);
+            }
+        }
     }
 
     void EntitySignatureChanged(Entity entity, Signature entitySignature)

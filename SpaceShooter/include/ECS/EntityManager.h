@@ -30,7 +30,7 @@ public:
         Entity id = mAvailableEntities.front();
         mAvailableEntities.pop();
         ++mLivingEntityCount;
-
+        
         return id;
     }
     
@@ -56,6 +56,13 @@ public:
 
         return mSignatures[entity];
     }
+    
+    Entity GetNumOfEntities()
+    {
+        return mAvailableEntities.front();
+    }
+    
+    
     
 private:
     std::queue<Entity> mAvailableEntities{};

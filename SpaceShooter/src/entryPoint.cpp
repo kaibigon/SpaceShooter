@@ -62,7 +62,7 @@ int main( int argc, char* args[] )
         signature.set(gCoordinator.GetComponentType<TransformComponent>());
         signature.set(gCoordinator.GetComponentType<MovementComponent>());
         gCoordinator.SetSystemSignature<PhysicsSystem>(signature);
-        gCoordinator.EntitySignatureChanged(player, signature);
+//        gCoordinator.EntitySignatureChanged(player, signature);
     }
     
     auto renderSystem = gCoordinator.RegisterSystem<RenderSystem>();
@@ -71,8 +71,8 @@ int main( int argc, char* args[] )
         signature.set(gCoordinator.GetComponentType<TextureComponent>());
         signature.set(gCoordinator.GetComponentType<TransformComponent>());
         gCoordinator.SetSystemSignature<RenderSystem>(signature);
-        gCoordinator.EntitySignatureChanged(bgEntity, signature);
-        gCoordinator.EntitySignatureChanged(player, signature);
+//        gCoordinator.EntitySignatureChanged(bgEntity, signature);
+//        gCoordinator.EntitySignatureChanged(player, signature);
     }
    
     gCoordinator.SetTag(player, "Player");
@@ -92,9 +92,11 @@ int main( int argc, char* args[] )
     gCoordinator.AddComponent(player, TextureComponent{});
     gCoordinator.AddComponent(player, MovementComponent{});
     
-    // Init Systems
+    // TODO add event to add/remove entity when there is a change of components in entities
+    gCoordinator.SetEntitiesForSystem<RenderSystem>();
+    gCoordinator.SetEntitiesForSystem<PhysicsSystem>();
     
-
+    // Init Systems
     physicsSystem->Init();
     
     renderSystem->LoadTexture(bgEntity, app->GetRenderer(), "./SpaceShooter/Assets/bg.png");
