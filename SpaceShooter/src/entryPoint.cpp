@@ -127,10 +127,10 @@ int main( int argc, char* args[] )
             Mix_PlayMusic( gMusic, -1 );
         }
         
-        physicsSystem->Update();
         SDL_RenderClear(app->GetRenderer());
         SDL_SetRenderDrawColor(app->GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
+        physicsSystem->Update();
         renderSystem->Render(app->GetRenderer());
         
         SDL_RenderPresent(app->GetRenderer());
