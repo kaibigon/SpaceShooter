@@ -15,14 +15,12 @@
 #include "SDLApp.hpp"
 
 #include "../include/ECS/Coordinator.h"
-#include "../include/Components/TransformComponent.h"
-#include "../include/Components/TextureComponent.h"
-#include "../include/Components/MovementComponent.h"
-#include "../include/Systems/PhysicsSystem.hpp"
+#include "../include/Components/Components.h"
+#include "../include/Systems/MovementSystem.hpp"
 #include "../include/Systems/RenderSystem.hpp"
 
+// well I dont think one or two global variables is that evil... right -.-?
 SDLApp* app;
-
 Coordinator gCoordinator;
 
 void HandleEvents()
@@ -56,12 +54,12 @@ int main( int argc, char* args[] )
     Entity bgEntity = gCoordinator.CreateEntity();
     Entity player = gCoordinator.CreateEntity();
     
-    auto physicsSystem = gCoordinator.RegisterSystem<PhysicsSystem>();
+    auto movementSystem = gCoordinator.RegisterSystem<MovementSystem>();
     {
         Signature signature;
         signature.set(gCoordinator.GetComponentType<TransformComponent>());
         signature.set(gCoordinator.GetComponentType<MovementComponent>());
-        gCoordinator.SetSystemSignature<PhysicsSystem>(signature);
+        gCoordinator.SetSystemSignature<MovementSystem>(signature);
 //        gCoordinator.EntitySignatureChanged(player, signature);
     }
     
@@ -94,10 +92,10 @@ int main( int argc, char* args[] )
     
     // TODO add event to add/remove entity when there is a change of components in entities
     gCoordinator.SetEntitiesForSystem<RenderSystem>();
-    gCoordinator.SetEntitiesForSystem<PhysicsSystem>();
+    gCoordinator.SetEntitiesForSystem<MovementSystem>();
     
     // Init Systems
-    physicsSystem->Init();
+    movementSystem->Init();
     
     renderSystem->LoadTexture(bgEntity, app->GetRenderer(), "./SpaceShooter/Assets/bg.png");
     renderSystem->SetRenderRange(bgEntity, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -121,7 +119,7 @@ int main( int argc, char* args[] )
                 app->StopAppLoop();
                 quit = true;
             }
-            physicsSystem->HandleInput(event);
+            movementSystem->HandleInput(event);
         }
         
         if( Mix_PlayingMusic() == 0 )
@@ -132,7 +130,7 @@ int main( int argc, char* args[] )
         SDL_RenderClear(app->GetRenderer());
         SDL_SetRenderDrawColor(app->GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
-        physicsSystem->Update();
+        movementSystem->Update();
         renderSystem->Render(app->GetRenderer());
         
         SDL_RenderPresent(app->GetRenderer());

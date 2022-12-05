@@ -6,19 +6,19 @@
 //
 
 #include <string>
-#include "PhysicsSystem.hpp"
+#include "MovementSystem.hpp"
 #include "../ECS/Coordinator.h"
-#include "../Components/TransformComponent.h"
-#include "../Components/MovementComponent.h"
+#include "../Components/Components.h"
+
 
 extern Coordinator gCoordinator;
 
-void PhysicsSystem::Init()
+void MovementSystem::Init()
 {
 
 }
 
-void PhysicsSystem::HandleInput(SDL_Event &e)
+void MovementSystem::HandleInput(SDL_Event &e)
 {
 //    printf("%lu\n", mEntities.size());
 
@@ -56,7 +56,7 @@ void PhysicsSystem::HandleInput(SDL_Event &e)
     
 }
 
-void PhysicsSystem::Update()
+void MovementSystem::Update()
 {
     for (auto const& entity : mEntities)
     {

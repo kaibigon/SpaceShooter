@@ -10,8 +10,8 @@
 #include "RenderSystem.hpp"
 #include "AssetManager.hpp"
 #include "../ECS/Coordinator.h"
-#include "../Components/TextureComponent.h"
-#include "../Components/TransformComponent.h"
+#include "../Components/Components.h"
+
 
 extern Coordinator gCoordinator;
 

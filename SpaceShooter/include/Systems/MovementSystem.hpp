@@ -12,7 +12,7 @@
 #include <SDL2/SDL.h>
 #include "../ECS/System.h"
 
-class PhysicsSystem : public System
+class MovementSystem : public System
 {
 public:
     void Init();
