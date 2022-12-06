@@ -7,7 +7,7 @@
 #ifndef consts_h
 #define consts_h
 
-inline const int SCREEN_WIDTH = 1080;
-inline const int SCREEN_HEIGHT = 920;
+inline const int SCREEN_WIDTH = 720;
+inline const int SCREEN_HEIGHT = 720;
 
 #endif /* consts_h */

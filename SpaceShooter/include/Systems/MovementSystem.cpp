@@ -66,7 +66,7 @@ void MovementSystem::Update()
         int last_y = transform.y;
         transform.x += movement.velX;
         transform.y += movement.velY;
-        printf("test: x:%d, y:%d\n", last_x - transform.x, last_y - transform.y);
+//        printf("test: x:%d, y:%d\n", last_x - transform.x, last_y - transform.y);
     }
     
 }

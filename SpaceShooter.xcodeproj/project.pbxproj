@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A25D93C2937DEB400B3015C /* MovementSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D93A2937DEB400B3015C /* MovementSystem.cpp */; };
 		2A25D9432938DA8400B3015C /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A25D9412938DA8400B3015C /* RenderSystem.cpp */; };
+		2A2DCB62293E391F001FFC76 /* TimeSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A2DCB60293E391F001FFC76 /* TimeSystem.cpp */; };
 		2AFA3A8D293245470074B1A9 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A8C293245470074B1A9 /* SDL2.framework */; };
 		2AFA3A94293247990074B1A9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A90293245480074B1A9 /* SDL2_image.framework */; };
 		2AFA3A9C2932AC3B0074B1A9 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */; };
@@ -43,6 +44,8 @@
 		2A25D9412938DA8400B3015C /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		2A25D9422938DA8400B3015C /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
 		2A2DCB5F293E32EF001FFC76 /* Components.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Components.h; sourceTree = "<group>"; };
+		2A2DCB60293E391F001FFC76 /* TimeSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeSystem.cpp; sourceTree = "<group>"; };
+		2A2DCB61293E391F001FFC76 /* TimeSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeSystem.hpp; sourceTree = "<group>"; };
 		2AFA3A81293245370074B1A9 /* SpaceShooter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpaceShooter; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFA3A8C293245470074B1A9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		2AFA3A90293245480074B1A9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 				2A25D93B2937DEB400B3015C /* MovementSystem.hpp */,
 				2A25D9412938DA8400B3015C /* RenderSystem.cpp */,
 				2A25D9422938DA8400B3015C /* RenderSystem.hpp */,
+				2A2DCB60293E391F001FFC76 /* TimeSystem.cpp */,
+				2A2DCB61293E391F001FFC76 /* TimeSystem.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AFA3ABB2934EC660074B1A9 /* entryPoint.cpp in Sources */,
+				2A2DCB62293E391F001FFC76 /* TimeSystem.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
 				2A25D9432938DA8400B3015C /* RenderSystem.cpp in Sources */,

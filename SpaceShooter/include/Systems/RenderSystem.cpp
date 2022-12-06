@@ -27,6 +27,38 @@ void RenderSystem::LoadTexture(Entity entity, SDL_Renderer *renender, std::strin
     textureComponent.texture = newTexture;
 }
 
+void RenderSystem::LoadFromRenderedText(Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor )
+{
+    auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
+    textureComponent.font = TTF_OpenFont(path.c_str(), 20);
+   
+    SDL_Surface* textSurface = TTF_RenderText_Solid( textureComponent.font, textureComponent.text.c_str(), textColor );
+
+    if( textSurface != NULL )
+    {
+        //Create texture from surface pixels
+//        newTexture = SDL_CreateTextureFromSurface( renender, textSurface );
+        textureComponent.texture = SDL_CreateTextureFromSurface( renender, textSurface );
+        if( textSurface == NULL )
+        {
+            printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+        }
+        else
+        {
+            //Get image dimensions
+            textureComponent.width = textSurface->w;
+            textureComponent.height = textSurface->h;
+        }
+
+        //Get rid of old surface
+        SDL_FreeSurface( textSurface );
+    }
+    else
+    {
+        printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+    }
+}
+
 void RenderSystem::SetRenderRange(Entity entity, int width, int height)
 {
     auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
