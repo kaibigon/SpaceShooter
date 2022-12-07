@@ -101,7 +101,7 @@ int main( int argc, char* args[] )
     gCoordinator.AddComponent(testEntity, TransformComponent{});
     
     gCoordinator.AddComponent(timer, TransformComponent{
-        .x = 7*SCREEN_WIDTH/10,
+        .x = 5*SCREEN_WIDTH/10,
         .y = 0,
         .z = 0,
     });
@@ -136,8 +136,9 @@ int main( int argc, char* args[] )
     renderSystem->SetRenderRange(player, 20, 20);
     
     renderSystem->LoadFromRenderedText(timer, app->GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
-    renderSystem->SetRenderRange(timer, 3 * SCREEN_WIDTH/10, 100);
+    renderSystem->SetRenderRange(timer, 5 * SCREEN_WIDTH/10, 100);
     timeSystem->SetStartTime();
+    timeSystem->StartFps();
     
     bool quit = false;
     SDL_Event event;
@@ -163,6 +164,7 @@ int main( int argc, char* args[] )
         SDL_RenderClear(app->GetRenderer());
         SDL_SetRenderDrawColor(app->GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
+        timeSystem->ShowFps();
         timeSystem->ShowCurrentTime();
         renderSystem->LoadFromRenderedText(timer, app->GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
         movementSystem->Update();

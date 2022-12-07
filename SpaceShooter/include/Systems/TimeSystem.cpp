@@ -17,7 +17,7 @@ void TimeSystem::ShowCurrentTime()
         auto& timerComponent = gCoordinator.GetComponent<TimerComponnet>(entity);
         std::stringstream tmp;
         tmp.str("");
-        tmp << "Time " << GetTicks();
+        tmp << "Time " << GetTicks() << "FPS " << mFps;
         textureComponent.text = tmp.str();
     }
 }
@@ -142,3 +142,21 @@ void TimeSystem::HandleInput(SDL_Event &e)
         }
     }
 }
+
+void TimeSystem::CalFps()
+{
+    mFpsTicks = SDL_GetTicks();
+}
+
+void TimeSystem::StartFps()
+{
+    mFpsStartTicks = SDL_GetTicks();
+}
+
+void TimeSystem::ShowFps()
+{
+    mFpsTicks = SDL_GetTicks();
+    mFrames++;
+    mFps = mFrames / (mFpsTicks / 1000);
+}
+

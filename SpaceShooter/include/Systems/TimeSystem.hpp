@@ -25,13 +25,19 @@ public:
     void PauseTime();
     void ResumeTime();
     Uint32 GetTicks();
+    void CalFps();
+    void StartFps();
+    void ShowFps();
     void HandleInput(SDL_Event &e);
 private:
     Uint32 mStartTime;
     Uint32 mPauseTime;
+    Uint32 mFpsStartTicks;
+    Uint32 mFpsTicks;
+    Uint32 mFps;
     bool mPaused;
     bool mStarted;
-    
+    int mFrames;
 };
 
 #endif /* TimeSystem_hpp */
