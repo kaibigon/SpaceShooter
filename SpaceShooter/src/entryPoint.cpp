@@ -137,7 +137,7 @@ int main( int argc, char* args[] )
     
     renderSystem->LoadFromRenderedText(timer, app->GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
     renderSystem->SetRenderRange(timer, 3 * SCREEN_WIDTH/10, 100);
-    timeSystem->setStartTime();
+    timeSystem->SetStartTime();
     
     bool quit = false;
     SDL_Event event;
@@ -150,11 +150,9 @@ int main( int argc, char* args[] )
             if(event.type == SDL_QUIT){
                 app->StopAppLoop();
                 quit = true;
-            }else if( event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN )
-            {
-                timeSystem->setStartTime();
             }
             movementSystem->HandleInput(event);
+            timeSystem->HandleInput(event);
         }
         
         if( Mix_PlayingMusic() == 0 )
@@ -165,7 +163,7 @@ int main( int argc, char* args[] )
         SDL_RenderClear(app->GetRenderer());
         SDL_SetRenderDrawColor(app->GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
-        timeSystem->showCurrentTime();
+        timeSystem->ShowCurrentTime();
         renderSystem->LoadFromRenderedText(timer, app->GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
         movementSystem->Update();
         renderSystem->Render(app->GetRenderer());
