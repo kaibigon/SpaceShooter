@@ -79,6 +79,7 @@ void SDLApp::Init()
     }
    
     gCoordinator->SetTag(player, "Player");
+    gCoordinator->SetTag(timer, "UI");
     printf("%s\n", gCoordinator->GetTag()[player]);
     gCoordinator->AddComponent(testEntity, TransformComponent{});
     
@@ -108,7 +109,6 @@ void SDLApp::Init()
     gCoordinator->SetEntitiesForSystem<RenderSystem>();
     gCoordinator->SetEntitiesForSystem<MovementSystem>();
     gCoordinator->SetEntitiesForSystem<TimeSystem>();
-    gCoordinator->SetEntitiesForSystem<RenderSystem>();
     
     // Init Systems
     movementSystem->Init();
@@ -118,12 +118,11 @@ void SDLApp::Init()
     renderSystem->LoadTexture(gCoordinator, player, GetRenderer(), "./SpaceShooter/Assets/dot.bmp");
     renderSystem->SetRenderRange(gCoordinator, player, 20, 20);
     
-    renderSystem->LoadFromRenderedText(gCoordinator, timer, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
+    renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
     renderSystem->SetRenderRange(gCoordinator, timer, 5 * SCREEN_WIDTH/10, 100);
     timeSystem->SetStartTime(gCoordinator);
     timeSystem->StartFps();
     
-    bool quit = false;
     gMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
 }
 
@@ -144,20 +143,7 @@ void SDLApp::SetUpdateCallback(std::function<void(void)> func){
 
 void SDLApp::RunLoop(){
     while(mGameIsRunning){
-//        Uint32 buttons;
-//        buttons = SDL_GetMouseState(&mMouseX,&mMouseY);
-//
-//        mEventCallback();
-//
-//        SDL_RenderClear(renderer);
-//
-//        SDL_SetRenderDrawColor(renderer,0,0,0,SDL_ALPHA_OPAQUE);
-//
-//        mUpdateCallback();
-//
-//        mRenderCallback();
-//
-//        SDL_RenderPresent(renderer);
+
         while(SDL_PollEvent(&event)){
             
             if(event.type == SDL_QUIT){
@@ -178,7 +164,8 @@ void SDLApp::RunLoop(){
         
         timeSystem->ShowFps();
         timeSystem->ShowCurrentTime(gCoordinator);
-//        renderSystem->LoadFromRenderedText(timer, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
+        // fail to load it since
+        renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
         movementSystem->Update(gCoordinator);
         renderSystem->Render(gCoordinator, GetRenderer());
         

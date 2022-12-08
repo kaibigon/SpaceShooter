@@ -24,35 +24,42 @@ void RenderSystem::LoadTexture(std::shared_ptr<Coordinator>& gCoordinator, Entit
     textureComponent.texture = newTexture;
 }
 
-void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor )
+void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinator, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor )
 {
-    auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
-    textureComponent.font = TTF_OpenFont(path.c_str(), 20);
-   
-    SDL_Surface* textSurface = TTF_RenderText_Solid( textureComponent.font, textureComponent.text.c_str(), textColor );
-
-    if( textSurface != NULL )
+    
+    for(auto const& entity : mEntities)
     {
-        //Create texture from surface pixels
-//        newTexture = SDL_CreateTextureFromSurface( renender, textSurface );
-        textureComponent.texture = SDL_CreateTextureFromSurface( renender, textSurface );
-        if( textSurface == NULL )
+        printf("%d\n", entity);
+        if(!gCoordinator->HasTag(entity) || std::strcmp(gCoordinator->GetTag()[entity], "UI")) continue;
+        printf("%d\n", entity);
+        auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
+        textureComponent.font = TTF_OpenFont(path.c_str(), 20);
+       
+        SDL_Surface* textSurface = TTF_RenderText_Solid( textureComponent.font, textureComponent.text.c_str(), textColor );
+
+        if( textSurface != NULL )
         {
-            printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+            // Create texture from surface pixels
+            // newTexture = SDL_CreateTextureFromSurface( renender, textSurface );
+            textureComponent.texture = SDL_CreateTextureFromSurface( renender, textSurface );
+            if( textSurface == NULL )
+            {
+                printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+            }
+            else
+            {
+                //Get image dimensions
+                textureComponent.width = textSurface->w;
+                textureComponent.height = textSurface->h;
+            }
+
+            //Get rid of old surface
+            SDL_FreeSurface( textSurface );
         }
         else
         {
-            //Get image dimensions
-            textureComponent.width = textSurface->w;
-            textureComponent.height = textSurface->h;
+            printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
         }
-
-        //Get rid of old surface
-        SDL_FreeSurface( textSurface );
-    }
-    else
-    {
-        printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 }
 
