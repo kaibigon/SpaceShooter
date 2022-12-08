@@ -12,10 +12,7 @@
 #include "../ECS/Coordinator.h"
 #include "../Components/Components.h"
 
-
-extern Coordinator gCoordinator;
-
-void RenderSystem::LoadTexture(Entity entity, SDL_Renderer *renender, std::string path)
+void RenderSystem::LoadTexture(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path)
 {
     SDL_Texture *newTexture = NULL;
     
@@ -23,13 +20,13 @@ void RenderSystem::LoadTexture(Entity entity, SDL_Renderer *renender, std::strin
     
     newTexture = SDL_CreateTextureFromSurface(renender, newSurface);
     
-    auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
+    auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
     textureComponent.texture = newTexture;
 }
 
-void RenderSystem::LoadFromRenderedText(Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor )
+void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor )
 {
-    auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
+    auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
     textureComponent.font = TTF_OpenFont(path.c_str(), 20);
    
     SDL_Surface* textSurface = TTF_RenderText_Solid( textureComponent.font, textureComponent.text.c_str(), textColor );
@@ -59,19 +56,19 @@ void RenderSystem::LoadFromRenderedText(Entity entity, SDL_Renderer *renender, s
     }
 }
 
-void RenderSystem::SetRenderRange(Entity entity, int width, int height)
+void RenderSystem::SetRenderRange(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, int width, int height)
 {
-    auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
+    auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
     textureComponent.dst.w = width;
     textureComponent.dst.h = height;
 }
 
-void RenderSystem::Render(SDL_Renderer *renender)
+void RenderSystem::Render(std::shared_ptr<Coordinator>& gCoordinator, SDL_Renderer *renender)
 {
     for (auto const& entity : mEntities)
     {
-        auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
-        auto& transformComponent = gCoordinator.GetComponent<TransformComponent>(entity);
+        auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
+        auto& transformComponent = gCoordinator->GetComponent<TransformComponent>(entity);
         textureComponent.dst.x = transformComponent.x;
         textureComponent.dst.y = transformComponent.y;
         SDL_RenderCopy(renender, textureComponent.texture, NULL, &textureComponent.dst);

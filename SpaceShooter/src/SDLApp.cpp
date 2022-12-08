@@ -16,17 +16,115 @@ SDLApp::SDLApp(const char* title,int x, int y, int w, int h)
     else{
         std::cout << "SDL video system is ready to go\n";
     }
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+    if( TTF_Init() == -1 )
+    {
+        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+    }
     window = SDL_CreateWindow(title,x,y,w,h,SDL_WINDOW_SHOWN);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    
-//    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 );
 }
 
 SDLApp::~SDLApp(){
     SDL_DestroyWindow(window);
     IMG_Quit();
     SDL_Quit();
+}
+
+void SDLApp::Init()
+{
+    // Init Coordinator
+    gCoordinator = std::make_shared<Coordinator>();
+    gCoordinator->Init();
+    gCoordinator->RegisterComponent<TransformComponent>();
+    gCoordinator->RegisterComponent<TextureComponent>();
+    gCoordinator->RegisterComponent<MovementComponent>();
+    gCoordinator->RegisterComponent<UITextComponent>();
+    gCoordinator->RegisterComponent<TimerComponnet>();
+    
+    // Init entity and attach components
+    Entity testEntity = gCoordinator->CreateEntity();
+    Entity bgEntity = gCoordinator->CreateEntity();
+    Entity player = gCoordinator->CreateEntity();
+    Entity timer = gCoordinator->CreateEntity();
+    
+    movementSystem = gCoordinator->RegisterSystem<MovementSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<TransformComponent>());
+        signature.set(gCoordinator->GetComponentType<MovementComponent>());
+        gCoordinator->SetSystemSignature<MovementSystem>(signature);
+//        gCoordinator.EntitySignatureChanged(player, signature);
+    }
+    
+    renderSystem = gCoordinator->RegisterSystem<RenderSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<TextureComponent>());
+        signature.set(gCoordinator->GetComponentType<TransformComponent>());
+        gCoordinator->SetSystemSignature<RenderSystem>(signature);
+//        gCoordinator.EntitySignatureChanged(bgEntity, signature);
+//        gCoordinator.EntitySignatureChanged(player, signature);
+    }
+    
+    timeSystem = gCoordinator->RegisterSystem<TimeSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<TimerComponnet>());
+        gCoordinator->SetSystemSignature<TimeSystem>(signature);
+    }
+   
+    gCoordinator->SetTag(player, "Player");
+    printf("%s\n", gCoordinator->GetTag()[player]);
+    gCoordinator->AddComponent(testEntity, TransformComponent{});
+    
+    gCoordinator->AddComponent(timer, TransformComponent{
+        .x = 5*SCREEN_WIDTH/10,
+        .y = 0,
+        .z = 0,
+    });
+    gCoordinator->AddComponent(timer, TextureComponent{});
+    gCoordinator->AddComponent(timer, TimerComponnet{});
+    
+    gCoordinator->AddComponent(bgEntity, TransformComponent{
+        .x = 0,
+        .y = 0,
+        .z = 0,
+    });
+    gCoordinator->AddComponent(bgEntity, TextureComponent{});
+    gCoordinator->AddComponent(player, TransformComponent{
+        .x = 0,
+        .y = 0,
+        .z = 0,
+    });
+    gCoordinator->AddComponent(player, TextureComponent{});
+    gCoordinator->AddComponent(player, MovementComponent{});
+    
+    // TODO add event to add/remove entity when there is a change of components in entities
+    gCoordinator->SetEntitiesForSystem<RenderSystem>();
+    gCoordinator->SetEntitiesForSystem<MovementSystem>();
+    gCoordinator->SetEntitiesForSystem<TimeSystem>();
+    gCoordinator->SetEntitiesForSystem<RenderSystem>();
+    
+    // Init Systems
+    movementSystem->Init();
+    
+    renderSystem->LoadTexture(gCoordinator, bgEntity, GetRenderer(), "./SpaceShooter/Assets/bg.png");
+    renderSystem->SetRenderRange(gCoordinator, bgEntity, SCREEN_WIDTH, SCREEN_HEIGHT);
+    renderSystem->LoadTexture(gCoordinator, player, GetRenderer(), "./SpaceShooter/Assets/dot.bmp");
+    renderSystem->SetRenderRange(gCoordinator, player, 20, 20);
+    
+    renderSystem->LoadFromRenderedText(gCoordinator, timer, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
+    renderSystem->SetRenderRange(gCoordinator, timer, 5 * SCREEN_WIDTH/10, 100);
+    timeSystem->SetStartTime(gCoordinator);
+    timeSystem->StartFps();
+    
+    bool quit = false;
+    gMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
 }
 
 // Handle Events
@@ -46,22 +144,45 @@ void SDLApp::SetUpdateCallback(std::function<void(void)> func){
 
 void SDLApp::RunLoop(){
     while(mGameIsRunning){
-        Uint32 buttons;
-        buttons = SDL_GetMouseState(&mMouseX,&mMouseY);
+//        Uint32 buttons;
+//        buttons = SDL_GetMouseState(&mMouseX,&mMouseY);
+//
+//        mEventCallback();
+//
+//        SDL_RenderClear(renderer);
+//
+//        SDL_SetRenderDrawColor(renderer,0,0,0,SDL_ALPHA_OPAQUE);
+//
+//        mUpdateCallback();
+//
+//        mRenderCallback();
+//
+//        SDL_RenderPresent(renderer);
+        while(SDL_PollEvent(&event)){
+            
+            if(event.type == SDL_QUIT){
+                StopAppLoop();
+                mGameIsRunning = false;
+            }
+            movementSystem->HandleInput(gCoordinator, event);
+            timeSystem->HandleInput(event);
+        }
         
-        mEventCallback();
-
-        SDL_RenderClear(renderer);
-
-        SDL_SetRenderDrawColor(renderer,0,0,0,SDL_ALPHA_OPAQUE);
+        if( Mix_PlayingMusic() == 0 )
+        {
+            Mix_PlayMusic( gMusic, -1 );
+        }
         
-        mUpdateCallback();
+        SDL_RenderClear(GetRenderer());
+        SDL_SetRenderDrawColor(GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
-        mRenderCallback();
+        timeSystem->ShowFps();
+        timeSystem->ShowCurrentTime(gCoordinator);
+//        renderSystem->LoadFromRenderedText(timer, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
+        movementSystem->Update(gCoordinator);
+        renderSystem->Render(gCoordinator, GetRenderer());
         
-        SDL_RenderPresent(renderer);
-        // TODO: Eventually set a frame cap
-//        SDL_Delay(100);
+        SDL_RenderPresent(GetRenderer());
     }
 }
 

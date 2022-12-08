@@ -10,25 +10,22 @@
 #include "../ECS/Coordinator.h"
 #include "../Components/Components.h"
 
-
-extern Coordinator gCoordinator;
-
 void MovementSystem::Init()
 {
 
 }
 
-void MovementSystem::HandleInput(SDL_Event &e)
+void MovementSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
 {
 //    printf("%lu\n", mEntities.size());
 
     for (auto const& entity : mEntities)
     {
-        if(gCoordinator.HasTag(entity) &&
-           !std::strcmp(gCoordinator.GetTag()[entity], "Player"))
+        if(gCoordinator->HasTag(entity) &&
+           !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
-            auto& transform = gCoordinator.GetComponent<TransformComponent>(entity);
-            auto& movement = gCoordinator.GetComponent<MovementComponent>(entity);
+            auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
+            auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
             if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
             {
                 switch( e.key.keysym.sym )
@@ -56,12 +53,12 @@ void MovementSystem::HandleInput(SDL_Event &e)
     
 }
 
-void MovementSystem::Update()
+void MovementSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
 {
     for (auto const& entity : mEntities)
     {
-        auto& transform = gCoordinator.GetComponent<TransformComponent>(entity);
-        auto& movement = gCoordinator.GetComponent<MovementComponent>(entity);
+        auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
+        auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
         int last_x = transform.x;
         int last_y = transform.y;
         transform.x += movement.velX;

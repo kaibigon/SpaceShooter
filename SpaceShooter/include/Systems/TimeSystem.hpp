@@ -11,15 +11,16 @@
 #include <stdio.h>
 #include "../ECS/System.h"
 #include "../Components/Components.h"
+#include "../ECS/Coordinator.h"
 
 // TODO: show time, pause time, resume time, and show fps
 class TimeSystem : public System
 {
 public:
-    void ShowCurrentTime();
+    void ShowCurrentTime(std::shared_ptr<Coordinator>& gCoordinator);
     void GetCurrentTime();
     void ShowEclapsedTime();
-    void SetStartTime();
+    void SetStartTime(std::shared_ptr<Coordinator>& gCoordinator);
     void StartTime();
     void StopTime();
     void PauseTime();
@@ -28,6 +29,8 @@ public:
     void CalFps();
     void StartFps();
     void ShowFps();
+    Uint32 GetFpsTicks();
+    void SetFpsTicks(Uint32 ticks);
     void HandleInput(SDL_Event &e);
 private:
     Uint32 mStartTime;

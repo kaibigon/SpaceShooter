@@ -7,14 +7,13 @@
 
 #include "TimeSystem.hpp"
 #include "../ECS/Coordinator.h"
-extern Coordinator gCoordinator;
 
-void TimeSystem::ShowCurrentTime()
+void TimeSystem::ShowCurrentTime(std::shared_ptr<Coordinator>& gCoordinator)
 {
     for(auto const& entity : mEntities)
     {
-        auto& textureComponent = gCoordinator.GetComponent<TextureComponent>(entity);
-        auto& timerComponent = gCoordinator.GetComponent<TimerComponnet>(entity);
+        auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
+        auto& timerComponent = gCoordinator->GetComponent<TimerComponnet>(entity);
         std::stringstream tmp;
         tmp.str("");
         tmp << "Time " << GetTicks() << "FPS " << mFps;
@@ -32,11 +31,11 @@ void TimeSystem::ShowEclapsedTime()
     
 }
 
-void TimeSystem::SetStartTime()
+void TimeSystem::SetStartTime(std::shared_ptr<Coordinator>& gCoordinator)
 {
     for(auto const& entity : mEntities)
     {
-        auto& timerComponent = gCoordinator.GetComponent<TimerComponnet>(entity);
+        auto& timerComponent = gCoordinator->GetComponent<TimerComponnet>(entity);
         timerComponent.startTime = SDL_GetTicks();
         printf("nmsl");
     }
@@ -158,5 +157,15 @@ void TimeSystem::ShowFps()
     mFpsTicks = SDL_GetTicks();
     mFrames++;
     mFps = mFrames / (mFpsTicks / 1000);
+}
+
+Uint32 TimeSystem::GetFpsTicks()
+{
+    return mFpsTicks;
+}
+
+void TimeSystem::SetFpsTicks(Uint32 ticks)
+{
+    mFpsTicks = ticks;
 }
 

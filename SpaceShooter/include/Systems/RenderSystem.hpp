@@ -13,14 +13,14 @@
 
 #include "../ECS/Entity.h"
 #include "../ECS/System.h"
-
+#include "../ECS/Coordinator.h"
 class RenderSystem : public System
 {
 public:
-    void LoadTexture(Entity entity, SDL_Renderer *renender, std::string path);
-    void LoadFromRenderedText(Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor );
-    void SetRenderRange(Entity entity, int width, int height);
-    void Render(SDL_Renderer *renender);
+    void LoadTexture(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path);
+    void LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path, std::string textureText, SDL_Color textColor );
+    void SetRenderRange(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, int width, int height);
+    void Render(std::shared_ptr<Coordinator>& gCoordinator, SDL_Renderer *renender);
 private:
     
 };

@@ -11,17 +11,18 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "../ECS/System.h"
+#include "../ECS/Coordinator.h"
 
 class MovementSystem : public System
 {
 public:
     void Init();
     
-    void HandleInput(SDL_Event &e);
+    void HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e);
 
-    void MovementUpdate(int velX, int velY);
+    void MovementUpdate(std::shared_ptr<Coordinator>& gCoordinator, int velX, int velY);
     
-    void Update();
+    void Update(std::shared_ptr<Coordinator>& gCoordinator);
     
 private:
 //    int mVelX;
