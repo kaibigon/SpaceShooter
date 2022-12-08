@@ -13,17 +13,17 @@
 #include <sstream>
 struct TransformComponent
 {
-    int x;
-    int y;
-    int z;
+    float x;
+    float y;
+    float z;
 };
 
 struct MovementComponent
 {
-    int velX = 0;
-    int velY = 0;
-    int velValue = 5;
-    int accer = 0;
+    float velX = 0;
+    float velY = 0;
+    float velValue = 0;
+    float accer = 0;
 };
 
 struct TextureComponent

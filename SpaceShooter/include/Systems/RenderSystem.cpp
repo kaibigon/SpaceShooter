@@ -29,9 +29,7 @@ void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinat
     
     for(auto const& entity : mEntities)
     {
-        printf("%d\n", entity);
         if(!gCoordinator->HasTag(entity) || std::strcmp(gCoordinator->GetTag()[entity], "UI")) continue;
-        printf("%d\n", entity);
         auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
         textureComponent.font = TTF_OpenFont(path.c_str(), 20);
        

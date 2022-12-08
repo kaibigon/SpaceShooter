@@ -92,18 +92,23 @@ void SDLApp::Init()
     gCoordinator->AddComponent(timer, TimerComponnet{});
     
     gCoordinator->AddComponent(bgEntity, TransformComponent{
-        .x = 0,
-        .y = 0,
-        .z = 0,
+        .x = 0.f,
+        .y = 0.f,
+        .z = 0.f,
     });
     gCoordinator->AddComponent(bgEntity, TextureComponent{});
     gCoordinator->AddComponent(player, TransformComponent{
-        .x = 0,
-        .y = 0,
-        .z = 0,
+        .x = 0.f,
+        .y = 0.f,
+        .z = 0.f,
     });
     gCoordinator->AddComponent(player, TextureComponent{});
-    gCoordinator->AddComponent(player, MovementComponent{});
+    gCoordinator->AddComponent(player, MovementComponent{
+        .velX = 0.f,
+        .velY = 0.f,
+        .velValue = 100.f,
+        .accer = 0.f,
+    });
     
     // TODO add event to add/remove entity when there is a change of components in entities
     gCoordinator->SetEntitiesForSystem<RenderSystem>();
@@ -158,15 +163,18 @@ void SDLApp::RunLoop(){
         {
             Mix_PlayMusic( gMusic, -1 );
         }
+       
+        float currentTick = SDL_GetTicks();
+        float deltaTime = (currentTick - mLastFrameTicks)/1000;
+        mLastFrameTicks = currentTick;
         
         SDL_RenderClear(GetRenderer());
         SDL_SetRenderDrawColor(GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
         
         timeSystem->ShowFps();
         timeSystem->ShowCurrentTime(gCoordinator);
-        // fail to load it since
         renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
-        movementSystem->Update(gCoordinator);
+        movementSystem->Update(gCoordinator, deltaTime);
         renderSystem->Render(gCoordinator, GetRenderer());
         
         SDL_RenderPresent(GetRenderer());

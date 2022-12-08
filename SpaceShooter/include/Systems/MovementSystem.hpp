@@ -22,7 +22,7 @@ public:
 
     void MovementUpdate(std::shared_ptr<Coordinator>& gCoordinator, int velX, int velY);
     
-    void Update(std::shared_ptr<Coordinator>& gCoordinator);
+    void Update(std::shared_ptr<Coordinator>& gCoordinator, float deltaTime);
     
 private:
 //    int mVelX;

@@ -43,14 +43,17 @@ public:
 private:
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
+    SDL_Event event;
+    
     bool mGameIsRunning = true;
     int mMouseX;
     int mMouseY;
+    float mLastFrameTicks = 0;
+    
     std::function<void(void)> mEventCallback;
     std::function<void(void)> mRenderCallback;
     std::function<void(void)> mUpdateCallback;
     
-    SDL_Event event;
     
     std::shared_ptr<Coordinator> gCoordinator;
     std::shared_ptr<TimeSystem> timeSystem;

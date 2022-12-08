@@ -17,14 +17,11 @@ void MovementSystem::Init()
 
 void MovementSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
 {
-//    printf("%lu\n", mEntities.size());
-
     for (auto const& entity : mEntities)
     {
         if(gCoordinator->HasTag(entity) &&
            !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
-            auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
             auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
             if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
             {
@@ -46,24 +43,20 @@ void MovementSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL
                     case SDLK_d: movement.velX -= movement.velValue; break;
                 }
             }
-//            printf("test: x:%d, y:%d\n", movement.velX, movement.velY);
-        }else{
-        }
+            }else{
+            }
     }
     
 }
 
-void MovementSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
+void MovementSystem::Update(std::shared_ptr<Coordinator>& gCoordinator, float deltaTime)
 {
     for (auto const& entity : mEntities)
     {
         auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
         auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
-        int last_x = transform.x;
-        int last_y = transform.y;
-        transform.x += movement.velX;
-        transform.y += movement.velY;
-//        printf("test: x:%d, y:%d\n", last_x - transform.x, last_y - transform.y);
+        printf("velx: %f, vely: %f\n", movement.velX * deltaTime, movement.velY * deltaTime);
+        transform.x += (movement.velX * deltaTime);
+        transform.y += (movement.velY * deltaTime);
     }
-    
 }
