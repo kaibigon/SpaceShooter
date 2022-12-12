@@ -45,6 +45,7 @@ void SDLApp::Init()
     gCoordinator->RegisterComponent<MovementComponent>();
     gCoordinator->RegisterComponent<UITextComponent>();
     gCoordinator->RegisterComponent<TimerComponnet>();
+    gCoordinator->RegisterComponent<InputComponent>();
     
     // Init entity and attach components
     Entity testEntity = gCoordinator->CreateEntity();
@@ -76,6 +77,13 @@ void SDLApp::Init()
         Signature signature;
         signature.set(gCoordinator->GetComponentType<TimerComponnet>());
         gCoordinator->SetSystemSignature<TimeSystem>(signature);
+    }
+    
+    inputSystem = gCoordinator->RegisterSystem<InputSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<InputComponent>());
+        gCoordinator->SetSystemSignature<InputSystem>(signature);
     }
    
     gCoordinator->SetTag(player, "Player");
@@ -109,11 +117,13 @@ void SDLApp::Init()
         .velValue = 100.f,
         .accer = 0.f,
     });
+    gCoordinator->AddComponent(player, InputComponent{});
     
     // TODO add event to add/remove entity when there is a change of components in entities
     gCoordinator->SetEntitiesForSystem<RenderSystem>();
     gCoordinator->SetEntitiesForSystem<MovementSystem>();
     gCoordinator->SetEntitiesForSystem<TimeSystem>();
+    gCoordinator->SetEntitiesForSystem<InputSystem>();
     
     // Init Systems
     movementSystem->Init();
@@ -155,7 +165,8 @@ void SDLApp::RunLoop(){
                 StopAppLoop();
                 mGameIsRunning = false;
             }
-            movementSystem->HandleInput(gCoordinator, event);
+//            movementSystem->HandleInput(gCoordinator, event);
+            inputSystem->HandleMovementInput(gCoordinator, event);
             timeSystem->HandleInput(event);
         }
         

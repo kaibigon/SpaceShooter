@@ -22,6 +22,7 @@
 #include "../include/Systems/TimeSystem.hpp"
 #include "../include/Systems/RenderSystem.hpp"
 #include "../include/Systems/MovementSystem.hpp"
+#include "../include/Systems/InputSystem.hpp"
 #include "../include/Systems/AssetManager.hpp"
 
 class SDLApp
@@ -59,6 +60,7 @@ private:
     std::shared_ptr<TimeSystem> timeSystem;
     std::shared_ptr<RenderSystem> renderSystem;
     std::shared_ptr<MovementSystem> movementSystem;
+    std::shared_ptr<InputSystem> inputSystem;
     std::shared_ptr<AssetManager> assetManager;
     Mix_Music *gMusic = NULL;
 };

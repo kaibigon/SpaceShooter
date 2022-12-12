@@ -53,4 +53,21 @@ struct UITextComponent
     int width;
     int height;
 };
+
+struct BulletComponent
+{
+    int id;
+};
+
+struct InputComponent
+{
+    bool w;
+    bool a;
+    bool s;
+    bool d;
+    bool up;
+    bool down;
+    bool left;
+    bool right;
+};
 #endif /* Components_h */

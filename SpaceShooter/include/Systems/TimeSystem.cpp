@@ -13,7 +13,6 @@ void TimeSystem::ShowCurrentTime(std::shared_ptr<Coordinator>& gCoordinator)
     for(auto const& entity : mEntities)
     {
         auto& textureComponent = gCoordinator->GetComponent<TextureComponent>(entity);
-        auto& timerComponent = gCoordinator->GetComponent<TimerComponnet>(entity);
         std::stringstream tmp;
         tmp.str("");
         tmp << "Time " << GetTicks() << "FPS " << mFps;

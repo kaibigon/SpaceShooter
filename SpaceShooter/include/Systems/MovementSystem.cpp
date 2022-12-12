@@ -15,6 +15,7 @@ void MovementSystem::Init()
 
 }
 
+// this should be in smh like inputSystem
 void MovementSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
 {
     for (auto const& entity : mEntities)
@@ -55,7 +56,7 @@ void MovementSystem::Update(std::shared_ptr<Coordinator>& gCoordinator, float de
     {
         auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
         auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
-        printf("velx: %f, vely: %f\n", movement.velX * deltaTime, movement.velY * deltaTime);
+//        printf("velx: %f, vely: %f\n", movement.velX * deltaTime, movement.velY * deltaTime);
         transform.x += (movement.velX * deltaTime);
         transform.y += (movement.velY * deltaTime);
     }
