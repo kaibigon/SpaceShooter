@@ -10,3 +10,77 @@
 void BulletSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
 {
 }
+
+void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction)
+{
+    Entity bullet = gCoordinator->CreateEntity();
+    gCoordinator->AddComponent(bullet, TransformComponent{
+        .x = x,
+        .y = y,
+        .z = 0,
+    });
+    
+    gCoordinator->AddComponent(bullet, MovementComponent{
+        .velX = 0,
+        .velY = 0,
+        .velValue = 200,
+        .accer = 0,
+    });
+    
+    gCoordinator->AddComponent(bullet, BulletComponent{
+        .id = bullet,
+        .direction = direction,
+        .speed = 10,
+    });
+    
+    printf("spawn");
+    
+    gCoordinator->AddComponent(bullet, TextureComponent{});
+    
+    renderSystem->LoadTexture(gCoordinator, bullet, renender, "./SpaceShooter/Assets/dot.bmp");
+    renderSystem->SetRenderRange(gCoordinator, bullet, 20, 20);
+    gCoordinator->SetEntitiesForSystem<RenderSystem>();
+    gCoordinator->SetEntitiesForSystem<MovementSystem>();
+
+    auto& movement = gCoordinator->GetComponent<MovementComponent>(bullet);
+    switch( direction )
+    {
+        case Up:
+            movement.velY -= movement.velValue; break;
+        case Down:
+            movement.velY += movement.velValue; break;
+        case Left:
+            movement.velX -= movement.velValue; break;
+        case Right:
+            movement.velX += movement.velValue; break;
+    }
+}
+
+void BulletSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
+{
+    for(auto const& entity : mEntities)
+    {
+        auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
+        auto& bullet = gCoordinator->GetComponent<BulletComponent>(entity);
+    }
+}
+
+void BulletSystem::SetSpeed(std::shared_ptr<Coordinator>& gCoordinator, Direction direction)
+{
+    for(auto const& entity : mEntities)
+    {
+        auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
+        switch( direction )
+        {
+            case Up:
+                movement.velY -= movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
+            case Down:
+                movement.velY += movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
+            case Left:
+                movement.velX -= movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
+            case Right:
+                movement.velX += movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
+        }
+    }
+}
+

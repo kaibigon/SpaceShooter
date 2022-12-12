@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
+#include "RenderSystem.hpp"
+#include "MovementSystem.hpp"
+#include "../Components/Components.h"
 #include "../ECS/Coordinator.h"
 #include "../ECS/System.h"
 
@@ -19,8 +22,9 @@ class BulletSystem : public System
 {
 public:
     void HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e);
-    void SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator);
-    void Update();
+    void SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction);
+    void SetSpeed(std::shared_ptr<Coordinator>& gCoordinator, Direction direction);
+    void Update(std::shared_ptr<Coordinator>& gCoordinator);
 private:
 };
 #endif /* BulletSystem_hpp */

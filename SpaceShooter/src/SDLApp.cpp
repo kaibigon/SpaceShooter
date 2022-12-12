@@ -46,6 +46,7 @@ void SDLApp::Init()
     gCoordinator->RegisterComponent<UITextComponent>();
     gCoordinator->RegisterComponent<TimerComponnet>();
     gCoordinator->RegisterComponent<InputComponent>();
+    gCoordinator->RegisterComponent<BulletComponent>();
     
     // Init entity and attach components
     Entity testEntity = gCoordinator->CreateEntity();
@@ -85,7 +86,14 @@ void SDLApp::Init()
         signature.set(gCoordinator->GetComponentType<InputComponent>());
         gCoordinator->SetSystemSignature<InputSystem>(signature);
     }
-   
+    
+    bulletSystem = gCoordinator->RegisterSystem<BulletSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<BulletComponent>());
+        gCoordinator->SetSystemSignature<BulletSystem>(signature);
+    }
+    
     gCoordinator->SetTag(player, "Player");
     gCoordinator->SetTag(timer, "UI");
     printf("%s\n", gCoordinator->GetTag()[player]);
@@ -124,6 +132,7 @@ void SDLApp::Init()
     gCoordinator->SetEntitiesForSystem<MovementSystem>();
     gCoordinator->SetEntitiesForSystem<TimeSystem>();
     gCoordinator->SetEntitiesForSystem<InputSystem>();
+    gCoordinator->SetEntitiesForSystem<BulletSystem>();
     
     // Init Systems
     movementSystem->Init();
@@ -167,6 +176,7 @@ void SDLApp::RunLoop(){
             }
 //            movementSystem->HandleInput(gCoordinator, event);
             inputSystem->HandleMovementInput(gCoordinator, event);
+            inputSystem->HandleShootInput(gCoordinator, event, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
             timeSystem->HandleInput(event);
         }
         

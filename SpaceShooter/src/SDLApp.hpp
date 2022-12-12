@@ -61,6 +61,7 @@ private:
     std::shared_ptr<RenderSystem> renderSystem;
     std::shared_ptr<MovementSystem> movementSystem;
     std::shared_ptr<InputSystem> inputSystem;
+    std::shared_ptr<BulletSystem> bulletSystem;
     std::shared_ptr<AssetManager> assetManager;
     Mix_Music *gMusic = NULL;
 };

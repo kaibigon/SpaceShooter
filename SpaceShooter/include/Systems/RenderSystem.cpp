@@ -12,6 +12,7 @@
 #include "../ECS/Coordinator.h"
 #include "../Components/Components.h"
 
+// loading asset shouldnt be in the redersystem, should have them in smh like asset manager
 void RenderSystem::LoadTexture(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path)
 {
     SDL_Texture *newTexture = NULL;
