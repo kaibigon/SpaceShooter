@@ -13,7 +13,6 @@ void InputSystem::HandleMovementInput(std::shared_ptr<Coordinator>& gCoordinator
     {
         if(gCoordinator->HasTag(entity) && !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
-            // handle movement input
             const Uint8* keystates = SDL_GetKeyboardState(NULL);
             
             auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
@@ -49,7 +48,6 @@ void InputSystem::HandleShootingInput(std::shared_ptr<Coordinator>& gCoordinator
     {
         if(gCoordinator->HasTag(entity) && !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
-            // handle shooting input
             const Uint8* keystates = SDL_GetKeyboardState(NULL);
             
             auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);

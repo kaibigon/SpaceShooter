@@ -13,7 +13,7 @@
 #include "../Components/Components.h"
 #include "../ECS/Coordinator.h"
 
-// just a testing system
+// Just a testing system
 class TimeSystem : public System
 {
 public:

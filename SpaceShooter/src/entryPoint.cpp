@@ -15,12 +15,6 @@
 #include "consts.h"
 #include "SDLApp.hpp"
 
-#include "../include/ECS/Coordinator.h"
-#include "../include/Components/Components.h"
-#include "../include/Systems/MovementSystem.hpp"
-#include "../include/Systems/RenderSystem.hpp"
-#include "../include/Systems/TimeSystem.hpp"
-
 int main( int argc, char* args[] )
 {
     const char* title = ">_<";

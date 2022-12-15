@@ -17,12 +17,14 @@
 #include <SDL2_image/SDL_image.h>
 
 #include "consts.h"
+// TODO: include path is cursed but universally work
 #include "../include/ECS/Coordinator.h"
 #include "../include/Components/Components.h"
 #include "../include/Systems/TimeSystem.hpp"
 #include "../include/Systems/RenderSystem.hpp"
 #include "../include/Systems/MovementSystem.hpp"
 #include "../include/Systems/InputSystem.hpp"
+// TODO: enemies spawner manager
 #include "../include/Systems/AssetManager.hpp"
 
 class SDLApp
