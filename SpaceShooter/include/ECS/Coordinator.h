@@ -96,6 +96,7 @@ public:
         mSystemManager->SetSignature<T>(signature);
     }
     
+    // TODO: this one only works for initialization. we need a event based method to notify whenever theres a entity change(either itself or components)
     template<typename T>
     void SetEntitiesForSystem()
     {
@@ -116,6 +117,13 @@ public:
             }
         }
     }
+    
+    // TODO: this is soooooo bad
+    template<typename T>
+    void RemoveEntityFromSystem(Entity entity)
+    {
+        mSystemManager->RemoveEntityFromSystemRequiredEntities<T>(entity);
+    }
 
     void EntitySignatureChanged(Entity entity, Signature entitySignature)
     {
@@ -125,6 +133,23 @@ public:
     void SetTag(Entity entity, const char* tagName)
     {
         Tag.insert({entity, tagName});
+    }
+    
+    Entity FindWithTag(const char* tagName)
+    {
+        Entity numOfEntities = mEntityManager->GetNumOfEntities();
+        
+        for(std::uint32_t i = 0; i < numOfEntities; i++)
+        {
+            if(!HasTag(i) || std::strcmp(GetTag()[i], tagName)){
+                continue;
+            }
+            else
+            {
+                return i;
+            }
+        }
+        return -1;
     }
     
     std::unordered_map<Entity, const char*>& GetTag()

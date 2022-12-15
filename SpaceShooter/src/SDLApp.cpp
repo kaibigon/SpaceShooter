@@ -54,6 +54,8 @@ void SDLApp::EcsRegiesterComponents()
     gCoordinator->RegisterComponent<TimerComponnet>();
     gCoordinator->RegisterComponent<InputComponent>();
     gCoordinator->RegisterComponent<BulletComponent>();
+    gCoordinator->RegisterComponent<CollisionComponent>();
+    gCoordinator->RegisterComponent<EnemyComponent>();
 }
 
 void SDLApp::EcsRegisterSystems()
@@ -94,6 +96,20 @@ void SDLApp::EcsRegisterSystems()
         signature.set(gCoordinator->GetComponentType<BulletComponent>());
         gCoordinator->SetSystemSignature<BulletSystem>(signature);
     }
+    
+    collisionSystem = gCoordinator->RegisterSystem<CollisionSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<CollisionComponent>());
+        gCoordinator->SetSystemSignature<CollisionSystem>(signature);
+    }
+    
+    enemySystem = gCoordinator->RegisterSystem<EnemySystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator->GetComponentType<EnemyComponent>());
+        gCoordinator->SetSystemSignature<EnemySystem>(signature);
+    }
 }
 
 void SDLApp::EcsCreateInitialEntities()
@@ -103,6 +119,7 @@ void SDLApp::EcsCreateInitialEntities()
     Entity bgEntity = gCoordinator->CreateEntity();
     Entity player = gCoordinator->CreateEntity();
     Entity timer = gCoordinator->CreateEntity();
+    mPlayer = player;
     
     gCoordinator->SetTag(player, "Player");
     gCoordinator->SetTag(timer, "UI");
@@ -169,7 +186,12 @@ void SDLApp::Init()
 
 void SDLApp::Run(){
     while(mGameIsRunning){
-
+        
+        if( Mix_PlayingMusic() == 0 )
+        {
+            Mix_PlayMusic( gMusic, -1 );
+        }
+        
         while(SDL_PollEvent(&event)){
             
             if(event.type == SDL_QUIT){
@@ -180,11 +202,6 @@ void SDLApp::Run(){
             timeSystem->HandleInput(event);
         }
         
-        if( Mix_PlayingMusic() == 0 )
-        {
-            Mix_PlayMusic( gMusic, -1 );
-        }
-       
         float currentTick = SDL_GetTicks();
         float deltaTime = (currentTick - mLastFrameTicks)/1000;
         mLastFrameTicks = currentTick;
@@ -200,7 +217,10 @@ void SDLApp::Run(){
         inputSystem->HandleMovementInput(gCoordinator);
         inputSystem->HandleShootingInput(gCoordinator, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
         
+        bulletSystem->Update(gCoordinator);
+        
         movementSystem->Update(gCoordinator, deltaTime);
+        EnemyManager::GetInstance().Update(gCoordinator, enemySystem, renderSystem, GetRenderer(), mPlayer);
         
         renderSystem->Render(gCoordinator, GetRenderer());
         SDL_RenderPresent(GetRenderer());

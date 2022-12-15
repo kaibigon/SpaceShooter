@@ -24,8 +24,11 @@
 #include "../include/Systems/RenderSystem.hpp"
 #include "../include/Systems/MovementSystem.hpp"
 #include "../include/Systems/InputSystem.hpp"
+#include "../include/Systems/CoillsionSystem.hpp"
+#include "../include/Systems/EnemySystem.hpp"
 // TODO: enemies spawner manager
 #include "../include/Systems/AssetManager.hpp"
+#include "../include/Systems/EnemyManager.hpp"
 
 class SDLApp
 {
@@ -54,7 +57,13 @@ private:
     std::shared_ptr<MovementSystem> movementSystem;
     std::shared_ptr<InputSystem> inputSystem;
     std::shared_ptr<BulletSystem> bulletSystem;
+    std::shared_ptr<CollisionSystem> collisionSystem;
+    std::shared_ptr<EnemySystem> enemySystem;
+    
     std::shared_ptr<AssetManager> assetManager;
+    std::shared_ptr<EnemyManager> enemyManager;
+    
+    Entity mPlayer;
     Mix_Music *gMusic = NULL;
     
     bool mGameIsRunning = true;

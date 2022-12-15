@@ -25,6 +25,8 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
         .id = bullet,
         .direction = direction,
         .speed = 10,
+        .maxLifeTime = 1000,
+        .spawnLifeTime = SDL_GetTicks(),
     });
     gCoordinator->AddComponent(bullet, TextureComponent{});
     
@@ -33,6 +35,7 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
     
     gCoordinator->SetEntitiesForSystem<RenderSystem>();
     gCoordinator->SetEntitiesForSystem<MovementSystem>();
+    gCoordinator->SetEntitiesForSystem<BulletSystem>();
 
     auto& movement = gCoordinator->GetComponent<MovementComponent>(bullet);
     
@@ -48,3 +51,36 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
             movement.velX += movement.velValue; break;
     }
 }
+
+void BulletSystem::DestoryBullet(std::shared_ptr<Coordinator>& gCoordinator, Entity bullet)
+{
+    // if exceed lifetime, destroy
+    // if collide with emenies, destroy
+    gCoordinator->DestroyEntity(bullet);
+}
+
+void BulletSystem::OnCollisionEvent(std::shared_ptr<Coordinator>& gCoordinator, Entity bullet)
+{
+    DestoryBullet(gCoordinator, bullet);
+    //update signature
+    
+}
+
+void BulletSystem::Update(std::shared_ptr<Coordinator> &gCoordinator)
+{
+    for(auto const& entity : mEntities)
+    {
+        auto& bulletComponent = gCoordinator->GetComponent<BulletComponent>(entity);
+        if (SDL_GetTicks() - bulletComponent.spawnLifeTime > bulletComponent.maxLifeTime )
+        {
+            DestoryBullet(gCoordinator, entity);
+            // TODO: this is soooo bad
+            gCoordinator->RemoveEntityFromSystem<MovementSystem>(entity);
+            gCoordinator->RemoveEntityFromSystem<RenderSystem>(entity);
+            gCoordinator->RemoveEntityFromSystem<BulletSystem>(entity);
+            // TODO: also should reconsider when removing from a set, things happen, put break for skipping current frame for now
+            break;
+        }
+    }
+}
+

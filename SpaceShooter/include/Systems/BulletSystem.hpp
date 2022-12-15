@@ -21,6 +21,9 @@ class BulletSystem : public System
 {
 public:
     void SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction);
+    void DestoryBullet(std::shared_ptr<Coordinator>& gCoordinator, Entity bullet);
+    void OnCollisionEvent(std::shared_ptr<Coordinator>& gCoordinator, Entity bullet);
+    void Update(std::shared_ptr<Coordinator>& gCoordinator);
 private:
     
 };

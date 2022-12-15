@@ -70,6 +70,8 @@ struct BulletComponent
     std::uint32_t id;
     Direction direction;
     int speed;
+    Uint32 maxLifeTime;
+    Uint32 spawnLifeTime;
 };
 
 struct InputComponent
@@ -85,10 +87,17 @@ struct InputComponent
 };
 
 // TODO: layer is for differentiate the entity, same layer doesnt need to check collision
-struct ColliderComponent
+struct CollisionComponent
 {
     int width;
     int height;
+    // could be a enum?
     int layer;
+    std::string layerName;
+};
+
+struct EnemyComponent
+{
+    int id;
 };
 #endif /* Components_h */

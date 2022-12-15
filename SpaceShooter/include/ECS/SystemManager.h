@@ -96,7 +96,11 @@ public:
     template<typename T>
     void RemoveEntityFromSystemRequiredEntities(Entity entity)
     {
+        const char* systemName = typeid(T).name();
         
+        auto const& system = mSystems[systemName];
+        
+        system->mEntities.erase(entity);
     }
 
 private:

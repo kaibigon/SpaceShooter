@@ -13,6 +13,8 @@
 		2A2DCB6529456107001FFC76 /* BulletSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A2DCB6329456107001FFC76 /* BulletSystem.cpp */; };
 		2ABDC6DE2947690300E149E6 /* InputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDC6DC2947690300E149E6 /* InputSystem.cpp */; };
 		2ABDC6E12948BF5C00E149E6 /* CoillsionSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDC6DF2948BF5C00E149E6 /* CoillsionSystem.cpp */; };
+		2ABDC6E5294B798300E149E6 /* EnemyManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDC6E3294B798300E149E6 /* EnemyManager.cpp */; };
+		2ABDC6E8294B862200E149E6 /* EnemySystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDC6E6294B862200E149E6 /* EnemySystem.cpp */; };
 		2AFA3A8D293245470074B1A9 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A8C293245470074B1A9 /* SDL2.framework */; };
 		2AFA3A94293247990074B1A9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A90293245480074B1A9 /* SDL2_image.framework */; };
 		2AFA3A9C2932AC3B0074B1A9 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFA3A9B2932AC3B0074B1A9 /* SDL2_mixer.framework */; };
@@ -55,6 +57,10 @@
 		2ABDC6DD2947690300E149E6 /* InputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputSystem.hpp; sourceTree = "<group>"; };
 		2ABDC6DF2948BF5C00E149E6 /* CoillsionSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoillsionSystem.cpp; sourceTree = "<group>"; };
 		2ABDC6E02948BF5C00E149E6 /* CoillsionSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CoillsionSystem.hpp; sourceTree = "<group>"; };
+		2ABDC6E3294B798300E149E6 /* EnemyManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EnemyManager.cpp; sourceTree = "<group>"; };
+		2ABDC6E4294B798300E149E6 /* EnemyManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EnemyManager.hpp; sourceTree = "<group>"; };
+		2ABDC6E6294B862200E149E6 /* EnemySystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EnemySystem.cpp; sourceTree = "<group>"; };
+		2ABDC6E7294B862200E149E6 /* EnemySystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EnemySystem.hpp; sourceTree = "<group>"; };
 		2AFA3A81293245370074B1A9 /* SpaceShooter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpaceShooter; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFA3A8C293245470074B1A9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		2AFA3A90293245480074B1A9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -100,6 +106,10 @@
 				2ABDC6DD2947690300E149E6 /* InputSystem.hpp */,
 				2ABDC6DF2948BF5C00E149E6 /* CoillsionSystem.cpp */,
 				2ABDC6E02948BF5C00E149E6 /* CoillsionSystem.hpp */,
+				2ABDC6E3294B798300E149E6 /* EnemyManager.cpp */,
+				2ABDC6E4294B798300E149E6 /* EnemyManager.hpp */,
+				2ABDC6E6294B862200E149E6 /* EnemySystem.cpp */,
+				2ABDC6E7294B862200E149E6 /* EnemySystem.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -253,8 +263,10 @@
 				2A2DCB6529456107001FFC76 /* BulletSystem.cpp in Sources */,
 				2A2DCB62293E391F001FFC76 /* TimeSystem.cpp in Sources */,
 				2AFA3AB9293443390074B1A9 /* SDLApp.cpp in Sources */,
+				2ABDC6E5294B798300E149E6 /* EnemyManager.cpp in Sources */,
 				2ABDC6E12948BF5C00E149E6 /* CoillsionSystem.cpp in Sources */,
 				2AFA3AB6293438C20074B1A9 /* AssetManager.cpp in Sources */,
+				2ABDC6E8294B862200E149E6 /* EnemySystem.cpp in Sources */,
 				2ABDC6DE2947690300E149E6 /* InputSystem.cpp in Sources */,
 				2A25D9432938DA8400B3015C /* RenderSystem.cpp in Sources */,
 				2A25D93C2937DEB400B3015C /* MovementSystem.cpp in Sources */,
