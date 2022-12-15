@@ -137,7 +137,7 @@ void SDLApp::Init()
     // Init Systems
     movementSystem->Init();
     
-    renderSystem->LoadTexture(gCoordinator, bgEntity, GetRenderer(), "./SpaceShooter/Assets/bg.png");
+    renderSystem->LoadTexture(gCoordinator, bgEntity, GetRenderer(), "./SpaceShooter/Assets/hoton.jpg");
     renderSystem->SetRenderRange(gCoordinator, bgEntity, SCREEN_WIDTH, SCREEN_HEIGHT);
     renderSystem->LoadTexture(gCoordinator, player, GetRenderer(), "./SpaceShooter/Assets/dot.bmp");
     renderSystem->SetRenderRange(gCoordinator, player, 20, 20);
@@ -148,6 +148,7 @@ void SDLApp::Init()
     timeSystem->StartFps();
     
     gMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
+    
 }
 
 // Handle Events
@@ -174,11 +175,12 @@ void SDLApp::RunLoop(){
                 StopAppLoop();
                 mGameIsRunning = false;
             }
-//            movementSystem->HandleInput(gCoordinator, event);
-            inputSystem->HandleMovementInput(gCoordinator, event);
-            inputSystem->HandleShootInput(gCoordinator, event, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
+            // deprecated input method
             timeSystem->HandleInput(event);
         }
+        
+        inputSystem->HandleMovementInput(gCoordinator);
+        inputSystem->HandleShootingInput(gCoordinator, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
         
         if( Mix_PlayingMusic() == 0 )
         {

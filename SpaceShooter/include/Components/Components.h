@@ -33,6 +33,7 @@ struct MovementComponent
     float velY = 0;
     float velValue = 0;
     float accer = 0;
+    bool isMoving = false;
 };
 
 struct TextureComponent
@@ -63,6 +64,7 @@ struct UITextComponent
     int height;
 };
 
+// add lifetime for destorying bullet
 struct BulletComponent
 {
     std::uint32_t id;
@@ -80,5 +82,13 @@ struct InputComponent
     bool down;
     bool left;
     bool right;
+};
+
+// layer is for differentiate the entity, same layer doesnt need to check collision
+struct ColliderComponent
+{
+    int width;
+    int height;
+    int layer;
 };
 #endif /* Components_h */

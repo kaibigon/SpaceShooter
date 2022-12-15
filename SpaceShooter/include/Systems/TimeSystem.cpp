@@ -36,7 +36,6 @@ void TimeSystem::SetStartTime(std::shared_ptr<Coordinator>& gCoordinator)
     {
         auto& timerComponent = gCoordinator->GetComponent<TimerComponnet>(entity);
         timerComponent.startTime = SDL_GetTicks();
-        printf("nmsl");
     }
 }
 

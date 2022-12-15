@@ -7,10 +7,6 @@
 
 #include "BulletSystem.hpp"
 
-void BulletSystem::HandleInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
-{
-}
-
 void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction)
 {
     Entity bullet = gCoordinator->CreateEntity();
@@ -33,7 +29,7 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
         .speed = 10,
     });
     
-    printf("spawn");
+//    printf("spawn");
     
     gCoordinator->AddComponent(bullet, TextureComponent{});
     
@@ -55,32 +51,3 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
             movement.velX += movement.velValue; break;
     }
 }
-
-void BulletSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
-{
-    for(auto const& entity : mEntities)
-    {
-        auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
-        auto& bullet = gCoordinator->GetComponent<BulletComponent>(entity);
-    }
-}
-
-void BulletSystem::SetSpeed(std::shared_ptr<Coordinator>& gCoordinator, Direction direction)
-{
-    for(auto const& entity : mEntities)
-    {
-        auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
-        switch( direction )
-        {
-            case Up:
-                movement.velY -= movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
-            case Down:
-                movement.velY += movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
-            case Left:
-                movement.velX -= movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
-            case Right:
-                movement.velX += movement.velValue; printf("%f, %f\n", movement.velX, movement.velY); break;
-        }
-    }
-}
-

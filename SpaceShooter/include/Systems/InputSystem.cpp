@@ -7,76 +7,81 @@
 
 #include "InputSystem.hpp"
 
-void InputSystem::HandleMovementInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e)
+void InputSystem::HandleMovementInput(std::shared_ptr<Coordinator>& gCoordinator)
 {
     for (auto const& entity : mEntities)
     {
-        if(gCoordinator->HasTag(entity) &&
-           !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
+        if(gCoordinator->HasTag(entity) && !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
+            // handle movement input
+            const Uint8* keystates = SDL_GetKeyboardState(NULL);
+            
             auto& movement = gCoordinator->GetComponent<MovementComponent>(entity);
-            if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+            
+            if( keystates[SDL_SCANCODE_W] ^ keystates[SDL_SCANCODE_S])
             {
-                switch( e.key.keysym.sym )
-                {
-                    case SDLK_w: movement.velY -= movement.velValue; break;
-                    case SDLK_s: movement.velY += movement.velValue; break;
-                    case SDLK_a: movement.velX -= movement.velValue; break;
-                    case SDLK_d: movement.velX += movement.velValue; break;
-                }
+                movement.velY =  keystates[SDL_SCANCODE_W]?
+                                -keystates[SDL_SCANCODE_W] * movement.velValue:
+                                 keystates[SDL_SCANCODE_S] * movement.velValue;
             }
-            else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+            else
             {
-                switch( e.key.keysym.sym )
-                {
-                    case SDLK_w: movement.velY += movement.velValue; break;
-                    case SDLK_s: movement.velY -= movement.velValue; break;
-                    case SDLK_a: movement.velX += movement.velValue; break;
-                    case SDLK_d: movement.velX -= movement.velValue; break;
-                }
+                movement.velY = 0;
             }
-            }else{
+            
+            if( keystates[SDL_SCANCODE_A] ^ keystates[SDL_SCANCODE_D])
+            {
+                movement.velX = keystates[SDL_SCANCODE_A]?
+                               -keystates[SDL_SCANCODE_A] * movement.velValue:
+                                keystates[SDL_SCANCODE_D] * movement.velValue;
             }
+            else
+            {
+                movement.velX = 0;
+            }
+        }
     }
-    
 }
 
-void InputSystem::HandleShootInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction, std::shared_ptr<BulletSystem> bulletSystem)
+void InputSystem::HandleShootingInput(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction, std::shared_ptr<BulletSystem> bulletSystem)
 {
-    for(auto const& entity : mEntities)
+    for (auto const& entity : mEntities)
     {
-        if(gCoordinator->HasTag(entity) &&
-           !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
+        if(gCoordinator->HasTag(entity) && !std::strcmp(gCoordinator->GetTag()[entity], "Player"))
         {
+            // handle shooting input
+            const Uint8* keystates = SDL_GetKeyboardState(NULL);
+            
             auto& transform = gCoordinator->GetComponent<TransformComponent>(entity);
             
-            if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+            if ( SDL_GetTicks() - mLastShootTime < mShootingInterval ){
+                break;
+            }
+            
+            if (keystates[SDL_SCANCODE_UP])
             {
-                switch( e.key.keysym.sym )
-                {
-                    case SDLK_UP:
-                        bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Up);
-                        break;
-                    case SDLK_DOWN:
-                        bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Down);
-                        break;
-                    case SDLK_LEFT:
-                        bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Left);
-                        break;
-                    case SDLK_RIGHT:
-                        bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Right);
-                        break;
-                }
+                bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Up);
+                mLastShootTime = SDL_GetTicks();
+                break;
             }
-            else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+            if (keystates[SDL_SCANCODE_DOWN])
             {
-                switch( e.key.keysym.sym )
-                {
-
-                }
+                bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Down);
+                mLastShootTime = SDL_GetTicks();
+                break;
             }
-            }else{
+            if (keystates[SDL_SCANCODE_LEFT])
+            {
+                bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Left);
+                mLastShootTime = SDL_GetTicks();
+                break;
             }
+            if (keystates[SDL_SCANCODE_RIGHT])
+            {
+                bulletSystem->SpawnBullet(gCoordinator, renderSystem,  renender, transform.x, transform.y, Right);
+                mLastShootTime = SDL_GetTicks();
+                break;
+            }
+        }
     }
 }
-

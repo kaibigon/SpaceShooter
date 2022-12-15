@@ -19,7 +19,11 @@
 class InputSystem : public System
 {
 public:
-    void HandleMovementInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e);
-    void HandleShootInput(std::shared_ptr<Coordinator>& gCoordinator, SDL_Event &e, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction, std::shared_ptr<BulletSystem> bulletSystem);
+    void HandleMovementInput(std::shared_ptr<Coordinator>& gCoordinator);
+    void HandleShootingInput(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction, std::shared_ptr<BulletSystem> bulletSystem);
+private:
+    // some infos to handle shooting, should probably move to smh like player controller/weapon componnet
+    float mShootingInterval = 500;
+    float mLastShootTime = 0;
 };
 #endif /* InputSystem_hpp */
