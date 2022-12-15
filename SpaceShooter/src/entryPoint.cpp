@@ -21,35 +21,15 @@
 #include "../include/Systems/RenderSystem.hpp"
 #include "../include/Systems/TimeSystem.hpp"
 
-// well I dont think one or two global variables is that evil... right -.-?
-//Coordinator gCoordinator;
-
-void HandleEvents()
-{
-    
-}
-
-void HandleUpdate()
-{
-}
-
-void HandleRendering()
-{
-}
-
 int main( int argc, char* args[] )
 {
-    const char* title = "Boden Hao Leng";
-    SDLApp* app;
+    const char* title = ">_<";
     
+    SDLApp* app;
     app = new SDLApp(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT);
     app->Init();
-//    app->SetEventCallback(HandleEvents);
-//    app->SetUpdateCallback(HandleUpdate);
-//    app->SetRenderCallback(HandleRendering);
-    app->RunLoop();
-//    Mix_FreeMusic( gMusic );
+    app->Run();
+    
     delete app;
-
     return 0;
 }

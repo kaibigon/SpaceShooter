@@ -30,31 +30,21 @@ class SDLApp
 public:
     SDLApp(const char* title,int x, int y, int w, int h);
     ~SDLApp();
+    SDL_Renderer* GetRenderer() const;
+    
+    void EcsInit();
+    void EcsRegiesterComponents();
+    void EcsCreateInitialEntities();
+    void EcsRegisterSystems();
     
     void Init();
-    void SetEventCallback(std::function<void(void)> func);
-    void SetRenderCallback(std::function<void(void)> func);
-    void SetUpdateCallback(std::function<void(void)> func);
-    void RunLoop();
-    SDL_Renderer* GetRenderer() const;
-    int GetMouseX();
-    int GetMouseY();
-    void StopAppLoop();
+    void Run();
+    void Stop();
     
 private:
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
     SDL_Event event;
-    
-    bool mGameIsRunning = true;
-    int mMouseX;
-    int mMouseY;
-    float mLastFrameTicks = 0;
-    
-    std::function<void(void)> mEventCallback;
-    std::function<void(void)> mRenderCallback;
-    std::function<void(void)> mUpdateCallback;
-    
     
     std::shared_ptr<Coordinator> gCoordinator;
     std::shared_ptr<TimeSystem> timeSystem;
@@ -64,6 +54,9 @@ private:
     std::shared_ptr<BulletSystem> bulletSystem;
     std::shared_ptr<AssetManager> assetManager;
     Mix_Music *gMusic = NULL;
+    
+    bool mGameIsRunning = true;
+    float mLastFrameTicks = 0;
 };
 #endif /* SDLApp_hpp */
 

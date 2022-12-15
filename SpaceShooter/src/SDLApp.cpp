@@ -35,11 +35,18 @@ SDLApp::~SDLApp(){
     SDL_Quit();
 }
 
-void SDLApp::Init()
+SDL_Renderer* SDLApp::GetRenderer() const{
+    return renderer;
+}
+
+void SDLApp::EcsInit()
 {
-    // Init Coordinator
     gCoordinator = std::make_shared<Coordinator>();
     gCoordinator->Init();
+}
+
+void SDLApp::EcsRegiesterComponents()
+{
     gCoordinator->RegisterComponent<TransformComponent>();
     gCoordinator->RegisterComponent<TextureComponent>();
     gCoordinator->RegisterComponent<MovementComponent>();
@@ -47,20 +54,16 @@ void SDLApp::Init()
     gCoordinator->RegisterComponent<TimerComponnet>();
     gCoordinator->RegisterComponent<InputComponent>();
     gCoordinator->RegisterComponent<BulletComponent>();
-    
-    // Init entity and attach components
-    Entity testEntity = gCoordinator->CreateEntity();
-    Entity bgEntity = gCoordinator->CreateEntity();
-    Entity player = gCoordinator->CreateEntity();
-    Entity timer = gCoordinator->CreateEntity();
-    
+}
+
+void SDLApp::EcsRegisterSystems()
+{
     movementSystem = gCoordinator->RegisterSystem<MovementSystem>();
     {
         Signature signature;
         signature.set(gCoordinator->GetComponentType<TransformComponent>());
         signature.set(gCoordinator->GetComponentType<MovementComponent>());
         gCoordinator->SetSystemSignature<MovementSystem>(signature);
-//        gCoordinator.EntitySignatureChanged(player, signature);
     }
     
     renderSystem = gCoordinator->RegisterSystem<RenderSystem>();
@@ -69,8 +72,6 @@ void SDLApp::Init()
         signature.set(gCoordinator->GetComponentType<TextureComponent>());
         signature.set(gCoordinator->GetComponentType<TransformComponent>());
         gCoordinator->SetSystemSignature<RenderSystem>(signature);
-//        gCoordinator.EntitySignatureChanged(bgEntity, signature);
-//        gCoordinator.EntitySignatureChanged(player, signature);
     }
     
     timeSystem = gCoordinator->RegisterSystem<TimeSystem>();
@@ -93,12 +94,20 @@ void SDLApp::Init()
         signature.set(gCoordinator->GetComponentType<BulletComponent>());
         gCoordinator->SetSystemSignature<BulletSystem>(signature);
     }
+}
+
+void SDLApp::EcsCreateInitialEntities()
+{
+    // Init entity and attach components
+    Entity testEntity = gCoordinator->CreateEntity();
+    Entity bgEntity = gCoordinator->CreateEntity();
+    Entity player = gCoordinator->CreateEntity();
+    Entity timer = gCoordinator->CreateEntity();
     
     gCoordinator->SetTag(player, "Player");
     gCoordinator->SetTag(timer, "UI");
-    printf("%s\n", gCoordinator->GetTag()[player]);
-    gCoordinator->AddComponent(testEntity, TransformComponent{});
     
+    gCoordinator->AddComponent(testEntity, TransformComponent{});
     gCoordinator->AddComponent(timer, TransformComponent{
         .x = 5*SCREEN_WIDTH/10,
         .y = 0,
@@ -127,7 +136,7 @@ void SDLApp::Init()
     });
     gCoordinator->AddComponent(player, InputComponent{});
     
-    // TODO add event to add/remove entity when there is a change of components in entities
+    // TODO: *** should be very event based, add/remove entity for system when there is a change of components in entities
     gCoordinator->SetEntitiesForSystem<RenderSystem>();
     gCoordinator->SetEntitiesForSystem<MovementSystem>();
     gCoordinator->SetEntitiesForSystem<TimeSystem>();
@@ -141,46 +150,35 @@ void SDLApp::Init()
     renderSystem->SetRenderRange(gCoordinator, bgEntity, SCREEN_WIDTH, SCREEN_HEIGHT);
     renderSystem->LoadTexture(gCoordinator, player, GetRenderer(), "./SpaceShooter/Assets/dot.bmp");
     renderSystem->SetRenderRange(gCoordinator, player, 20, 20);
-    
     renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
     renderSystem->SetRenderRange(gCoordinator, timer, 5 * SCREEN_WIDTH/10, 100);
+    
     timeSystem->SetStartTime(gCoordinator);
     timeSystem->StartFps();
     
     gMusic = Mix_LoadMUS("./SpaceShooter/Assets/bgMusic.mp3");
-    
 }
 
-// Handle Events
-void SDLApp::SetEventCallback(std::function<void(void)> func){
-    mEventCallback = func;
+void SDLApp::Init()
+{
+    EcsInit();
+    EcsRegiesterComponents();
+    EcsRegisterSystems();
+    EcsCreateInitialEntities();
 }
 
-// Handle Render
-void SDLApp::SetRenderCallback(std::function<void(void)> func){
-    mRenderCallback = func;
-    
-}
-
-void SDLApp::SetUpdateCallback(std::function<void(void)> func){
-    mUpdateCallback = func;
-}
-
-void SDLApp::RunLoop(){
+void SDLApp::Run(){
     while(mGameIsRunning){
 
         while(SDL_PollEvent(&event)){
             
             if(event.type == SDL_QUIT){
-                StopAppLoop();
+                Stop();
                 mGameIsRunning = false;
             }
             // deprecated input method
             timeSystem->HandleInput(event);
         }
-        
-        inputSystem->HandleMovementInput(gCoordinator);
-        inputSystem->HandleShootingInput(gCoordinator, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
         
         if( Mix_PlayingMusic() == 0 )
         {
@@ -191,30 +189,24 @@ void SDLApp::RunLoop(){
         float deltaTime = (currentTick - mLastFrameTicks)/1000;
         mLastFrameTicks = currentTick;
         
+        // testing UI
         SDL_RenderClear(GetRenderer());
         SDL_SetRenderDrawColor(GetRenderer(),255,255,255,SDL_ALPHA_OPAQUE);
+        renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
         
         timeSystem->ShowFps();
         timeSystem->ShowCurrentTime(gCoordinator);
-        renderSystem->LoadFromRenderedText(gCoordinator, GetRenderer(), "./SpaceShooter/Assets/pixel.TTF", "here to show time", {100, 100, 100, 255});
-        movementSystem->Update(gCoordinator, deltaTime);
-        renderSystem->Render(gCoordinator, GetRenderer());
         
+        inputSystem->HandleMovementInput(gCoordinator);
+        inputSystem->HandleShootingInput(gCoordinator, renderSystem, GetRenderer(), 100, 100, Up, bulletSystem);
+        
+        movementSystem->Update(gCoordinator, deltaTime);
+        
+        renderSystem->Render(gCoordinator, GetRenderer());
         SDL_RenderPresent(GetRenderer());
     }
 }
 
-SDL_Renderer* SDLApp::GetRenderer() const{
-    return renderer;
-}
-
-int SDLApp::GetMouseX(){
-    return mMouseX;
-}
-int SDLApp::GetMouseY(){
-    return mMouseY;
-}
-
-void SDLApp::StopAppLoop(){
+void SDLApp::Stop(){
     mGameIsRunning = false;
 }
