@@ -18,13 +18,9 @@
 class AssetManager
 {
 public:
-    
     static AssetManager& GetInstance();
-    
     SDL_Surface* GetSurface(std::string filepath);
-    
     void Free();
-    
 private:
     AssetManager();
     AssetManager(AssetManager const&);

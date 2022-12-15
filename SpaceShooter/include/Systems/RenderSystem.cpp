@@ -12,7 +12,6 @@
 #include "../ECS/Coordinator.h"
 #include "../Components/Components.h"
 
-// loading asset shouldnt be in the redersystem, should have them in smh like asset manager
 void RenderSystem::LoadTexture(std::shared_ptr<Coordinator>& gCoordinator, Entity entity, SDL_Renderer *renender, std::string path)
 {
     SDL_Texture *newTexture = NULL;
@@ -38,8 +37,6 @@ void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinat
 
         if( textSurface != NULL )
         {
-            // Create texture from surface pixels
-            // newTexture = SDL_CreateTextureFromSurface( renender, textSurface );
             textureComponent.texture = SDL_CreateTextureFromSurface( renender, textSurface );
             if( textSurface == NULL )
             {
@@ -47,12 +44,10 @@ void RenderSystem::LoadFromRenderedText(std::shared_ptr<Coordinator>& gCoordinat
             }
             else
             {
-                //Get image dimensions
                 textureComponent.width = textSurface->w;
                 textureComponent.height = textSurface->h;
             }
 
-            //Get rid of old surface
             SDL_FreeSurface( textSurface );
         }
         else

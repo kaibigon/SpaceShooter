@@ -29,8 +29,6 @@ void BulletSystem::SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::
         .speed = 10,
     });
     
-//    printf("spawn");
-    
     gCoordinator->AddComponent(bullet, TextureComponent{});
     
     renderSystem->LoadTexture(gCoordinator, bullet, renender, "./SpaceShooter/Assets/dot.bmp");

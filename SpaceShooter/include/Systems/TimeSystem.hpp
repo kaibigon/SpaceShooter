@@ -13,7 +13,7 @@
 #include "../Components/Components.h"
 #include "../ECS/Coordinator.h"
 
-// TODO: show time, pause time, resume time, and show fps
+// just a testing system
 class TimeSystem : public System
 {
 public:

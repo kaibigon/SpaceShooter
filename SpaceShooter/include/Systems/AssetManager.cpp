@@ -28,8 +28,7 @@ SDL_Surface* AssetManager::GetSurface(std::string filepath){
         SDL_Surface* surface = IMG_Load(filepath.c_str());
         if( surface == NULL )
         {
-            printf( "Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError() );
-          
+            printf( "Fail to load surface, SDL Error: %s\n", SDL_GetError() );
         }
         m_surfaces.insert(std::make_pair(filepath,surface));
         return m_surfaces[filepath];

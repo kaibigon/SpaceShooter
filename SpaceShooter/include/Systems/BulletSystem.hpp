@@ -17,11 +17,11 @@
 #include "../ECS/Coordinator.h"
 #include "../ECS/System.h"
 
-// transform, render, bullet component
 class BulletSystem : public System
 {
 public:
     void SpawnBullet(std::shared_ptr<Coordinator>& gCoordinator, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender, float x, float y, Direction direction);
 private:
+    
 };
 #endif /* BulletSystem_hpp */

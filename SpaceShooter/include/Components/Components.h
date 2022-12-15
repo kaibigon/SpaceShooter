@@ -64,7 +64,7 @@ struct UITextComponent
     int height;
 };
 
-// add lifetime for destorying bullet
+// TODO: add lifetime for destorying bullet
 struct BulletComponent
 {
     std::uint32_t id;
@@ -84,7 +84,7 @@ struct InputComponent
     bool right;
 };
 
-// layer is for differentiate the entity, same layer doesnt need to check collision
+// TODO: layer is for differentiate the entity, same layer doesnt need to check collision
 struct ColliderComponent
 {
     int width;
