@@ -88,7 +88,6 @@ void CollisionSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
                     flag = 1;
                     break;
                 }
-                printf("nmsl\n");
             }
         }
         

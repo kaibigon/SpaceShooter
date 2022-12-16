@@ -44,6 +44,6 @@ For each system, it has the required component type, that is it will only look f
 
 ### Take away
 
-Combining all the stuffs we got a basic ECS. I used it to implement simple player movement, shooting and collision detection in this project. But a lot of code that I wrote are very lack of design and I'm a C++ noob. I will probably continue to do a bit more in this project and study bevy engine in Rust since I found it a interesting language.
+Combining all the stuffs we got a basic ECS. I used it to implement simple player movement, shooting and collision detection in this project. But a lot of code that I wrote are very lack of design and spaghetti. Especially the collision detection, I've only got half a day to do it before the deadline. I will probably continue to do a bit more in this project and study bevy engine in Rust since I found it a interesting language.
 
-I have learned a lot from this project. Thanks for the opportunity.
+I have learned a lot from this project. Thanks for the opportunity :)

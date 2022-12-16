@@ -28,7 +28,7 @@ public:
 private:
     EnemyManager();
     EnemyManager(EnemyManager const&);
-    Uint32 mSpawnInterval = 3000;
+    Uint32 mSpawnInterval = 500;
     Uint32 mLastSpawnTime = 0;
     int mNumOfEnemies = 0;
 };
