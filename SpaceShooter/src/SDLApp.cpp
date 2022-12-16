@@ -221,6 +221,7 @@ void SDLApp::Run(){
         
         movementSystem->Update(gCoordinator, deltaTime);
         EnemyManager::GetInstance().Update(gCoordinator, enemySystem, renderSystem, GetRenderer(), mPlayer);
+        collisionSystem->Update(gCoordinator);
         
         renderSystem->Render(gCoordinator, GetRenderer());
         SDL_RenderPresent(GetRenderer());

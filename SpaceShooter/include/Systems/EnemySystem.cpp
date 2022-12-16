@@ -21,7 +21,6 @@ void EnemySystem::ChasePlayer(std::shared_ptr<Coordinator> &gCoordinator, Entity
         float vec_x = playerTransform.x - enemyTransform.x;
         float vec_y = playerTransform.y - enemyTransform.y;
         float vec_mag = std::sqrt(std::pow(vec_x, 2) + std::pow(vec_y, 2));
-//        float enemy_mag = std::sqrt(std::pow(enemyTransform.x, 2) + std::pow(enemyTransform.y, 2));
         
         float dotProd = vec_x * 1.0 + vec_y * 0 ;
         float dotProd_x = vec_x / vec_mag;
@@ -30,9 +29,23 @@ void EnemySystem::ChasePlayer(std::shared_ptr<Coordinator> &gCoordinator, Entity
         float theta = std::acos(cos0);
         float sin0 = std::sin(theta);
         
-        printf("%f, %f\n", sin0, cos0);
-        // since coordination is differetn, rendering based on left-upper corner
+//        printf("%f, %f\n", sin0, cos0);
         enemyMovement.velX = enemyMovement.velValue * dotProd_x;
         enemyMovement.velY = enemyMovement.velValue * dotProd_y;
     }
+}
+
+void EnemySystem::DestoryEnemy(std::shared_ptr<Coordinator> &gCoordinator, Entity enemy)
+{
+    gCoordinator->DestroyEntity(enemy);
+    
+    gCoordinator->RemoveEntityFromSystem<MovementSystem>(enemy);
+    gCoordinator->RemoveEntityFromSystem<RenderSystem>(enemy);
+    gCoordinator->RemoveEntityFromSystem<EnemySystem>(enemy);
+    gCoordinator->RemoveEntityFromSystem<CollisionSystem>(enemy);
+}
+
+void EnemySystem::OnCollisionEvent(std::shared_ptr<Coordinator> &gCoordinator, Entity entity)
+{
+    gCoordinator->DestroyEntity(entity);
 }

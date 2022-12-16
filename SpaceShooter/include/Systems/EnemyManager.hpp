@@ -9,6 +9,7 @@
 #define EnemyManager_hpp
 
 #include <stdio.h>
+#include "../../src/consts.h"
 #include "../ECS/Entity.h"
 #include "../ECS/Coordinator.h"
 #include "../ECS/System.h"
@@ -27,7 +28,7 @@ public:
 private:
     EnemyManager();
     EnemyManager(EnemyManager const&);
-    Uint32 mSpawnInterval = 1000;
+    Uint32 mSpawnInterval = 3000;
     Uint32 mLastSpawnTime = 0;
     int mNumOfEnemies = 0;
 };

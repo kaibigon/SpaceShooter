@@ -24,11 +24,10 @@ EnemyManager& EnemyManager::GetInstance(){
 void EnemyManager::SpawnEnemy(std::shared_ptr<Coordinator> &gCoordinator, std::shared_ptr<EnemySystem> enemySystem, std::shared_ptr<RenderSystem> renderSystem, SDL_Renderer *renender)
 {
     Entity enemy = gCoordinator->CreateEntity();
+    gCoordinator->SetTag(enemy, "Enemy");
     gCoordinator->AddComponent(enemy, TransformComponent{
-//        .x = 100 + (float)mNumOfEnemies * 20,
-//        .y = 100 + (float)mNumOfEnemies * 20,
-        .x = 0,
-        .y = 0,
+        .x = SCREEN_WIDTH/2,
+        .y = SCREEN_HEIGHT/2,
         .z = 0,
     });
     gCoordinator->AddComponent(enemy, MovementComponent{
@@ -36,6 +35,12 @@ void EnemyManager::SpawnEnemy(std::shared_ptr<Coordinator> &gCoordinator, std::s
         .velY = 0,
         .velValue = 100,
         .accer = 0,
+    });
+    gCoordinator->AddComponent(enemy, CollisionComponent{
+        .width = 20,
+        .height = 20,
+        .layer = 2,
+        .layerName = "Enemy",
     });
     gCoordinator->AddComponent(enemy, TextureComponent{});
     gCoordinator->AddComponent(enemy, EnemyComponent{});

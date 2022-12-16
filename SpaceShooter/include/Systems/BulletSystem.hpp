@@ -13,6 +13,7 @@
 
 #include "RenderSystem.hpp"
 #include "MovementSystem.hpp"
+#include "CoillsionSystem.hpp"
 #include "../Components/Components.h"
 #include "../ECS/Coordinator.h"
 #include "../ECS/System.h"

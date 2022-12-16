@@ -38,22 +38,60 @@ bool CollisionSystem::IsOverlapping(std::shared_ptr<Coordinator> &gCoordinator, 
 
 void CollisionSystem::Update(std::shared_ptr<Coordinator>& gCoordinator)
 {
-    for (auto const& entityA : mEntities )
+    // TODO: this for loop count the full square of entities, we actually just need half of it.
+    int flag = 0;
+    for(auto const& entityA : mEntities)
     {
-        for (auto const& entityB : mEntities )
-        {
-            if (entityA == entityB || HasSameLayer(gCoordinator, entityA, entityB))
+        for (auto const& entityB : mEntities) {
+            if (HasSameLayer(gCoordinator, entityA, entityB))
             {
                 continue;
             }
-            
+
+            // should be a template, call corresponding event depends on the component type it has???
+            // And this is soooooo bad, should rework everything ahhhh
+            // shouldnt have any system inside other systems, system shouldnt be passed around systems
             if(IsOverlapping(gCoordinator, entityA, entityB))
             {
-                // should be a template, call corresponding event depends on the component type it has???
-                // entityA.callColiisionEvent
-                
-                // entityB.callCollisionEvent
+                if(gCoordinator->HasTag(entityA) && !std::strcmp(gCoordinator->GetTag()[entityA], "Bullet")
+                && gCoordinator->HasTag(entityB) && !std::strcmp(gCoordinator->GetTag()[entityB], "Enemy"))
+                {
+                    gCoordinator->RemoveEntityFromSystem<MovementSystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<RenderSystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<BulletSystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<CollisionSystem>(entityA);
+                    gCoordinator->DestroyEntity(entityA);
+                    
+                    gCoordinator->RemoveEntityFromSystem<MovementSystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<RenderSystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<EnemySystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<CollisionSystem>(entityB);
+                    gCoordinator->DestroyEntity(entityB);
+                    flag = 1;
+                    break;
+                }
+
+                if(gCoordinator->HasTag(entityB) && !std::strcmp(gCoordinator->GetTag()[entityA], "Bullet")
+                && gCoordinator->HasTag(entityA) && !std::strcmp(gCoordinator->GetTag()[entityB], "Enemy"))
+                {
+                    gCoordinator->RemoveEntityFromSystem<MovementSystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<RenderSystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<BulletSystem>(entityB);
+                    gCoordinator->RemoveEntityFromSystem<CollisionSystem>(entityB);
+                    gCoordinator->DestroyEntity(entityB);
+                    
+                    gCoordinator->RemoveEntityFromSystem<MovementSystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<RenderSystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<EnemySystem>(entityA);
+                    gCoordinator->RemoveEntityFromSystem<CollisionSystem>(entityA);
+                    gCoordinator->DestroyEntity(entityA);
+                    flag = 1;
+                    break;
+                }
+                printf("nmsl\n");
             }
         }
+        
+        if(flag == 1) break;
     }
 }

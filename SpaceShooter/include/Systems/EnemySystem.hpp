@@ -15,12 +15,15 @@
 #include "../Systems/RenderSystem.hpp"
 #include "../Systems/MovementSystem.hpp"
 #include "../Systems/RenderSystem.hpp"
+#include "../Systems/CoillsionSystem.hpp"
 #include "../Components/Components.h"
 
 class EnemySystem : public System
 {
 public:
     void ChasePlayer(std::shared_ptr<Coordinator>& gCoordinator, Entity player);
+    void DestoryEnemy(std::shared_ptr<Coordinator>& gCoordinator, Entity enemy);
+    void OnCollisionEvent(std::shared_ptr<Coordinator>& gCoordinator, Entity entity);
     void Update(std::shared_ptr<Coordinator>& gCoordinator);
 private:
     

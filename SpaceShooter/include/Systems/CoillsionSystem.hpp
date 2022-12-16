@@ -13,6 +13,8 @@
 #include "../ECS/Coordinator.h"
 #include "../ECS/System.h"
 #include "../Components/Components.h"
+#include "BulletSystem.hpp"
+#include "EnemySystem.hpp"
 
 class CollisionSystem : public System
 {
